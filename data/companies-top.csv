@@ -1,0 +1,11 @@
+company,mat_paid,mat_unpaid,pat_paid,pat_unpaid,note,p,employees,location
+Walmart,16,9,6,0,,0,"2,300,000","Bentonville, Arkansas"
+Kroger,6,6,2,6,corporate only,1,"443,000","Cincinnati, Ohio"
+Yum! Brands,18,0,6,0,,2,"420,000","Louisville, Kentucky"
+IBM,20,6,12,0,,3,"414,400","Armonk, New York"
+The Home Depot,6,6,0,0,,4,"406,000","Atlanta, Georiga"
+McDonald's,12,0,2,0,corporate only,5,"375,000","Oak Brook, Illinois"
+Berkshire Hathaway,5,0,0,0,,6,"367,700","Omaha, Nebraska"
+Amazon,20,0,6,0,,7,"341,400","Seattle, Washington"
+FedEx,6,6,0,0,,8,"335,767","Memphis, Tennessee"
+United Parcel Service,6,12,0,0,corporate only,9,"335,520","Atlanta, Georiga"
