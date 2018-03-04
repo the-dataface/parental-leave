@@ -1,0 +1,273 @@
+body {
+  margin: 0; }
+
+.guide {
+  position: fixed;
+  width: 50%;
+  min-width: 350px;
+  height: 100%;
+  margin-left: 25%;
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.text {
+  width: 50%;
+  min-width: 350px;
+  margin: auto; }
+
+h1 {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 500; }
+
+h2 {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px; }
+
+p {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 300; }
+
+.chartTitle {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  fill: #333333; }
+
+.chartTitleh2 {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  fill: #666666; }
+
+.adbaseline {
+  stroke: black;
+  stroke-width: 2px; }
+
+.adstart {
+  fill: black; }
+
+.admat {
+  fill: #f768a1;
+  stroke: white;
+  stroke-width: 2px; }
+
+.adpat {
+  fill: #74a9cf;
+  stroke: white;
+  stroke-width: 2px; }
+
+.adarc {
+  stroke-width: 2px;
+  cursor: pointer; }
+
+.adarc-mat-p {
+  stroke: #fdae95;
+  fill: rgba(253, 174, 149, 0.65); }
+
+.adarc-mat-up {
+  stroke: rgba(253, 174, 149, 0.75);
+  fill: rgba(253, 174, 149, 0.25); }
+
+.adarc-pat-p {
+  stroke: #88cae3;
+  fill: rgba(136, 202, 227, 0.65); }
+
+.adarc-pat-up {
+  stroke: rgba(136, 202, 227, 0.75);
+  fill: rgba(136, 202, 227, 0.25); }
+
+.adarclabel {
+  font-family: "Mada", Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-style: italic;
+  pointer-events: none; }
+
+.adlengthlabel {
+  font-family: "Mada", Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 9px;
+  fill: #b5b5b5;
+  pointer-events: none; }
+
+.bsControl {
+  width: 50%;
+  min-width: 350px;
+  margin: auto; }
+
+.btn-group {
+  display: inline; }
+
+.bsMetricSelect {
+  display: inline-block;
+  color: #b5b5b5;
+  background-color: #fff;
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5b5b5;
+  border-bottom-width: 3px;
+  margin: 10px 0px 10px; }
+
+.bsMetricSelect.active, .bsMetricSelect:hover {
+  background-color: #fff;
+  border-color: #333333;
+  color: #333333;
+  cursor: pointer; }
+
+.bsMetricSelect:focus {
+  outline: none; }
+
+.select2 {
+  padding-top: 5px; }
+
+.select2-container--default .select2-selection--single {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 10px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5b5b5;
+  border-bottom-width: 3px; }
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: #b5b5b5;
+  margin-top: -2.5px;
+  padding-top: 0px; }
+
+.select2-selection__arrow {
+  padding-top: 5px; }
+
+.select2-results {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 10px;
+  color: #666666; }
+
+.tooltip {
+  font-family: "Mada", Arial, sans-serif;
+  padding: 6px;
+  background: #666666;
+  color: white;
+  border: 1px solid gray;
+  border-radius: 2px;
+  pointer-events: none;
+  cursor: none;
+  max-width: 200px; }
+
+.tooltip h1 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 12px;
+  padding-bottom: 2px; }
+
+.tooltip h2 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  padding-bottom: 2px;
+  color: #b5b5b5; }
+
+.tooltip p {
+  font-size: 12px;
+  line-height: 12px; }
+
+.aText, .axislabel, .barXaxis text {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 9px;
+  text-transform: uppercase;
+  fill: #b5b5b5; }
+
+.axisTick {
+  stroke: #b5b5b5;
+  stroke-dasharray: 4,4; }
+
+.barXaxis line, .barXaxis path {
+  stroke: #b5b5b5; }
+
+.companies {
+  cursor: pointer; }
+
+.companies:hover {
+  stroke: black !important; }
+
+.barLabels {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666666;
+  pointer-events: none; }
+
+.bar-axis-label {
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 11px;
+  fill: #666666; }
+
+.barM, .barP {
+  cursor: pointer; }
+
+.barM:hover, .barP:hover {
+  opacity: .8; }
+
+.barControl {
+  width: 50%;
+  min-width: 350px;
+  margin: auto; }
+
+.btn-group {
+  display: inline; }
+
+.barOrderSelect {
+  display: inline-block;
+  color: #b5b5b5;
+  background-color: #fff;
+  font-family: "Mada", Arial, sans-serif;
+  font-size: 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5b5b5;
+  border-bottom-width: 3px;
+  margin: 10px 0px 10px; }
+
+.barOrderSelect.active, .barOrderSelect:hover {
+  background-color: #fff;
+  border-color: #333333;
+  color: #333333;
+  cursor: pointer; }
+
+.barOrderSelect:focus {
+  outline: none; }
+
+.annotation-group {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 400; }
+
+.bsAnnotation-group {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 400; }
+
+.barAnnotation-group {
+  font-family: "Mada", Arial, sans-serif;
+  font-weight: 400; }
+
+.bsAnnotation-end {
+  text-anchor: end; }
+
+.bsAnnotation-start {
+  text-anchor: start; }
+
+.annotation-note-bg {
+  fill: #666666; }
+
+.adAnnotation {
+  font-size: 10px; }
+
+.adAnnotation .annotation-note-label, .adAnnotation .connector-end {
+  fill: #b5b5b5 !important; }
+
+.adAnnotation .connector, .adAnnotation .note-line, .adAnnotation .connector-end {
+  stroke: #b5b5b5 !important; }

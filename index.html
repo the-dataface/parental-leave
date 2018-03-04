@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US" class="no-js no-svg">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Parental Leave</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Mada:400,500" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.css" rel="stylesheet">
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+
+  </head>
+
+  <body>
+    <!-- <div class="guide"></div> -->
+    <div class="text">
+      <h1>Parental Leave</h1>
+      <h2>Policies of the Top Ten Largest Employers in the US</h2>
+    </div>
+
+    <svg class="arcdiagram"></svg>
+
+    <div class="text">
+      <h2>Companies</h2>
+    </div>
+
+    <div class="bsControl">
+      <div class="btn-group">
+        <button type="radio" class="bsMetricSelect active" id="bsMetricSelectPaid" value="paid" checked>Paid</button>
+        <button type="radio" class="bsMetricSelect" id="bsMetricSelectUnpaid" value="unpaid">Unpaid</button>
+      </div>
+      <select class="btn form-control bsIndustrySelect" id="bsIndustrySelect">
+            <option value=""></option>
+            <option value='accountingServices'>Accounting Services</option>
+            <option value='advertisingAndCreativeServices'>Advertising and Creative Services</option>
+            <option value='automotive'>Automotive</option>
+            <option value='businessServices'>Business Services</option>
+            <option value='collegesandUniversities'>Colleges & Universities</option>
+            <option value='consultingServices'>Consulting Services</option>
+            <option value='consumerGoods'>Consumer Goods</option>
+            <option value='defenseAirandSpace'>Defense, Air, & Space</option>
+            <option value='educationalServices'>Educational Services</option>
+            <option value='electronics'>Electronics</option>
+            <option value='financialServices'>Financial Services</option>
+            <option value='government'>Government</option>
+            <option value='healthcare'>Healthcare</option>
+            <option value='hospitality'>Hospitality</option>
+            <option value='industrial'>Industrial</option>
+            <option value='informationServices'>Information Services</option>
+            <option value='insurance'>Insurance</option>
+            <option value='legalServices'>Legal Services</option>
+            <option value='lifestyle'>Lifestyle</option>
+            <option value='media'>Media</option>
+            <option value='naturalResources'>Natural Resources</option>
+            <option value='nonprofit'>Nonprofit</option>
+            <option value='other'>Other</option>
+            <option value='pharmaceutical'>Pharmaceutical</option>
+            <option value='publicRelations'>Public Relations</option>
+            <option value='publishingandPrinting'>Publishing & Printing</option>
+            <option value='realEstate'>Real Estate</option>
+            <option value='retail'>Retail</option>
+            <option value='technology'>Technology</option>
+            <option value='telecommunications'>Telecommunications</option>
+            <option value='transportation'>Transportation</option>
+          </select>
+      <select class="btn form-control bsSearch" id="bsSearch"></select>
+    </div>
+    <svg class="beeswarm"></svg>
+
+    <div class="text">
+      <h2>How does the US compare to the rest of the world?</h2>
+    </div>
+    <div class="barControl">
+      <div class="btn-group">
+        <button type="radio" class="barOrderSelect active" id="barOrderSelectMat" value="matLeave" checked>Sort by Maternity Length</button>
+        <button type="radio" class="barOrderSelect" id="barOrderSelectPat" value="patLeave">Sort by Paternity Length</button>
+      </div>
+      <!-- <select class="btn form-control barClassificationSelect" id="barClassificationSelect">
+            <option value="developed">Developed Countries</option>
+            <option value='developing'>Developing Countries</option>
+            <option value='transitioning'>Countries in Transition</option>
+          </select> -->
+    </div>
+    <svg class="barchart"></svg>
+
+    <script src=" //ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script src="js/d3-tip.js"></script>
+    <script src="js/main.js "></script>
+  </body>
+
+</html>
