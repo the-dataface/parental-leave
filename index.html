@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Mada:400,500" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.css" rel="stylesheet">
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="d3/d3.js"></script>
 
 
   </head>
@@ -81,7 +81,9 @@
           </select>
       <select class="btn form-control bsSearch" id="bsSearch"></select>
     </div>
-    <svg class="beeswarm"></svg>
+	<div id='beeswarm-container'>
+		<svg class="beeswarm"></svg>
+	</div>
 
     <div class="text">
       <h2>Section Three - The Rest of the World</h2>
@@ -108,7 +110,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-annotation/1.17.0/d3-annotation.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="js/d3-tip.js"></script>
-    <script src="js/main.js "></script>
+	<script src="js/arc.js"></script>
+	<script src="js/beeswarm-update.js"></script>
+	<script src="js/bar.js"></script>
   </body>
 
 </html>

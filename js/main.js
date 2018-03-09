@@ -357,10 +357,16 @@ function arcDiagram() {
 
 // -- CHART 2: BEESWARM --
 // showing every company's parental leave policies from 0 to 52 weeks, with options for paid vs unpaid, search, and industry filter
+var customBaseMat = document.createElement('custom');
+var customMat = d3.select(customBaseMat);
+
+var customBasePat = document.createElement('custom');
+var customPat = d3.select(customBasePat);
+
 function beeSwarm() {
   // remove all
-  d3.selectAll(".beeswarm > *").remove();
-
+  d3.selectAll(".beeswarm").remove();
+	
   // setup
   var bsW = windowW, // beeswarm width = full width
     bsH = 800,
@@ -368,7 +374,8 @@ function beeSwarm() {
   bsW = bsW - margin.left - margin.right;
   bsH = bsH - margin.top - margin.bottom;
 
-  var bsSVG = d3.select(".beeswarm")
+  var bsSVG = d3.select("#beeswarm-container").append('svg')
+  	.classed('beeswarm', true)
     .attr("width", bsW + margin.left + margin.right - 15)
     .attr("height", bsH + margin.top + margin.bottom),
     bsG = bsSVG.append("g")
@@ -532,8 +539,8 @@ function beeSwarm() {
       };
 
     drawAnnotations("paid");
-    drawSwarm(m);
-    drawSwarm(p);
+	drawSwarm(m);
+	drawSwarm(p);
 
     // redraw when paid/unpaid is clicked
     $(".bsMetricSelect").on("click", function() {
@@ -560,7 +567,7 @@ function beeSwarm() {
 
       drawAnnotations(status);
       drawSwarm(m);
-      drawSwarm(p);
+	  drawSwarm(p);
     });
 
     // populate the search
@@ -579,7 +586,8 @@ function beeSwarm() {
       })
 
     function drawSwarm(state) {
-      // define metric and colour scale
+		
+      // define metric arnd colour scale
       var metric = state.gender + "_" + state.variable,
         c = d3.scaleLinear().domain([1, 52]).interpolate(d3.interpolateHcl).range([d3.rgb(state.c1), d3.rgb(state.c2)])
 
@@ -617,8 +625,7 @@ function beeSwarm() {
 
       pMtext.transition().duration(1000).ease(d3.easeExp)
         .attr("x", x(suppData["pat_" + state.variable + "med"])).text("MEDIAN " + suppData["pat_" + state.variable + "med"].toFixed(1));
-
-
+	  
       // run the force simulation to get new x and y values
       var simulation = d3.forceSimulation(state.data)
         .force("x", d3.forceX(function(d) {
@@ -629,8 +636,124 @@ function beeSwarm() {
         .stop();
 
       for (var i = 0; i < 200; ++i) simulation.tick(); // increase this number to make it look better
+	
+	  //remove gender-specific canvas
+	  var thisGender = state.gender;
+	  d3.select('#canvas-container' + thisGender).remove();
+		
+	  //create visible and hidden canvas
+	  var canvasWidth = bsW + margin.left + margin.right - 15,
+		canvasHeight = (bsH + margin.top + margin.bottom) / 2;
 
-      // draw (or redraw) a circle for each company
+	  var canvasArea = d3.select('#beeswarm-container').append('div')
+		.attr('id', 'canvas-container' + thisGender)
+		.style('position', 'absolute')
+		.style('transform', function() {
+			if (thisGender == 'mat') {
+				return 'translate(' + margin.left + 'px,-' + ((canvasHeight * 2) - margin.top) + 'px)';
+			} else {
+				return 'translate(' + margin.left + 'px,-' + (canvasHeight) + 'px)';
+			}
+		});
+
+	  var canvas = canvasArea.append("canvas")
+		.attr("id", "canvas" + thisGender)
+		.attr("width", canvasWidth)
+		.attr("height", canvasHeight);
+
+	  var context = canvas.node().getContext("2d");
+	  context.clearRect(0, 0, canvasWidth, canvasHeight);
+
+	  var hiddenCanvas = canvasArea.append("canvas")
+		.attr("id", "hiddenCanvas" + thisGender)
+		.attr("width", canvasWidth)
+		.attr("height", canvasHeight)
+	    .style('transform', function() {
+			if (thisGender == 'mat') {
+				return 'translate(' + margin.left + 'px,-' + (canvasHeight - margin.top) + 'px)';
+			} else {
+				return 'translate(' + margin.left + 'px,-' + (canvasHeight - margin.top - (canvasHeight / 2)) + 'px)';
+			}
+		})
+		.style("display","none");	
+
+	  var hiddenContext = hiddenCanvas.node().getContext("2d");
+	  hiddenContext.clearRect(0, 0, canvasWidth, canvasHeight);
+
+	  // create an in memory only element of type 'custom'
+	  var dataContainer;
+		
+	  if (thisGender == 'mat') {
+		  dataContainer = customMat;
+		  console.log('mat');
+	  } else {
+		  dataContainer = customPat;
+		  console.log('pat');
+	  }
+		  
+	  var dataBinding = dataContainer.selectAll("custom.rect")
+    	.data(state.data, function(d) { 
+			return d.company; 
+		});
+	  
+	  enterSel = dataBinding.enter()
+        .append("custom")
+       	.classed("dot", true)
+      	.attr("x", function(d) {
+		 	return d.x;
+	  	})
+      	.attr("y", function(d) {
+		 	return d.y;
+	  	})
+      	.attr("size", r)
+      	.attr("fillStyle", "red")
+	
+	  dataBinding.merge(enterSel)
+		.transition()
+        .duration(2500)
+        .ease(d3.easeExp)
+        .attr("cx", function(d) {
+          if (d[metric] > -1) {
+            return d.x
+          }
+        })
+        .attr("cy", function(d) {
+          if (d[metric] > -1) {
+            return d.y
+          }
+        })
+        .attr("fill", function(d) {
+          if (d[metric] < 1) {
+            return "#b5b5b5";
+          } else {
+            return c(d[metric])
+          }
+	  	});
+		
+	  var exitSel = dataBinding.exit()
+		.transition()
+        .duration(0)
+        .ease(d3.easeExp)
+        .attr("cx", 0)
+        .attr("cy", bsH * state.placement)
+        .style("opacity", 0)
+        .remove();
+	  
+	  var elements = dataContainer.selectAll("custom.dot");
+  		elements.each(function(d) {
+    		var node = d3.select(this);
+
+    		context.beginPath();
+			context.arc(d.x, d.y, r, 0,  2 * Math.PI, true);
+			context.fill();
+			context.fillStyle = 'rgba(230, 43, 30, .15)';
+			context.strokeStyle = 'rgba(230, 43, 30, 1)';
+			context.lineWidth = 1;
+			context.stroke();
+			context.closePath();
+		});
+
+      /* draw (or redraw) a circle for each company
       var cc = bsG.selectAll(".companies" + state.gender)
         .data(state.data, function(d) {
           return d.company
@@ -666,7 +789,7 @@ function beeSwarm() {
         })
         .merge(cc)
         .transition()
-        .duration(1000)
+        .duration(2500)
         .ease(d3.easeExp)
         .attr("cx", function(d) {
           if (d[metric] > -1) {
@@ -685,7 +808,7 @@ function beeSwarm() {
             return c(d[metric])
           }
         });
-
+	  */
       // show the tooltip
       d3.selectAll(".companies").on("mouseover", bsTT.show).on("mouseout", bsTT.hide);
 
@@ -1262,6 +1385,7 @@ function barChart() {
   } // end annotations
 
 }
+
 
 
 
