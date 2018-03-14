@@ -19,7 +19,7 @@ var small_screen = false;
 
 if (windowW > 1000) {
   large_screen = true;
-} else if (windowW > 650) {
+} else if (windowW > 763) {
   medium_screen = true;
 } else {
   small_screen = true;
@@ -48,21 +48,22 @@ function arcDiagram() {
 
   // setup
   var adW = windowW,
-    cH = 150,
+    cH = 200,
     adH = (10 * cH) + cH;
 
-  var sidemargin = 100;
-  if (small_screen) sidemargin = 45;
-  if (medium_screen) sidemargin = 45;
+  var rightmargin = 50;
+	
+  var leftmargin = 250;
+  if (small_screen) leftmargin = 175;
 
   adMargin = {
     top: 0,
-    right: sidemargin,
+    right: rightmargin,
     bottom: 0,
-    left: sidemargin
+    left: leftmargin
   }
 
-  if (large_screen) adW = windowW / 2;
+  if (large_screen) adW = 980;
 
   adW = adW - margin.left - margin.right - adMargin.left - adMargin.right;
   adH = adH - margin.top - margin.bottom;
@@ -89,7 +90,11 @@ function arcDiagram() {
     .attr("d", "M0,-5L10,0L0,5")
     .style("fill", "black");
 
-  if (large_screen) adSVG.attr("transform", "translate(" + windowW / 4 + ")")
+  if (medium_screen || large_screen) {
+	  adSVG.attr("transform", "translate(" + (windowW - adSVG.attr('width')) / 2 + ")");
+  } else {
+	  adSVG.attr("transform", "translate(0)");
+  }
 
     // set up some basics
     var adr = 3;
@@ -235,13 +240,51 @@ function arcDiagram() {
       adG.append("circle").attr("class", "adNode admat").attr("cy", p).attr("cx", adX(data[i].mat_paid)).attr("r", adr + 1);
       adG.append("circle").attr("class", "adNode admat").attr("cy", p).attr("cx", adX(data[i].mat_unpaid) + adX(data[i].mat_paid)).attr("r", adr + 1);
       adG.append("circle").attr("class", "adNode adstart").attr("cy", p).attr("cx", adX(0)).attr("r", adr);
+	  
+	  /*
+	  var overlapCompanies = ['IBM', 'Yum! Brands', 'Amazon'], 
+		  overlapComDy,
+	  	  overlapLocDy,
+		  overlapEmpDy;
+		
+	  if (overlapCompanies.indexOf(data[i].company) > -1 ) {
+		  console.log('hi');
+		  overlapComDy = -20;
+	  	  overlapLocDy = 0;
+		  overlapEmpDy = 10;
+	  } else {
+		  overlapComDy = -32;
+	  	  overlapLocDy = -20;
+		  overlapEmpDy = -10;
+	  }
+	  */
+		
+	  var allX,
+	  	  comDy,
+	      locDy,
+          empDy;
+		  
+	  if (small_screen) {
+		  allX = -50,
+		  comDy = -30, 
+		  locDy = -12,
+		  empDy = 0;
+	  } else {
+		  allX = -80,
+		  comDy = -40, 
+		  locDy = -18,
+		  empDy = 0;
+	  }
 
       // draw labels
       adG.append("text").attr("class", "axislabel").attr("x", adX(0)).attr("y", p).attr("dx", -7.5).attr("dy", 3).style("text-anchor", "end").text("BIRTH")
       adG.append("text").attr("class", "axislabel").attr("x", adX(52)).attr("y", p).attr("dx", 7.5).attr("dy", 3).style("text-anchor", "start").text("52 WKS")
-      adG.append("text").attr("class", "chartTitle").attr("x", 0).attr("dy", -3).attr("y", p - (cH / 2)).style("text-anchor", "start").text(data[i].company)
-      adG.append("text").attr("class", "chartTitleh2").attr("x", 0).attr("dy", 10).attr("y", p - (cH / 2)).style("text-anchor", "start").text(data[i].location)
-      adG.append("text").attr("class", "chartTitleh2").attr("x", 0).attr("dy", 22).attr("y", p - (cH / 2)).style("text-anchor", "start").text(data[i].employees + " employees")
+	  /*
+      adG.append("text").attr("class", "chartTitle").attr("x", 0).attr("dy", overlapComDy).attr("y", p - (adX(data[i].mat_paid) / 2)).style("text-anchor", "start").text(data[i].company)
+	  */
+      adG.append("text").attr("class", "chartTitle").attr("x", allX).attr("dy", comDy).attr("y", p).style("text-anchor", "end").text(data[i].company)
+      adG.append("text").attr("class", "chartTitleh2").attr("x", allX).attr("dy", locDy).attr("y", p).style("text-anchor","end").text(data[i].location)
+      adG.append("text").attr("class", "chartTitleh2").attr("x", allX).attr("dy", empDy).attr("y", p).style("text-anchor", "end").text(data[i].employees + " employees")
 
     } //end drawing stuff
 
@@ -264,7 +307,7 @@ function arcDiagram() {
           ]
         },
         x: adX(13),
-        y: 150 - adX(14) / 2,
+        y: 200 - adX(14) / 2,
         dy: -17,
         dx: 74
       },
@@ -285,7 +328,7 @@ function arcDiagram() {
           ]
         },
         x: adX(25),
-        y: 150 - adX(5.5) / 2,
+        y: 200 - adX(5.5) / 2,
         dy: -17,
         dx: 74
       },
@@ -306,7 +349,7 @@ function arcDiagram() {
           ]
         },
         x: adX(5.5),
-        y: 150 + adX(5.5) / 2,
+        y: 200 + adX(5.5) / 2,
         dy: 17,
         dx: 74
       }
@@ -333,10 +376,14 @@ window.addEventListener('resize', resize)
 function resize() {
   windowW = window.innerWidth;
   windowH = window.innerHeight;
+  
+  large_screen = false;
+  medium_screen = false;
+  small_screen = false;
 
   if (windowW > 1000) {
     large_screen = true;
-  } else if (windowW > 650) {
+  } else if (windowW > 763) {
     medium_screen = true;
   } else {
     small_screen = true;

@@ -27,17 +27,85 @@ p {
   font-family: "Mada", Arial, sans-serif;
   font-weight: 300; }
 
+#full-header-container {
+	width:100%;
+	height:100%;
+}
+
+#header-container {
+	text-align:right;
+	text-align:center;
+	
+}
+
+#header {
+	font-family: 'Mada';
+	font-weight:900;
+	color:#fdae95;
+	text-transform:uppercase;
+}
+
+@media only screen and (min-width : 1000px) {
+	 #header {
+		font-size:120px;
+		line-height:130px;
+	}
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 #header {
+		font-size:120px;
+		line-height:130px;
+	}
+}
+
+@media only screen and (max-width: 763px) {
+	 #header {
+		font-size:60px;
+		line-height:70px;
+	}
+}
+
+
+.largeLetter {
+	font-family: 'Mada';
+	font-size:150px;
+	font-weight:900;
+	text-decoration:underline;
+	text-decoration-color:#88cae3;
+}
+
+.mLetter {
+	color:#fdae95
+}
+
+.blue-text {
+	color:#88cae3;
+}
+
 .chartTitle {
   font-family: "Mada", Arial, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  fill: #333333; }
+  font-weight: 700;
+  font-size:20px;
+  fill: #333333; 
+  alignment-baseline: middle;
+}
 
 .chartTitleh2 {
   font-family: "Mada", Arial, sans-serif;
-  font-size: 10px;
   font-weight: 400;
-  fill: #666666; }
+  font-size:16px;
+  fill: #666666; 
+  alignment-baseline: middle;
+}
+
+@media only screen and (max-width: 763px) {
+	.chartTitle {
+	  font-size: 14px;}
+
+	.chartTitleh2 {
+	  font-size: 10px;}
+}
 
 .adbaseline {
   stroke: black;
@@ -79,7 +147,7 @@ p {
 .adarclabel {
   font-family: "Mada", Arial, sans-serif;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 16px;
   font-style: italic;
   pointer-events: none; }
 
@@ -89,6 +157,45 @@ p {
   font-size: 9px;
   fill: #b5b5b5;
   pointer-events: none; }
+
+@media only screen and (max-width: 763px) {
+	.adarclabel {
+	  font-family: "Mada", Arial, sans-serif;
+	  text-transform: uppercase;
+	  font-size: 12px;
+	  font-style: italic;
+	  pointer-events: none; }
+}
+
+.bsChartTitle {
+	text-transform:uppercase;
+	font-weight:400;
+	alignment-baseline:middle;
+}
+
+@media only screen and (min-width : 1000px) {
+	 .bsChartTitle {
+		font-size:18px;
+	 }
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 .bsChartTitle {
+		font-size:16px;
+	 }
+}
+
+@media only screen and (max-width: 763px) {
+	 .bsChartTitle {
+		font-size:14px;
+	 }
+}
+
+
+.backgroundRect {
+	fill:white;
+	stroke-width:2;
+}
 
 .bsControl {
   width: 50%;
@@ -176,9 +283,23 @@ p {
 
 .aText, .axislabel, .barXaxis text {
   font-family: "Mada", Arial, sans-serif;
-  font-size: 9px;
   text-transform: uppercase;
   fill: #b5b5b5; }
+
+@media only screen and (min-width : 1000px) {
+	 .aText, .axislabel, .barXaxis text {
+	  font-size: 16px;}
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 .aText, .axislabel, .barXaxis text {
+	  font-size: 13px;}
+}
+
+@media only screen and (max-width: 763px) {
+	 .aText, .axislabel, .barXaxis text {
+	  font-size: 10px;}
+}
 
 .axisTick {
   stroke: #b5b5b5;
@@ -264,10 +385,37 @@ p {
   fill: #666666; }
 
 .adAnnotation {
-  font-size: 10px; }
+  font-size: 16px; }
+
+@media only screen and (max-width: 763px) {
+	.adAnnotation {
+      font-size: 10px; }
+}
 
 .adAnnotation .annotation-note-label, .adAnnotation .connector-end {
   fill: #b5b5b5 !important; }
 
 .adAnnotation .connector, .adAnnotation .note-line, .adAnnotation .connector-end {
   stroke: #b5b5b5 !important; }
+
+.bsAnnotation1 {
+	
+}
+
+@media only screen and (min-width : 1000px) {
+	 .bsAnnotation1 {
+		font-size:16px;
+	 }
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 .bsAnnotation1 {
+		font-size:13px;
+	 }
+}
+
+@media only screen and (max-width: 763px) {
+	 .bsAnnotation1 {
+		font-size:10px;
+	 }
+}

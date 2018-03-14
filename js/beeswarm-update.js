@@ -17,15 +17,19 @@ var large_screen = false;
 var medium_screen = false;
 var small_screen = false;
 
+console.log(windowW);
+
 if (windowW > 1000) {
   large_screen = true;
-} else if (windowW > 650) {
+} else if (windowW > 763) {
   medium_screen = true;
 } else {
   small_screen = true;
   margin.left = 10;
   margin.right = 10;
 }
+
+console.log(small_screen);
 
 // colours
 var matc1 = "#fdae95",
@@ -41,6 +45,8 @@ var matc1 = "#fdae95",
 // bring in the data
 d3.csv("data/companies.csv", function(error, data) {
 	if (error) throw error;
+	
+	console.log(small_screen);
 
 	// filter data depending on what we're looking at
 	var data_mat_paid = data.filter(function(d) {
@@ -119,7 +125,6 @@ d3.csv("data/companies.csv", function(error, data) {
 	  }
 
 	function beeSwarm() {
-	
 	  // remove all
 	  d3.selectAll(".beeswarm").remove();
 
@@ -135,19 +140,19 @@ d3.csv("data/companies.csv", function(error, data) {
 	  // draw average lines
 	  mAline = bsG.append("line").attr("class", "aLine").attr("x1", x(suppData["mat_paidavg"])).attr("x2", x(suppData["mat_paidavg"])).attr("y1", (0) + linemargin).attr("y2", (bsH * .5) - linemargin).style("stroke", matc1);
 
-	  mAtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["mat_paidavg"])).attr("y", linemargin).text("AVG " + suppData["mat_paidavg"].toFixed(1)).style("fill", matc1).attr("dy", 4).attr("dx", 3)
+	  mAtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["mat_paidavg"])).attr("y", linemargin).text("AVG " + suppData["mat_paidavg"].toFixed(1)).style("fill", matc1).style("text-anchor", "start").attr("dy", -4).attr("dx", -6)
 
 	  pAline = bsG.append("line").attr("class", "aLine").attr("x1", x(suppData["pat_paidavg"])).attr("x2", x(suppData["pat_paidavg"])).attr("y1", (bsH * .5) + linemargin).attr("y2", bsH - linemargin).style("stroke", patc1);
 
-	  pAtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["pat_paidavg"])).attr("y", (bsH * .5) + linemargin).text("AVG " + suppData["pat_paidavg"].toFixed(1)).style("fill", patc1).attr("dy", 4).attr("dx", 3)
+	  pAtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["pat_paidavg"])).attr("y", (bsH - linemargin) + linemargin).text("AVG " + suppData["pat_paidavg"].toFixed(1)).style("fill", patc1).style("text-anchor", "start").attr("dy", 4).attr("dx", -6)
 
 	  mMline = bsG.append("line").attr("class", "aLine").attr("x1", x(suppData["mat_paidmed"])).attr("x2", x(suppData["mat_paidmed"])).attr("y1", (0) + linemargin).attr("y2", (bsH * .5) - linemargin).style("stroke", matc1);
 
-	  mMtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["mat_paidmed"])).attr("y", linemargin).text("MEDIAN " + suppData["mat_paidmed"].toFixed(1)).style("fill", matc1).style("text-anchor", "end").attr("dy", 4).attr("dx", -3)
+	  mMtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["mat_paidmed"])).attr("y", linemargin).text("MEDIAN " + suppData["mat_paidmed"].toFixed(1)).style("fill", matc1).style("text-anchor", "end").attr("dy", -4).attr("dx", 6)
 
 	  pMline = bsG.append("line").attr("class", "aLine").attr("x1", x(suppData["pat_paidmed"])).attr("x2", x(suppData["pat_paidmed"])).attr("y1", (bsH * .5) + linemargin).attr("y2", bsH - linemargin).style("stroke", patc1);
 
-	  pMtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["pat_paidmed"])).attr("y", (bsH * .5) + linemargin).text("MEDIAN " + suppData["pat_paidmed"].toFixed(1)).style("fill", patc1).style("text-anchor", "end").attr("dy", 4).attr("dx", -3)
+	  pMtext = bsG.append("text").attr("class", "aText").attr("x", x(suppData["pat_paidmed"])).attr("y", (bsH - linemargin) + linemargin).text("MEDIAN " + suppData["pat_paidmed"].toFixed(1)).style("fill", patc1).style("text-anchor", "end").attr("dy", 4).attr("dx", 6)
 
 	  // draw labels/ticks
 	  bsG.append("text").attr("class", "axislabel").attr("id", "axisLabelStart").attr("x", x(0)).attr("y", bsH / 2).text("0 weeks").attr("dy", 3);
@@ -158,8 +163,34 @@ d3.csv("data/companies.csv", function(error, data) {
 		bsG.append("line").attr("class", "axisTick").attr("id", "axisTickM" + i).attr("x1", x(bsTicks[i])).attr("x2", x(bsTicks[i])).attr("y1", linemargin).attr("y2", (bsH / 2) - linemargin);
 		bsG.append("line").attr("class", "axisTick").attr("id", "axisTickP" + i).attr("x1", x(bsTicks[i])).attr("x2", x(bsTicks[i])).attr("y1", (bsH / 2) + linemargin).attr("y2", bsH - linemargin);
 	  }
-	  bsG.append("text").attr("class", "chartTitle").attr("x", bsW / 2).attr("y", 25).style("text-anchor", "middle").text("Length of Maternity Leave")
-	  bsG.append("text").attr("class", "chartTitle").attr("x", bsW / 2).attr("y", bsH / 2 + 25).style("text-anchor", "middle").text("Length of Paternity Leave")
+		
+
+	  var xCoord,
+		  rectWidth;
+	  if (small_screen) {
+		  rectWidth = 200;
+		  rectHeight = 40;
+	  } else if (medium_screen) {
+		  rectWidth = 230;
+		  rectHeight = 44;
+	  } else {
+		  rectWidth = 260;
+		  rectHeight = 48;
+	  }
+		
+	  if (windowW > 1300) {
+		  xCoord = bsW / 2;
+	  } else {
+		 xCoord = (2 * bsW) / 3;
+	  }
+		
+	  //maternity leave chart header
+      bsG.append("rect").attr("class", "backgroundRect mbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', '#fdae95');
+	  bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", 15).style("text-anchor", "middle").text("Length of Maternity Leave")
+	  
+      //paternity leave chart header
+	  bsG.append("rect").attr("class", "backgroundRect pbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", bsH - 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', '#88cae3');
+	  bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", bsH - 15).style("text-anchor", "middle").text("Length of Paternity Leave")
 
 	  // create tooltip and call using d3tip.js
 	  var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
@@ -391,6 +422,15 @@ d3.csv("data/companies.csv", function(error, data) {
 
 		function drawAnnotations(status) {
 		  d3.selectAll(".bsAnnotation-group").remove();
+			
+		  var wrap;
+		  if (small_screen) {
+			  wrap = 120;
+		  } else if (medium_screen) {
+			 wrap = 120;
+		  } else {
+			 wrap = 200;
+		  }
 
 		  // annotations, thank you Susie Lu
 		  const type = d3.annotationLabel
@@ -400,19 +440,19 @@ d3.csv("data/companies.csv", function(error, data) {
 				  label: "Netflix allows for 52 weeks of paid leave for both parents, regardless of sex.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 160
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
 				  type: "curve",
 				  points: [
-					[-20, 20],
-					[-35, 28]
+					[-20, 30],
+					[-35, 40]
 				  ]
 				},
 				x: x(52) - 4,
 				y: bsH * .25 + 9,
-				dy: 34,
+				dy: 55,
 				dx: -74
 			  },
 			  {
@@ -421,7 +461,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  // lineType: "none",
 				  "align": "middle",
 				  "orientation": "leftRight",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
@@ -438,29 +478,29 @@ d3.csv("data/companies.csv", function(error, data) {
 			  }, {
 				note: {
 				  label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
-				  orientation: "leftRight",
-				  "align": "middle",
-				  wrap: 175
+				  "orientation": "leftRight",
+				  "align": "bottom",
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[(x(10) - x(8)) / 2, 15],
+					[(x(10) - x(8)), 60]
 				  ]
 				},
 				x: x(8),
-				y: bsH * .5 - 60,
-				dy: 34,
-				dx: 74
+				y: bsH * .5 - 50,
+				dy: 60,
+				dx: x(10) - x(8)
 			  },
 			  {
 				note: {
 				  label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
@@ -492,7 +532,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  // lineType: "none",
 				  "align": "middle",
 				  "orientation": "leftRight",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
@@ -511,27 +551,27 @@ d3.csv("data/companies.csv", function(error, data) {
 				  label: "More companies are inclined to offer longer unpaid leave than paid.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[10, 5],
+					[35, 10]
 				  ]
 				},
 				x: x(12),
-				y: bsH * .5 - 60,
-				dy: 34,
-				dx: 74
+				y: bsH * .5 - 55,
+				dy: -15,
+				dx: 80
 			  },
 			  {
 				note: {
 				  label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
@@ -583,8 +623,31 @@ d3.csv("data/companies.csv", function(error, data) {
 		bsG.select('#axisTickM' + i).attr("x1", x(bsTicks[i])).attr("x2", x(bsTicks[i]));
 		bsG.select('#axisTickP' + i).attr("x1", x(bsTicks[i])).attr("x2", x(bsTicks[i]));
 	  }
+	  
+	  var xCoord,
+		  rectWidth;
+	  if (small_screen) {
+		  rectWidth = 200;
+		  rectHeight = 40;
+	  } else if (medium_screen) {
+		  rectWidth = 230;
+		  rectHeight = 44;
+	  } else {
+		  rectWidth = 260;
+		  rectHeight = 48;
+	  }
 		
-	  bsG.selectAll(".chartTitle").attr("x", bsW / 2);
+	  if (windowW > 1300) {
+		  xCoord = bsW / 2;
+	  } else {
+		 xCoord = (2 * bsW) / 3;
+	  }
+		
+	  bsG.selectAll(".chartTitle").attr("x", xCoord);
+	  bsG.selectAll('.backgroundRect').attr("x", xCoord - (rectWidth / 2)).attr('width', rectWidth).attr('height', rectHeight);
+		
+	  bsG.select('.mbackgroundRect').attr('y', 15 - (rectHeight / 2));
+	  bsG.select('.pbackgroundRect').attr('y', bsH - 15 - (rectHeight / 2));
 		
 		drawAnnotations(status);
 		drawSwarm(m);
@@ -654,6 +717,15 @@ d3.csv("data/companies.csv", function(error, data) {
 
 		function drawAnnotations(status) {
 		  d3.selectAll(".bsAnnotation-group").remove();
+			
+		  var wrap;
+		  if (small_screen) {
+			  wrap = 120;
+		  } else if (medium_screen) {
+			 wrap = 120;
+		  } else {
+			 wrap = 200;
+		  }
 
 		  // annotations, thank you Susie Lu
 		  const type = d3.annotationLabel
@@ -663,19 +735,19 @@ d3.csv("data/companies.csv", function(error, data) {
 				  label: "Netflix allows for 52 weeks of paid leave for both parents, regardless of sex.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 160
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
 				  type: "curve",
 				  points: [
-					[-20, 20],
-					[-35, 28]
+					[-20, 30],
+					[-35, 40]
 				  ]
 				},
 				x: x(52) - 4,
 				y: bsH * .25 + 9,
-				dy: 34,
+				dy: 55,
 				dx: -74
 			  },
 			  {
@@ -684,7 +756,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  // lineType: "none",
 				  "align": "middle",
 				  "orientation": "leftRight",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
@@ -701,29 +773,29 @@ d3.csv("data/companies.csv", function(error, data) {
 			  }, {
 				note: {
 				  label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
-				  orientation: "leftRight",
-				  "align": "middle",
-				  wrap: 175
+				  "orientation": "leftRight",
+				  "align": "bottom",
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[(x(10) - x(8)) / 2, 15],
+					[(x(10) - x(8)), 60]
 				  ]
 				},
 				x: x(8),
-				y: bsH * .5 - 60,
-				dy: 34,
-				dx: 74
+				y: bsH * .5 - 50,
+				dy: 60,
+				dx: x(10) - x(8)
 			  },
 			  {
 				note: {
 				  label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
@@ -755,7 +827,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  // lineType: "none",
 				  "align": "middle",
 				  "orientation": "leftRight",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
 				connector: {
@@ -774,27 +846,27 @@ d3.csv("data/companies.csv", function(error, data) {
 				  label: "More companies are inclined to offer longer unpaid leave than paid.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[10, 5],
+					[35, 10]
 				  ]
 				},
 				x: x(12),
-				y: bsH * .5 - 60,
-				dy: 34,
-				dx: 74
+				y: bsH * .5 - 55,
+				dy: -15,
+				dx: 80
 			  },
 			  {
 				note: {
 				  label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
 				  orientation: "leftRight",
 				  "align": "middle",
-				  wrap: 175
+				  wrap: wrap
 				},
 				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
 				connector: {
@@ -831,10 +903,14 @@ d3.csv("data/companies.csv", function(error, data) {
 	function resize() {
 	  windowW = window.innerWidth;
 	  windowH = window.innerHeight;
+	  
+  	  large_screen = false;
+  	  medium_screen = false;
+  	  small_screen = false;
 
 	  if (windowW > 1000) {
 		large_screen = true;
-	  } else if (windowW > 650) {
+	  } else if (windowW > 763) {
 		medium_screen = true;
 	  } else {
 		small_screen = true;
@@ -842,6 +918,8 @@ d3.csv("data/companies.csv", function(error, data) {
 		margin.right = 10;
 	  }
 	  
+	  console.log(small_screen);
+		
 	  // setup
 	  bsW = windowW; // beeswarm width = full width
 	

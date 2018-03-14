@@ -19,7 +19,7 @@ var small_screen = false;
 
 if (windowW > 1000) {
   large_screen = true;
-} else if (windowW > 650) {
+} else if (windowW > 763) {
   medium_screen = true;
 } else {
   small_screen = true;
@@ -434,7 +434,7 @@ function resize() {
 
   if (windowW > 1000) {
     large_screen = true;
-  } else if (windowW > 650) {
+  } else if (windowW > 763) {
     medium_screen = true;
   } else {
     small_screen = true;
