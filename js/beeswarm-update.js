@@ -423,7 +423,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		  } else if (medium_screen) {
 			 wrap = 120;
 		  } else {
-			 wrap = 200;
+			 wrap = 240;
 		  }
 
 		  // annotations, thank you Susie Lu
@@ -571,14 +571,14 @@ d3.csv("data/companies.csv", function(error, data) {
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[-8, -18],
+					[-17, -28]
 				  ]
 				},
 				x: x(12),
-				y: bsH - 115,
-				dy: 34,
-				dx: 74
+				y: bsH - 215,
+				dy: -34,
+				dx: -50
 			  }
 			]
 
@@ -866,14 +866,14 @@ d3.csv("data/companies.csv", function(error, data) {
 				connector: {
 				  type: "curve",
 				  points: [
-					[20, 20],
-					[35, 28]
+					[-8, -18],
+					[-17, -28]
 				  ]
 				},
 				x: x(12),
-				y: bsH - 115,
-				dy: 34,
-				dx: 74
+				y: bsH - 215,
+				dy: -34,
+				dx: -50
 			  }
 			]
 

@@ -414,7 +414,7 @@ function barChart() {
           ]
         },
         x: barX(-1) - 4,
-        y: barY("Japan") + barY.bandwidth() / 2,
+        y: barY("Iceland") + barY.bandwidth(),
         dy: -34,
         dx: -80
       }, {
@@ -433,7 +433,7 @@ function barChart() {
           ]
         },
         x: barX(-2) - 4,
-        y: barY("Poland") + barY.bandwidth() / 2,
+        y: barY("Cyprus") + barY.bandwidth() / 2,
         dy: 34,
         dx: -40
       }]
