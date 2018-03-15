@@ -89,6 +89,9 @@ function barChart() {
   // set defaults
   var order = "matLeave",
     classification = "developed";
+	
+  $("#barOrderSelectMat").addClass("active")
+  $("#barOrderSelectPat").removeClass("active")
 
   // create tooltip and call using d3tip.js
   var barTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
@@ -466,8 +469,6 @@ function resize() {
     barMargin.left = 10;
     barMargin.right = 10;
   }
-	
-	console.log(order);
 	
   barChart()
 }
