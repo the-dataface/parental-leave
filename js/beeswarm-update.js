@@ -5,7 +5,7 @@ var windowW = window.innerWidth;
 var windowH = window.innerHeight;
 
 // margin setup
-var margin = {
+var swarmMargin = {
   top: 30,
   right: 30,
   bottom: 100,
@@ -17,19 +17,15 @@ var large_screen = false;
 var medium_screen = false;
 var small_screen = false;
 
-console.log(windowW);
-
 if (windowW > 1000) {
   large_screen = true;
 } else if (windowW > 763) {
   medium_screen = true;
 } else {
   small_screen = true;
-  margin.left = 10;
-  margin.right = 10;
+  swarmMargin.left = 10;
+  swarmMargin.right = 10;
 }
-
-console.log(small_screen);
 
 // colours
 var matc1 = "#fdae95",
@@ -45,8 +41,6 @@ var matc1 = "#fdae95",
 // bring in the data
 d3.csv("data/companies.csv", function(error, data) {
 	if (error) throw error;
-	
-	console.log(small_screen);
 
 	// filter data depending on what we're looking at
 	var data_mat_paid = data.filter(function(d) {
@@ -103,8 +97,8 @@ d3.csv("data/companies.csv", function(error, data) {
 		r = 3, 
 		linemargin = 15;
 	
-	bsW = bsW - margin.left - margin.right;
-	bsH = bsH - margin.top - margin.bottom;
+	bsW = bsW - swarmMargin.left - swarmMargin.right;
+	bsH = bsH - swarmMargin.top - swarmMargin.bottom;
 	
 	var x = d3.scaleLinear()
 		.rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])
@@ -130,11 +124,11 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	  bsSVG = d3.select("#beeswarm-container").append('svg')
 		.classed('beeswarm', true)
-		.attr("width", bsW + margin.left + margin.right - 15)
-		.attr("height", bsH + margin.top + margin.bottom);
+		.attr("width", bsW + swarmMargin.left + swarmMargin.right - 15)
+		.attr("height", bsH + swarmMargin.top + swarmMargin.bottom);
 		
 	  bsG = bsSVG.append("g")
-		.attr("transform", "translate(" + margin.left + "," + margin.top + ")"),
+		.attr("transform", "translate(" + swarmMargin.left + "," + swarmMargin.top + ")"),
 		formatNumber = d3.format(",");
 		
 	  // draw average lines
@@ -609,9 +603,9 @@ d3.csv("data/companies.csv", function(error, data) {
 	
 	function redrawBeeSwarm() {
 		
-	  bsSVG.attr("width", bsW + margin.left + margin.right - 15)
-		.attr("height", bsH + margin.top + margin.bottom),
-	  bsG.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	  bsSVG.attr("width", bsW + swarmMargin.left + swarmMargin.right - 15)
+		.attr("height", bsH + swarmMargin.top + swarmMargin.bottom),
+	  bsG.attr("transform", "translate(" + swarmMargin.left + "," + swarmMargin.top + ")");
 
 	  // draw labels/ticks
 	  bsG.select("#axisLabelStart").attr("x", x(0));
@@ -914,16 +908,14 @@ d3.csv("data/companies.csv", function(error, data) {
 		medium_screen = true;
 	  } else {
 		small_screen = true;
-		margin.left = 10;
-		margin.right = 10;
+		swarmMargin.left = 10;
+		swarmMargin.right = 10;
 	  }
-	  
-	  console.log(small_screen);
 		
 	  // setup
 	  bsW = windowW; // beeswarm width = full width
 	
-	  bsW = bsW - margin.left - margin.right;
+	  bsW = bsW - swarmMargin.left - swarmMargin.right;
 		
 	  x = d3.scaleLinear()
 	  .rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])

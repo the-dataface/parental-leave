@@ -5,7 +5,7 @@ var windowW = window.innerWidth;
 var windowH = window.innerHeight;
 
 // margin setup
-var margin = {
+var arcMargin = {
   top: 30,
   right: 30,
   bottom: 100,
@@ -23,8 +23,8 @@ if (windowW > 1000) {
   medium_screen = true;
 } else {
   small_screen = true;
-  margin.left = 10;
-  margin.right = 10;
+  arcMargin.left = 10;
+  arcMargin.right = 10;
 }
 
 // colours
@@ -65,15 +65,15 @@ function arcDiagram() {
 
   if (large_screen) adW = 980;
 
-  adW = adW - margin.left - margin.right - adMargin.left - adMargin.right;
-  adH = adH - margin.top - margin.bottom;
-  var Gtrans = adMargin.left + margin.left
+  adW = adW - arcMargin.left - arcMargin.right - adMargin.left - adMargin.right;
+  adH = adH - arcMargin.top - arcMargin.bottom;
+  var Gtrans = adMargin.left + arcMargin.left
 
   var adSVG = d3.select(".arcdiagram")
-    .attr("width", adW + margin.left + margin.right + adMargin.left + adMargin.right)
-    .attr("height", adH + margin.top + margin.bottom),
+    .attr("width", adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)
+    .attr("height", adH + arcMargin.top + arcMargin.bottom),
     adG = adSVG.append("g")
-    .attr("transform", "translate(" + Gtrans + "," + margin.top + ")")
+    .attr("transform", "translate(" + Gtrans + "," + arcMargin.top + ")")
   adX = d3.scaleLinear()
     .range([0, adW])
     .domain([0, 52]);
@@ -387,8 +387,8 @@ function resize() {
     medium_screen = true;
   } else {
     small_screen = true;
-    margin.left = 10;
-    margin.right = 10;
+    arcMargin.left = 10;
+    arcMargin.right = 10;
   }
 
   arcDiagram()

@@ -4,8 +4,8 @@
 var windowW = window.innerWidth;
 var windowH = window.innerHeight;
 
-// margin setup
-var margin = {
+// barMargin setup
+var barMargin = {
   top: 30,
   right: 30,
   bottom: 100,
@@ -23,8 +23,6 @@ if (windowW > 1000) {
   medium_screen = true;
 } else {
   small_screen = true;
-  margin.left = 10;
-  margin.right = 10;
 }
 
 // colours
@@ -46,20 +44,29 @@ function barChart() {
   // remove
   d3.selectAll(".barchart > *").remove();
 
+  var barW, 
+  	  barH = 1000;
   // setup
-  var barW = windowW - 15,
-    barH = 1000;
+  if (windowW > 1300) {
+	  barW = 1300;
+	  barMargin.left = (windowW - 1300) / 2;
+	  barMargin.right = 0;
+  } else {
+	  barMargin.right = 10;
+	  barMargin.left = 10;
+	  barW = windowW - 15;
+  }
 
-  barW = barW - margin.left - margin.right;
-  barH = barH - margin.top - margin.bottom;
-
+  barW = barW - barMargin.left - barMargin.right;
+  barH = barH - barMargin.top - barMargin.bottom;
+	
   var barSVG = d3.select(".barchart")
-    .attr("width", barW + margin.left + margin.right)
-    .attr("height", barH + margin.top + margin.bottom),
+    .attr("width", barW + barMargin.left + barMargin.right)
+    .attr("height", barH + barMargin.top + barMargin.bottom),
     barG = barSVG.append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .attr("transform", "translate(" + barMargin.left + "," + barMargin.top + ")")
   barX = d3.scaleLinear()
-    .range([200, barW]),
+    .range([100, barW]),
     barY = d3.scaleBand()
     .rangeRound([barH, 0])
     .padding(0.2)
@@ -68,7 +75,7 @@ function barChart() {
 
   // set up axes
   var barXaxis = d3.axisBottom(barX)
-    .ticks(20, ".0s")
+    .ticks(10, ".0s")
     .tickSizeOuter(0)
     .tickFormat(function(d) {
       return Math.abs(d) + " wks"
@@ -98,7 +105,7 @@ function barChart() {
   barSVG.call(barTT)
 
     drawBars(data, order, classification, true)
-    drawAnnotations("matLeave")
+    drawAnnotations(order)
 
     $(".barOrderSelect").on("click", function() {
 
@@ -162,12 +169,21 @@ function barChart() {
           .attr("class", "barXaxis")
           .attr("transform", "translate(0," + barH + ")")
           .call(barXaxis);
+		  
+		var arrowOffset;
+		if (small_screen) {
+		  arrowOffset = 115;
+		} else if (medium_screen) {
+		  arrowOffset = 135;
+		} else {
+		  arrowOffset = 155;
+		}
 
         // draw axis labels
         barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternal Leave").attr("dy", 3)
         barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternal Leave").style("text-anchor", "end").attr("dy", 3)
-        barG.append("line").attr("x1", barX(0) + 125).attr("y1", 0).attr("x2", barX(0) + 150).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
-        barG.append("line").attr("x1", barX(0) - 125).attr("y1", 0).attr("x2", barX(0) - 150).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+        barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + 25).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+        barG.append("line").attr("x1", barX(0) - arrowOffset).attr("y1", 0).attr("x2", barX(0) - arrowOffset - 25).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
       }
 
       // new bars
@@ -318,6 +334,15 @@ function barChart() {
   function drawAnnotations(status) {
     d3.selectAll(".barAnnotation-group").remove();
 
+    var wrap;
+	if (small_screen) {
+	  wrap = 120;
+    } else if (medium_screen) {
+	  wrap = 160;
+    } else {
+	  wrap = 200;
+    }
+
     // annotations, thank you Susie Lu
     const type = d3.annotationLabel
     if (status === "matLeave") {
@@ -326,7 +351,7 @@ function barChart() {
           label: "The United States is the only developed country with no federal paid parental leave policy, but mandates 12 weeks unpaid leave for each parent.",
           orientation: "leftRight",
           "align": "middle",
-          wrap: 160
+          wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-start",
         connector: {
@@ -336,29 +361,29 @@ function barChart() {
             [108, -14]
           ]
         },
-        x: barX(10) - 4,
+        x: barX(0) + 100,
         y: barY("United States") + barY.bandwidth() / 2,
-        dy: -34,
-        dx: 148
+        dy: -60,
+        dx: 150
       }, {
         note: {
           label: "Sweden tops the list on both sides, mandating up to 68 weeks paid maternal leave and 18 weeks paid paternal leave, funded by social security.",
           orientation: "leftRight",
           "align": "middle",
-          wrap: 160
+          wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
         connector: {
           type: "curve",
           points: [
-            [-20, 20],
-            [-35, 28]
+            [-5, 40],
+            [-10, 50]
           ]
         },
-        x: barX(-7.5),
+        x: barX(-5),
         y: barY("Sweden") + barY.bandwidth() + 5,
-        dy: 34,
-        dx: -74
+        dy: 70,
+        dx: -40
       }]
 
       const barMakeAnnotations = d3.annotation()
@@ -375,39 +400,39 @@ function barChart() {
           label: "Many developed countries offer no paid paternal leave, leaving it up to private companies to create their own policies.",
           orientation: "leftRight",
           "align": "middle",
-          wrap: 160
+          wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
         connector: {
           type: "curve",
           points: [
-            [-78, -6],
-            [-108, -14]
+            [-30, -6],
+            [-50, -14]
           ]
         },
         x: barX(-1) - 4,
         y: barY("Japan") + barY.bandwidth() / 2,
         dy: -34,
-        dx: -148
+        dx: -80
       }, {
         note: {
           label: "Some countries, like the United Kingdom, offer split parental leave. The UK requires 2 weeks maternal leave, while the remaining 50 weeks can be split between either parent.",
           orientation: "leftRight",
           "align": "middle",
-          wrap: 160
+          wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
         connector: {
           type: "curve",
           points: [
-            [-39, 6],
-            [-54, 14]
+            [-15, 10],
+            [-15, 10]
           ]
         },
         x: barX(-2) - 4,
         y: barY("Poland") + barY.bandwidth() / 2,
         dy: 34,
-        dx: -74
+        dx: -40
       }]
 
       const barMakeAnnotations = d3.annotation()
@@ -438,9 +463,11 @@ function resize() {
     medium_screen = true;
   } else {
     small_screen = true;
-    margin.left = 10;
-    margin.right = 10;
+    barMargin.left = 10;
+    barMargin.right = 10;
   }
+	
+	console.log(order);
 	
   barChart()
 }

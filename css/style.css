@@ -326,6 +326,21 @@ p {
   font-size: 11px;
   fill: #666666; }
 
+@media only screen and (min-width : 1000px) {
+	 .bar-axis-label {
+	  font-size: 14px;}
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 .bar-axis-label {
+	  font-size: 12px;}
+}
+
+@media only screen and (max-width: 763px) {
+	 .bar-axis-label {
+	  font-size: 10px;}
+}
+
 .barM, .barP {
   cursor: pointer; }
 
