@@ -188,10 +188,10 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	   // create tooltip and call using d3tip.js
 	  var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
-		var mpL = (d.mat_paid == -5) ? 'N/A' : d.mat_paid,
-		  muL = (d.mat_unpaid == -5) ? 'N/A' : d.mat_unpaid,
-		  ppL = (d.pat_paid == -5) ? 'N/A' : d.pat_paid,
-		  puL = (d.pat_unpaid == -5) ? 'N/A' : d.pat_unpaid,
+		var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
+		  muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
+		  ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
+		  puL = (d.pat_unpaid == -5) ? '—' : d.pat_unpaid,
 		  mpT = "",
 		  muT = "",
 		  ppT = "",
@@ -210,10 +210,10 @@ d3.csv("data/companies.csv", function(error, data) {
 		if (puL > 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " weeks <strong>unpaid</strong> paternal leave</span>";
 		if (puL === 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " week <strong>unpaid</strong> paternal leave</span>";
 		*/
-		(mpL != 'N/A') ? mpT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
-		(muL != 'N/A') ? muT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
-		(ppL != 'N/A') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
-		(puL != 'N/A') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(mpL != '—') ? mpT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(muL != '—') ? muT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 		  
 		return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 	  });
@@ -259,6 +259,29 @@ d3.csv("data/companies.csv", function(error, data) {
 				d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
 			}
 		}
+		  
+		var industryData = data.filter(
+			function(d) {
+				return camelize(d.industry) == industry;
+			}
+		)
+		
+		bsSearch.selectAll(".searchoptions").remove();
+		  
+		bsSearch.selectAll(".searchoptions")
+		  .data(industryData.sort(function(a, b) {
+			return d3.ascending(a.company, b.company);
+		  }))
+		  .enter()
+		  .append("option")
+		  .attr("class", "searchoptions")
+		  .attr("value", function(d) {
+			return camelize(d.company);
+		  })
+		  .text(function(d) {
+			return d.company
+		  })
+		  
 	  }
 
 	  function companysearch() {
@@ -282,6 +305,8 @@ d3.csv("data/companies.csv", function(error, data) {
 		d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
 		  
 		d3.selectAll('.adAnnotation').style('visibility', 'visible');
+		
+		resetSearch();
 		 
 	  }
 
@@ -311,6 +336,8 @@ d3.csv("data/companies.csv", function(error, data) {
 			m.data = data_mat_unpaid;
 			p.data = data_pat_unpaid;
 		  }
+			
+	      resetSearch();
 
 		  drawAnnotations(status);
 		  drawSwarm(m);
@@ -626,6 +653,24 @@ d3.csv("data/companies.csv", function(error, data) {
 		  if (small_screen) d3.selectAll(".bsAnnotation-group").style("display", "none")
 		  d3.selectAll(".bsAnnotation-group").selectAll(".annotation-note-label").attr("y", 10)
 		} // end annotations
+		
+		function resetSearch() {
+			bsSearch.selectAll(".searchoptions").remove();
+
+			bsSearch.selectAll(".searchoptions")
+			  .data(data.sort(function(a, b) {
+				return d3.ascending(a.company, b.company);
+			  }))
+			  .enter()
+			  .append("option")
+			  .attr("class", "searchoptions")
+			  .attr("value", function(d) {
+				return camelize(d.company);
+			  })
+			  .text(function(d) {
+				return d.company
+			  })
+		}
 
 	} // end beeswarm
 	// draw everything
@@ -958,6 +1003,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	}
 
 	window.addEventListener('resize', resize)
+	
 }) // end data
 
 // to clean up company names for id tags
