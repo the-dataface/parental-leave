@@ -73,7 +73,7 @@ function arcDiagram() {
     .attr("width", adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)
     .attr("height", adH + arcMargin.top + arcMargin.bottom),
     adG = adSVG.append("g")
-    .attr("transform", "translate(" + Gtrans + "," + arcMargin.top + ")")
+    .attr("transform", "translate(" + Gtrans + "," + (-50) + ")")
   adX = d3.scaleLinear()
     .range([0, adW])
     .domain([0, 52]);
