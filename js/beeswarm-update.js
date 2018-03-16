@@ -219,6 +219,8 @@ d3.csv("data/companies.csv", function(error, data) {
 	  });
 
 	  bsSVG.call(bsTT)
+		
+	  var industry = 'all';
 
 	  // set up controls using select2.js
 	  //    industry filter
@@ -228,7 +230,10 @@ d3.csv("data/companies.csv", function(error, data) {
 		width: "150px"
 	  });
 	  $('.bsIndustrySelect').on("select2:select", industryselect);
-	  $('.bsIndustrySelect').on("select2:unselect", filterclear);
+	  $('.bsIndustrySelect').on("select2:unselect", function() {
+		industry = 'all';
+		filterclear();
+	  });
 
 	  //    company search, will populate later
 	  $('.bsSearch').select2({ // company search
@@ -245,7 +250,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		.text("");
 
 	  function industryselect() {
-		var industry = $(this).val();
+		industry = $(this).val();
 		$('.bsSearch').val(null).trigger('change');
 		d3.selectAll(".companies").style("visibility", "hidden")
 		d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1)
@@ -266,7 +271,6 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	  function companysearch() {
 		var company = $(this).val();
-		$('.bsIndustrySelect').val(null).trigger('change');
 		d3.selectAll(".companies").style("opacity", .15).style("stroke", "none").attr("r", r);
 		d3.selectAll("#" + company).style("opacity", 1).style("stroke", "black").style("stroke-width", "1px").attr("r", 6);
 		
@@ -282,11 +286,21 @@ d3.csv("data/companies.csv", function(error, data) {
 	  }
 
 	  function filterclear() {
-		d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
+		d3.selectAll(".companies").style("visibility", "hidden").style("stroke", "none").attr("r", r);
+		if (industry == 'all') {
+			d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1);
+			d3.selectAll('.adAnnotation').style('visibility', 'visible');
+		} else {
+			if (industry == 'other') {
+				d3.select('.bsGatesAnnotation').style('visibility', 'visible');
+			} else if (industry == 'technology') {
+				d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
+			}
+			d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1);
+		}
 		  
-		d3.selectAll('.adAnnotation').style('visibility', 'visible');
 		
-		resetSearch('all', status);
+		resetSearch(industry, status);
 		 
 	  }
 
@@ -317,7 +331,8 @@ d3.csv("data/companies.csv", function(error, data) {
 			p.data = data_pat_unpaid;
 		  }
 			
-	      resetSearch('all', status);
+		  industry = 'all';
+	      resetSearch(industry, status);
 
 		  drawAnnotations(status);
 		  drawSwarm(m);
@@ -325,7 +340,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		});
 
 		// populate the search
-		resetSearch('all', status);
+		resetSearch(industry, status);
 
 		function drawSwarm(state) {
 
