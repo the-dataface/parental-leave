@@ -375,6 +375,8 @@ p {
 	color:#bdbdbd;
 	font-weight:600;
 	font-size:14px;
+	line-height:14px;
+	align-items:baseline;
 }
 
 .first-cell {
@@ -419,6 +421,10 @@ p {
 
 .matText {
 	color:#fdae95;
+}
+
+.parText {
+	color:white;
 }
 
 @media only screen and (min-width : 1000px) {

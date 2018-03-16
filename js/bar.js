@@ -47,9 +47,9 @@ function barChart() {
   var barW, 
   	  barH = 1000;
   // setup
-  if (windowW > 1300) {
-	  barW = 1300;
-	  barMargin.left = (windowW - 1300) / 2;
+  if (windowW > 1500) {
+	  barW = 1450;
+	  barMargin.left = (windowW - 1450) / 2;
 	  barMargin.right = 0;
   } else {
 	  barMargin.right = 10;
@@ -102,7 +102,7 @@ function barChart() {
     if (d.patLeave < 2 && d.patLeave > 0) pl = "<br> <strong>" + d.patLeave + " week </strong> paternal leave ";
     if (d.parentalLeave < 2 && d.parentalLeave > 0) parl = "<br> <strong>" + d.parentalLeave + " week </strong>parental leave ";
     if (d.note.length > 1) var note = "<br><br><span style='color: #b5b5b5'; font-size: 9px><em>" + d.note + "</em></span>"
-    return "<div class='tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div></div>"
+    return "<div class='tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div></div>"
   });
 
   barSVG.call(barTT)
