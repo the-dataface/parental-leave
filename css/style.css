@@ -300,6 +300,7 @@ p {
 
 .table-header {
 	margin-top:15px;
+	margin-bottom:5px;
 	text-align:center;
 	color:#bdbdbd;
 	font-weight:600;
@@ -321,7 +322,7 @@ p {
 
 .first-cell {
 	width:60px;
-	margin-bottom:15px;
+	margin-bottom:5px;
 	margin-top:10px;
 	font-size:14px;
 	line-height:16px;
@@ -349,6 +350,10 @@ p {
 .weekAmountSubText {
 	font-size:10px;
 	text-transform:uppercase;
+}
+
+.tooltipHiddenText {
+	color:#666666;
 }
 
 .patText {
