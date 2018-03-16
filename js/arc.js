@@ -209,7 +209,7 @@ function arcDiagram() {
           .text(function() {
             if (x2 > 0) return x2 + " wks"
           })
-          .style("fill", "#dfdfdf")
+          .style("fill", "white")
           .style("display", "none")
 
         arc.on("mouseover", function(d) {
