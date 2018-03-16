@@ -242,6 +242,16 @@ d3.csv("data/companies.csv", function(error, data) {
 		$('.bsSearch').val(null).trigger('change');
 		d3.selectAll(".companies").style("visibility", "hidden")
 		d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1)
+		
+		d3.selectAll('.adAnnotation').style('visibility', 'hidden');
+		  
+		if (status == 'paid') {
+			if (industry == 'other') {
+				d3.select('.bsGatesAnnotation').style('visibility', 'visible');
+			} else if (industry == 'technology') {
+				d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
+			}
+		}
 	  }
 
 	  function companysearch() {
@@ -249,10 +259,23 @@ d3.csv("data/companies.csv", function(error, data) {
 		$('.bsIndustrySelect').val(null).trigger('change');
 		d3.selectAll(".companies").style("opacity", .15).style("stroke", "none").attr("r", r);
 		d3.selectAll("#" + company).style("opacity", 1).style("stroke", "black").style("stroke-width", "1px").attr("r", 6);
+		
+		d3.selectAll('.adAnnotation').style('visibility', 'hidden');
+		  
+		if (status == 'paid') {
+			if (company == 'billAndMelindaGatesFoundation') {
+				d3.select('.bsGatesAnnotation').style('visibility', 'visible');
+			} else if (company == 'netflix') {
+				d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
+			}
+		}
 	  }
 
 	  function filterclear() {
 		d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
+		  
+		d3.selectAll('.adAnnotation').style('visibility', 'visible');
+		 
 	  }
 
 		drawAnnotations(status);
@@ -436,7 +459,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "align": "middle",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsNetflixAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -457,7 +480,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "orientation": "leftRight",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsGatesAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -476,7 +499,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "align": "bottom",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -496,7 +519,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "align": "middle",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -528,7 +551,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "orientation": "leftRight",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-end",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-end bsUnpaidAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -547,7 +570,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "align": "middle",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-start bsUnpaidAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
@@ -567,7 +590,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				  "align": "middle",
 				  wrap: wrap
 				},
-				className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				className: "adAnnotation bsAnnotation1 bsAnnotation-start bsUnpaidAnnotation",
 				connector: {
 				  type: "curve",
 				  points: [
