@@ -241,7 +241,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		var industry = $(this).val();
 		$('.bsSearch').val(null).trigger('change');
 		d3.selectAll(".companies").style("visibility", "hidden")
-		d3.selectAll("." + industry).style("visibility", "visible")
+		d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1)
 	  }
 
 	  function companysearch() {
