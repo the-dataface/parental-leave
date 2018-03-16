@@ -191,7 +191,6 @@ p {
 	 }
 }
 
-
 .backgroundRect {
 	fill:white;
 	stroke-width:2;
@@ -255,45 +254,139 @@ p {
 
 .tooltip {
   font-family: "Mada", Arial, sans-serif;
-  padding: 6px;
+  padding: 2px;
+  padding-left:10px;
+  padding-right:10px;
   background: #666666;
-  color: white;
-  border: 1px solid gray;
-  border-radius: 2px;
+  color: black;
   pointer-events: none;
   cursor: none;
-  max-width: 200px; }
+  max-width: 200px; 
+  border-radius:2px;}
 
 .tooltip h1 {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 12px;
-  padding-bottom: 2px; }
+  font-weight: 700;
+  padding-bottom: 2px;
+  margin-bottom:5px;}
 
 .tooltip h2 {
-  font-size: 12px;
   font-weight: 400;
-  line-height: 12px;
-  padding-bottom: 2px;
-  color: #b5b5b5; }
+  padding-bottom: 0px;
+  margin-top:0;
+  color: #333333; }
 
 .tooltip p {
-  font-size: 12px;
-  line-height: 12px; }
+  }
+
+.tooltip-header {
+	margin:0;
+	margin-bottom:5px;
+	font-size:20px;
+	color:white;
+	font-weight:600;
+}
+
+.tooltip-sub-header {
+	margin:0;
+	font-size:14px;
+	line-height:14px;
+	padding-bottom:5px;
+	font-weight:700;
+	color:#dbdbdb;
+}
+
+.table-header {
+	margin-top:15px;
+	text-align:center;
+	color:#bdbdbd;
+	font-weight:600;
+	height:10px;
+}
+
+.table-row {
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+}
+
+.flex-cell {
+	margin:0;
+	color:#bdbdbd;
+	font-weight:600;
+	font-size:14px;
+}
+
+.first-cell {
+	width:60px;
+	margin-bottom:15px;
+	margin-top:10px;
+	font-size:14px;
+	line-height:16px;
+	color:#bdbdbd;
+	font-weight:600;
+}
+
+.second-cell {
+	width:50px;
+}
+
+.third-cell {
+	width:50px;
+}
+
+.tooltipWeeks {
+	display:block;
+	text-align:center;
+}
+
+.weekAmount {
+	font-size:20px;
+}
+
+.weekAmountSubText {
+	font-size:10px;
+	text-transform:uppercase;
+}
+
+.patText {
+	color:#88cae3;
+}
+
+.matText {
+	color:#fdae95;
+}
 
 @media only screen and (min-width : 1000px) {
-	 .aText, .axislabel, .barXaxis text {
-	  font-size: 16px;}
+	 .tooltip h1 {
+	  font-size: 20px;
+	  line-height: 18px;}
+
+	.tooltip h2 {
+	  font-size: 14px;
+	  line-height: 14px;}
+
 }
 
 @media only screen and (min-width : 764px) and (max-width: 999px) {
-	 .aText, .axislabel, .barXaxis text {
-	  font-size: 13px;}
+	 .tooltip h1 {
+	  font-size: 16px;
+	  line-height: 14px;}
+
+	.tooltip h2 {
+	  font-size: 14px;
+	  line-height: 12px;}
+
 }
 
 @media only screen and (max-width: 763px) {
-	 .aText, .axislabel, .barXaxis text {
-	  font-size: 10px;}
+	 .tooltip h1 {
+	  font-size: 16px;
+	  line-height: 14px;}
+
+	.tooltip h2 {
+	  font-size: 14px;
+	  line-height: 12px;}
+
 }
 
 .aText, .axislabel, .barXaxis text {

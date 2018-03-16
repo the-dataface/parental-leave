@@ -186,7 +186,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	  bsG.append("rect").attr("class", "backgroundRect pbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", bsH - 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', '#88cae3');
 	  bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", bsH - 15).style("text-anchor", "middle").text("Length of Paternity Leave")
 
-	  // create tooltip and call using d3tip.js
+	   // create tooltip and call using d3tip.js
 	  var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
 		var mpL = d.mat_paid,
 		  muL = d.mat_unpaid,
@@ -208,7 +208,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		if (ppL === 1) ppT = "<br><span style='color: " + patc1 + "'>" + ppL + " week <strong>paid</strong> paternal leave</span>";
 		if (puL > 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " weeks <strong>unpaid</strong> paternal leave</span>";
 		if (puL === 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " week <strong>unpaid</strong> paternal leave</span>";
-		return "<div class='tooltip'><h1>" + d.company + "</h1><h2>" + ind + city + state + country + "</h2><p>" + mpT + muT + ppT + puT + "</div>"
+		return "<div class='tooltip'><h1><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div></div></div>"
 	  });
 
 	  bsSVG.call(bsTT)
