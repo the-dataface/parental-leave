@@ -163,13 +163,13 @@ d3.csv("data/companies.csv", function(error, data) {
 		  rectWidth;
 	  if (small_screen) {
 		  rectWidth = 200;
-		  rectHeight = 40;
+		  rectHeight = 33;
 	  } else if (medium_screen) {
-		  rectWidth = 230;
-		  rectHeight = 44;
+		  rectWidth = 220;
+		  rectHeight = 33;
 	  } else {
-		  rectWidth = 260;
-		  rectHeight = 48;
+		  rectWidth = 250;
+		  rectHeight = 37;
 	  }
 		
 	  if (windowW > 1300) {
@@ -179,11 +179,11 @@ d3.csv("data/companies.csv", function(error, data) {
 	  }
 		
 	  //maternity leave chart header
-      bsG.append("rect").attr("class", "backgroundRect mbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', '#fdae95');
+      bsG.append("rect").attr("class", "backgroundRect mbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', 'none').style('fill', '#fdae95');
 	  bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", 15).style("text-anchor", "middle").text("Length of Maternity Leave")
 	  
       //paternity leave chart header
-	  bsG.append("rect").attr("class", "backgroundRect pbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", bsH - 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', '#88cae3');
+	  bsG.append("rect").attr("class", "backgroundRect pbackgroundRect").attr("x", xCoord - (rectWidth / 2)).attr("y", bsH - 15 - (rectHeight / 2)).attr("rx", 1).attr("ry", 1).attr('width', rectWidth).attr('height', rectHeight).style('stroke', 'none').style('fill', '#88cae3');
 	  bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", bsH - 15).style("text-anchor", "middle").text("Length of Paternity Leave")
 
 	   // create tooltip and call using d3tip.js

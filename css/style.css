@@ -225,8 +225,9 @@ p {
 
 .bsChartTitle {
 	text-transform:uppercase;
-	font-weight:400;
+	font-weight:600;
 	alignment-baseline:middle;
+	fill:white;
 }
 
 @media only screen and (min-width : 1000px) {
