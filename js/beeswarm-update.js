@@ -260,27 +260,7 @@ d3.csv("data/companies.csv", function(error, data) {
 			}
 		}
 		  
-		var industryData = data.filter(
-			function(d) {
-				return camelize(d.industry) == industry;
-			}
-		)
-		
-		bsSearch.selectAll(".searchoptions").remove();
-		  
-		bsSearch.selectAll(".searchoptions")
-		  .data(industryData.sort(function(a, b) {
-			return d3.ascending(a.company, b.company);
-		  }))
-		  .enter()
-		  .append("option")
-		  .attr("class", "searchoptions")
-		  .attr("value", function(d) {
-			return camelize(d.company);
-		  })
-		  .text(function(d) {
-			return d.company
-		  })
+		resetSearch(industry, status);
 		  
 	  }
 
@@ -306,7 +286,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		  
 		d3.selectAll('.adAnnotation').style('visibility', 'visible');
 		
-		resetSearch();
+		resetSearch('all', status);
 		 
 	  }
 
@@ -337,7 +317,7 @@ d3.csv("data/companies.csv", function(error, data) {
 			p.data = data_pat_unpaid;
 		  }
 			
-	      resetSearch();
+	      resetSearch('all', status);
 
 		  drawAnnotations(status);
 		  drawSwarm(m);
@@ -345,19 +325,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		});
 
 		// populate the search
-		bsSearch.selectAll(".searchoptions")
-		  .data(data.sort(function(a, b) {
-			return d3.ascending(a.company, b.company);
-		  }))
-		  .enter()
-		  .append("option")
-		  .attr("class", "searchoptions")
-		  .attr("value", function(d) {
-			return camelize(d.company);
-		  })
-		  .text(function(d) {
-			return d.company
-		  })
+		resetSearch('all', status);
 
 		function drawSwarm(state) {
 
@@ -654,11 +622,34 @@ d3.csv("data/companies.csv", function(error, data) {
 		  d3.selectAll(".bsAnnotation-group").selectAll(".annotation-note-label").attr("y", 10)
 		} // end annotations
 		
-		function resetSearch() {
+		function resetSearch(ind, pay) {
+			
+			var searchData;
+			searchData = data.filter(
+				function(d) {
+					var industryCheck, 
+						payCheck;
+					
+					if (ind == 'all') {
+						industryCheck = true;
+					} else {
+						industryCheck = (camelize(d.industry) == ind);
+					}
+					
+					if (pay == 'paid') {
+						payCheck = ((d["mat_paid"] >= 1) || (d["pat_paid"] >= 1));
+					} else {
+						payCheck = ((d["mat_unpaid"] >= 1) || (d["pat_unpaid"] >= 1));
+					}
+					
+					return industryCheck && payCheck;
+				}
+			)
+			
 			bsSearch.selectAll(".searchoptions").remove();
 
 			bsSearch.selectAll(".searchoptions")
-			  .data(data.sort(function(a, b) {
+			  .data(searchData.sort(function(a, b) {
 				return d3.ascending(a.company, b.company);
 			  }))
 			  .enter()
