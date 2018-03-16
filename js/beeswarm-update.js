@@ -240,8 +240,8 @@ d3.csv("data/companies.csv", function(error, data) {
 	  function industryselect() {
 		var industry = $(this).val();
 		$('.bsSearch').val(null).trigger('change');
-		d3.selectAll(".companies").style("opacity", 0)
-		d3.selectAll("." + industry).style("opacity", 1)
+		d3.selectAll(".companies").style("visibility", "hidden")
+		d3.selectAll("." + industry).style("visibility", "visible")
 	  }
 
 	  function companysearch() {
@@ -252,7 +252,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	  }
 
 	  function filterclear() {
-		d3.selectAll(".companies").style("opacity", 1).style("stroke", "none").attr("r", r)
+		d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
 	  }
 
 		drawAnnotations(status);
@@ -263,7 +263,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		$(".bsMetricSelect").on("click", function() {
 		  $('.bsSearch').val(null).trigger('change');
 		  $('.bsIndustrySelect').val(null).trigger('change');
-		  d3.selectAll(".companies").style("opacity", 1).style("stroke", "none").attr("r", r)
+		  d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
 
 		  status = $(this).val();
 		  m.variable = status;
@@ -367,7 +367,7 @@ d3.csv("data/companies.csv", function(error, data) {
 			.ease(d3.easeExp)
 			.attr("cx", 0)
 			.attr("cy", bsH * state.placement)
-			.style("opacity", 0)
+			.style("visibility", "hidden")
 			.remove();
 
 		  cc.enter()

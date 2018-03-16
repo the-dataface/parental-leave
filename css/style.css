@@ -281,8 +281,10 @@ p {
 
 .tooltip-header {
 	margin:0;
+	margin-top:5px;
 	margin-bottom:5px;
-	font-size:23px;
+	font-size:20px;
+	line-height:20px;
 	color:white;
 	font-weight:600;
 }
