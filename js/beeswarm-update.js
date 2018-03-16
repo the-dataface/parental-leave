@@ -188,10 +188,10 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	   // create tooltip and call using d3tip.js
 	  var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
-		var mpL = d.mat_paid,
-		  muL = d.mat_unpaid,
-		  ppL = d.pat_paid,
-		  puL = d.pat_unpaid,
+		var mpL = (d.mat_paid == -5) ? 'N/A' : d.mat_paid,
+		  muL = (d.mat_unpaid == -5) ? 'N/A' : d.mat_unpaid,
+		  ppL = (d.pat_paid == -5) ? 'N/A' : d.pat_paid,
+		  puL = (d.pat_unpaid == -5) ? 'N/A' : d.pat_unpaid,
 		  mpT = "",
 		  muT = "",
 		  ppT = "",
@@ -199,7 +199,8 @@ d3.csv("data/companies.csv", function(error, data) {
 		  ind = "<strong>" + d.industry + "</strong><br>",
 		  city = d.city + ", ",
 		  state = d.state + ", ",
-		  country = d.country
+		  country = d.country;
+		/*
 		if (mpL > 1) mpT = "<span style='color: " + matc1 + "'>" + mpL + " weeks <strong>paid</strong> maternal leave</span>";
 		if (mpL === 1) mpT = "<br><span style='color: " + matc1 + "'>" + mpL + " week <strong>paid</strong> maternal leave</span>";
 		if (muL > 1) muT = "<br><span style='color: " + matc1 + "'>" + muL + " weeks <strong>unpaid</strong> maternal leave</span>";
@@ -208,7 +209,13 @@ d3.csv("data/companies.csv", function(error, data) {
 		if (ppL === 1) ppT = "<br><span style='color: " + patc1 + "'>" + ppL + " week <strong>paid</strong> paternal leave</span>";
 		if (puL > 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " weeks <strong>unpaid</strong> paternal leave</span>";
 		if (puL === 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " week <strong>unpaid</strong> paternal leave</span>";
-		return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div></div></div>"
+		*/
+		(mpL != 'N/A') ? mpT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(muL != 'N/A') ? muT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(ppL != 'N/A') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		(puL != 'N/A') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
+		  
+		return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 	  });
 
 	  bsSVG.call(bsTT)

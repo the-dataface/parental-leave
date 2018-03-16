@@ -48,8 +48,8 @@ function arcDiagram() {
 
   // setup
   var adW = windowW,
-    cH = 200,
-    adH = (10 * cH) + cH;
+    cH = windowH * (1 / 6),
+    adH = (11 * cH);
 
   var rightmargin = 50;
 	
