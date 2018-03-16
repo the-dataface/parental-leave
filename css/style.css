@@ -10,8 +10,6 @@ body {
   background-color: rgba(0, 0, 0, 0.1); }
 
 .text {
-  width: 50%;
-  min-width: 350px;
   margin: auto; }
 
 h1 {
@@ -30,11 +28,16 @@ p {
 #full-header-container {
 	width:100%;
 	height:100%;
+	position:relative;
 }
 
 #header-container {
-	text-align:right;
 	text-align:center;
+	position:absolute;
+	width:100%;
+	left:50%;
+	top:50%;
+	transform:translate(-50%, -50%);
 	
 }
 
@@ -43,19 +46,20 @@ p {
 	font-weight:900;
 	color:#fdae95;
 	text-transform:uppercase;
+	margin-top:auto;
 }
 
 @media only screen and (min-width : 1000px) {
 	 #header {
-		font-size:120px;
-		line-height:130px;
+		font-size:80px;
+		line-height:85px;
 	}
 }
 
 @media only screen and (min-width : 764px) and (max-width: 999px) {
 	 #header {
-		font-size:120px;
-		line-height:130px;
+		font-size:80px;
+		line-height:85px;
 	}
 }
 
@@ -66,6 +70,59 @@ p {
 	}
 }
 
+.copy-header {
+	font-family:'Mada';
+	font-weight:700;
+	padding-bottom:.3em;
+}
+
+.copy-body {
+	font-family:'PT Serif';
+    padding-bottom:.7em;
+}
+
+@media only screen and (min-width : 1000px) {
+	 .copy-header {
+		width:900px;
+	    font-size:32px;
+		margin:auto;
+	 }
+
+	 .copy-body {
+ 		width:900px;
+		margin:auto;
+		font-size:18px;
+		line-height:30px;
+	 }
+}
+
+@media only screen and (min-width : 764px) and (max-width: 999px) {
+	 .copy-header {
+		width:700px;
+		font-size:30px;
+		margin:auto;
+	 }
+
+	 .copy-body {
+ 		width:700px;
+		margin:auto;
+	    font-size:16px;
+	 }
+}
+
+@media only screen and (max-width: 763px) {
+	 .copy-header {
+		width:84%;
+		font-size:26px;
+		margin:auto;
+	 }
+
+	 .copy-body {
+ 		width:84%;
+		margin:auto;
+	    font-size:14px;
+	 }
+}
 
 .largeLetter {
 	font-family: 'Mada';
@@ -199,6 +256,7 @@ p {
 .bsControl {
   width: 50%;
   min-width: 350px;
+  padding-top:50px;
   margin: auto; }
 
 .btn-group {
@@ -466,6 +524,7 @@ p {
 .barControl {
   width: 50%;
   min-width: 350px;
+  padding-top:50px;
   margin: auto; }
 
 .btn-group {
