@@ -23,8 +23,6 @@ if (windowW > 1000) {
   medium_screen = true;
 } else {
   small_screen = true;
-  swarmMargin.left = 10;
-  swarmMargin.right = 10;
 }
 
 // colours
@@ -989,8 +987,6 @@ d3.csv("data/companies.csv", function(error, data) {
 		medium_screen = true;
 	  } else {
 		small_screen = true;
-		swarmMargin.left = 10;
-		swarmMargin.right = 10;
 	  }
 		
 	  // setup

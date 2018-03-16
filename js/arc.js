@@ -47,9 +47,17 @@ function arcDiagram() {
   d3.selectAll(".arcdiagram > *").remove();
 
   // setup
-  var adW = windowW,
-    cH = 200,
-    adH = (11 * cH);
+  var adW = windowW, 
+	  cH;
+  if (small_screen) {
+	  cH = 150;
+  } else if (medium_screen) {
+	  cH = 175;
+  } else if (large_screen) {
+	  cH = 200;
+  }
+  
+  var adH = (11 * cH);
 
   var rightmargin = 50;
 	
@@ -307,7 +315,7 @@ function arcDiagram() {
           ]
         },
         x: adX(13),
-        y: 200 - adX(14) / 2,
+        y: cH - adX(14) / 2,
         dy: -17,
         dx: 74
       },
@@ -328,7 +336,7 @@ function arcDiagram() {
           ]
         },
         x: adX(25),
-        y: 200 - adX(5.5) / 2,
+        y: cH - adX(5.5) / 2,
         dy: -17,
         dx: 74
       },
@@ -349,7 +357,7 @@ function arcDiagram() {
           ]
         },
         x: adX(5.5),
-        y: 200 + adX(5.5) / 2,
+        y: cH + adX(5.5) / 2,
         dy: 17,
         dx: 74
       }
