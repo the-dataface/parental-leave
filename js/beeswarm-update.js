@@ -208,7 +208,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		if (ppL === 1) ppT = "<br><span style='color: " + patc1 + "'>" + ppL + " week <strong>paid</strong> paternal leave</span>";
 		if (puL > 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " weeks <strong>unpaid</strong> paternal leave</span>";
 		if (puL === 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " week <strong>unpaid</strong> paternal leave</span>";
-		return "<div class='tooltip'><h1><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div></div></div>"
+		return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div></div></div>"
 	  });
 
 	  bsSVG.call(bsTT)
@@ -247,7 +247,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	  function companysearch() {
 		var company = $(this).val();
 		$('.bsIndustrySelect').val(null).trigger('change');
-		d3.selectAll(".companies").style("opacity", .15)
+		d3.selectAll(".companies").style("opacity", .15).style("stroke", "none").attr("r", r);
 		d3.selectAll("#" + company).style("opacity", 1).style("stroke", "black").style("stroke-width", "1px").attr("r", 6);
 	  }
 

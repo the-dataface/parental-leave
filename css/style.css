@@ -254,9 +254,10 @@ p {
 
 .tooltip {
   font-family: "Mada", Arial, sans-serif;
-  padding: 2px;
-  padding-left:10px;
-  padding-right:10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left:15px;
+  padding-right:15px;
   background: #666666;
   color: black;
   pointer-events: none;
@@ -281,7 +282,7 @@ p {
 .tooltip-header {
 	margin:0;
 	margin-bottom:5px;
-	font-size:20px;
+	font-size:23px;
 	color:white;
 	font-weight:600;
 }
