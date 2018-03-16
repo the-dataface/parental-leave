@@ -102,7 +102,7 @@ function barChart() {
     if (d.patLeave < 2 && d.patLeave > 0) pl = "<br> <strong>" + d.patLeave + " week </strong> paternal leave ";
     if (d.parentalLeave < 2 && d.parentalLeave > 0) parl = "<br> <strong>" + d.parentalLeave + " week </strong>parental leave ";
     if (d.note.length > 1) var note = "<br><br><span style='color: #b5b5b5'; font-size: 9px><em>" + d.note + "</em></span>"
-    return "<div class='tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span></div></div></div>"
+    return "<div class='tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks parText'>of salary</span></div></div></div>"
   });
 
   barSVG.call(barTT)
@@ -414,9 +414,9 @@ function barChart() {
           ]
         },
         x: barX(-1) - 4,
-        y: barY("Iceland") + barY.bandwidth(),
-        dy: -34,
-        dx: -80
+        y: barY.bandwidth() * 43 + barMargin.top,
+        dy: -20,
+        dx: -60
       }, {
         note: {
           label: "Some countries, like the United Kingdom, offer split parental leave. The UK requires 2 weeks maternal leave, while the remaining 50 weeks can be split between either parent.",
@@ -433,9 +433,9 @@ function barChart() {
           ]
         },
         x: barX(-2) - 4,
-        y: barY("Cyprus") + barY.bandwidth() / 2,
+        y: barY.bandwidth() * 19.5 + barMargin.top,
         dy: 34,
-        dx: -40
+        dx: -50
       }]
 
       const barMakeAnnotations = d3.annotation()
