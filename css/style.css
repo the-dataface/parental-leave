@@ -124,7 +124,7 @@ p {
 	.chartSubheader {
 		font-size:20px;
 	}
-	.bsControl {
+	.bsControl, .barControl{
 		width:900px;
 		margin-left:calc((100% - 900px) / 2);
  	}
@@ -154,7 +154,7 @@ p {
 	 .chartSubheader {
 		font-size:18px;
 	 }
-	 .bsControl {
+	 .bsControl, .barControl{
 		width:700px;
 		margin-left:calc((100% - 700px) / 2);
  	 }
@@ -184,7 +184,7 @@ p {
 	 .chartSubheader {
 		font-size:14px;
 	 }
-	 .bsControl {
+	 .bsControl, .barControl{
 		width:84%;
 		margin-left:8%;
  	 }
@@ -574,16 +574,26 @@ p {
 @media only screen and (min-width : 1000px) {
 	 .bar-axis-label {
 	  font-size: 14px;}
+	.barLabels{
+	  font-size: 14px;
+	}
 }
 
 @media only screen and (min-width : 764px) and (max-width: 999px) {
 	 .bar-axis-label {
-	  font-size: 12px;}
+	  font-size: 12px;
+	  }
+	.barLabels{
+	  font-size: 12px;
+	}
 }
 
 @media only screen and (max-width: 763px) {
 	 .bar-axis-label {
 	  font-size: 10px;}
+	.barLabels{
+	  font-size: 10px;
+	}
 }
 
 .barM, .barP {
@@ -591,11 +601,6 @@ p {
 
 .barM:hover, .barP:hover {
   opacity: .8; }
-
-.barControl {
-  width: 50%;
-  min-width: 350px;
-  margin: auto; }
 
 .btn-group {
   display: inline; }

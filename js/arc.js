@@ -310,14 +310,14 @@ function arcDiagram() {
         connector: {
           type: "curve",
           points: [
-            [20, -10],
-            [35, -14]
+            [adX(2) - adX(0), -8],
+            [adX(3) - adX(0), -12]
           ]
         },
         x: adX(13),
         y: cH - adX(14) / 2,
         dy: -17,
-        dx: 74
+        dx: adX(5) - adX(0)
       },
       {
         note: {
@@ -331,14 +331,14 @@ function arcDiagram() {
         connector: {
           type: "curve",
           points: [
-            [20, -10],
-            [35, -14]
+            [adX(2) - adX(0), -8],
+            [adX(3) - adX(0), -12]
           ]
         },
         x: adX(25),
         y: cH - adX(5.5) / 2,
         dy: -17,
-        dx: 74
+        dx: adX(5) - adX(0)
       },
       {
         note: {
@@ -352,14 +352,14 @@ function arcDiagram() {
         connector: {
           type: "curve",
           points: [
-            [20, 10],
-            [35, 14]
+            [adX(2) - adX(0), 10],
+            [adX(3) - adX(0), 14]
           ]
         },
         x: adX(5.5),
         y: cH + adX(5.5) / 2,
         dy: 17,
-        dx: 74
+        dx: adX(5) - adX(0)
       }
     ]
 
