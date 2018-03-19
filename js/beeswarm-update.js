@@ -3,6 +3,7 @@
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
 var windowH = window.innerHeight;
+var barControlHeight = $('.bsControl').height();
 
 // margin setup
 var swarmMargin = {
@@ -104,7 +105,8 @@ d3.csv("data/companies.csv", function(error, data) {
 	var bsW = windowW, // beeswarm width = full width
 		bsH = 800,
 		r = 3, 
-		linemargin = 15;
+		linemargin = 15,
+		linemarginMobile = 0;
 	
 	bsW = bsW - swarmMargin.left - swarmMargin.right;
 	bsH = bsH - swarmMargin.top - swarmMargin.bottom;
@@ -118,7 +120,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	
 	// mobile setup
 	var bsWMobile = windowW, // beeswarm width = full width
-		bsHMobile = windowH, // beeswarm height = full height
+		bsHMobile = windowH - barControlHeight, // beeswarm height = full height
 		r = 3, 
 		linemargin = 15;
 	
@@ -129,7 +131,6 @@ d3.csv("data/companies.csv", function(error, data) {
 	.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
 	.domain([0, 6.5, 13, 26, 52]),
 		yAxis = d3.axisLeft(bsHMobile)
-	.ticks(20, ".0s")
 	.tickSizeOuter(0);
 
 	var suppData = {
@@ -1029,30 +1030,30 @@ d3.csv("data/companies.csv", function(error, data) {
 			formatNumber = d3.format(",");
 
 		// draw average lines
-		mAline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(suppData["mat_paidavg"])).attr("y2", y(suppData["mat_paidavg"])).style("stroke", matc1);
+		mAline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(suppData["mat_paidavg"])).attr("y2", y(suppData["mat_paidavg"])).style("stroke", matc1);
 		
-		mAtext = bsG.append("text").attr("class", "aText").attr("x", (0) + linemargin).attr("y", y(suppData["mat_paidavg"])).text("AVG " + suppData["mat_paidavg"].toFixed(1)).style("fill", matc1).style("text-anchor", "start").attr("dy", -4);
+		mAtext = bsG.append("text").attr("class", "aText").attr("x", bsWMobile - linemarginMobile).attr("y", y(suppData["mat_paidavg"])).text("AVG " + suppData["mat_paidavg"].toFixed(1)).style("fill", matc1).style("text-anchor", "end").attr("dy", -4);
 
-		pAline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(suppData["pat_paidavg"])).attr("y2", y(suppData["pat_paidavg"])).style("stroke", patc1);
+		pAline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(suppData["pat_paidavg"])).attr("y2", y(suppData["pat_paidavg"])).style("stroke", patc1);
 
-		pAtext = bsG.append("text").attr("class", "aText").attr("x", (0) + linemargin).attr("y", y(suppData["pat_paidavg"])).text("AVG " + suppData["pat_paidavg"].toFixed(1)).style("fill", patc1).style("text-anchor", "start").attr("dy", -4);
+		pAtext = bsG.append("text").attr("class", "aText").attr("x", bsWMobile - linemarginMobile).attr("y", y(suppData["pat_paidavg"])).text("AVG " + suppData["pat_paidavg"].toFixed(1)).style("fill", patc1).style("text-anchor", "end").attr("dy", -4);
 
-		mMline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(suppData["mat_paidmed"])).attr("y2", y(suppData["mat_paidmed"])).style("stroke", matc1);
+		mMline = bsG.append("line").attr("class", "aLine").attr("x1", (0) + linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(suppData["mat_paidmed"])).attr("y2", y(suppData["mat_paidmed"])).style("stroke", matc1);
 
-		mMtext = bsG.append("text").attr("class", "aText").attr("x", (0) + linemargin).attr("y", y(suppData["mat_paidmed"])).text("MEDIAN " + suppData["mat_paidmed"].toFixed(1)).style("fill", matc1).style("text-anchor", "start").attr("dy", -4);
+		mMtext = bsG.append("text").attr("class", "aText").attr("x", bsWMobile - linemarginMobile).attr("y", y(suppData["mat_paidmed"])).text("MEDIAN " + suppData["mat_paidmed"].toFixed(1)).style("fill", matc1).style("text-anchor", "end").attr("dy", -4);
 
-		pMline = bsG.append("line").attr("class", "aLine").attr("x1",  (0) + linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(suppData["pat_paidmed"])).attr("y2", y(suppData["pat_paidmed"])).style("stroke", patc1);
+		pMline = bsG.append("line").attr("class", "aLine").attr("x1",  (0) + linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(suppData["pat_paidmed"])).attr("y2", y(suppData["pat_paidmed"])).style("stroke", patc1);
 
-		pMtext = bsG.append("text").attr("class", "aText").attr("x", (0) + linemargin).attr("y", y(suppData["pat_paidmed"])).text("MEDIAN " + suppData["pat_paidmed"].toFixed(1)).style("fill", patc1).style("text-anchor", "start").attr("dy", -4);
+		pMtext = bsG.append("text").attr("class", "aText").attr("x", bsWMobile - linemarginMobile).attr("y", y(suppData["pat_paidmed"])).text("MEDIAN " + suppData["pat_paidmed"].toFixed(1)).style("fill", patc1).style("text-anchor", "end").attr("dy", -4);
 
 		// draw labels/ticks
-		bsG.append("text").attr("class", "axislabel").attr("id", "axisLabelStart").attr("x", linemargin).attr("y", y(0)).text("0 weeks").attr("dy", 3);
-		bsG.append("text").attr("class", "axislabel").attr("id", "axisLabelEnd").attr("x", linemargin).attr("y", y(52)).text("52 weeks").style("text-anchor", "end").attr("dy", 3);
+		bsG.append("text").attr("class", "axislabel").attr("id", "axisLabelStart").attr("x", linemarginMobile).attr("y", y(0)).text("0 weeks").attr("dy", 3);
+		bsG.append("text").attr("class", "axislabel").attr("id", "axisLabelEnd").attr("x", linemarginMobile).attr("y", y(52)).text("52 weeks").attr("dy", 3);
 		var bsTicks = [4, 8, 16, 32]
 		for (var i = 0; i < bsTicks.length; i++) {
-			bsG.append("text").attr("class", "axislabel").attr("id", "axisLabel" + i).attr("x", linemargin).attr("y", y(bsTicks[i])).text(bsTicks[i] + " weeks").style("text-anchor", "start").attr("dy", -3);
-			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickM" + i).attr("x1", linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
-			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickP" + i).attr("x1", linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
+			bsG.append("text").attr("class", "axislabel").attr("id", "axisLabel" + i).attr("x", linemarginMobile).attr("y", y(bsTicks[i])).text(bsTicks[i] + " weeks").style("text-anchor", "start").attr("dy", -3);
+			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickM" + i).attr("x1", linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
+			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickP" + i).attr("x1", linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
 		}
 
 		// create tooltip and call using d3tip.js
@@ -1164,6 +1165,7 @@ d3.csv("data/companies.csv", function(error, data) {
 
 		}
 		
+		hideLines(gender);
 		drawSwarm(m);
 
 		$("#bsPayGenderSelect").select2({ 
@@ -1204,12 +1206,14 @@ d3.csv("data/companies.csv", function(error, data) {
 					d3.selectAll('.companies').remove();
 				}
 				gender = 'maternity';
+				hideLines(gender)
 				drawSwarm(m);
 			} else {
 				if (gender == 'maternity') {
 					d3.selectAll('.companies').remove();
 				}
 				gender = 'paternity';
+				hideLines(gender)
 				drawSwarm(p);
 			}
 		});
@@ -1371,6 +1375,29 @@ d3.csv("data/companies.csv", function(error, data) {
 				return d.company
 			})
 		}
+		
+		function hideLines(g) {
+			if (g == 'maternity') {
+				mAline.style('visibility', 'visible');
+				mAtext.style('visibility', 'visible');
+				pAline.style('visibility', 'hidden');
+				pAtext.style('visibility', 'hidden');
+				mMline.style('visibility', 'visible');
+				mMtext.style('visibility', 'visible');
+				pMline.style('visibility', 'hidden');
+				pMtext.style('visibility', 'hidden');
+			} else if (g == 'paternity') {
+				mAline.style('visibility', 'hidden');
+				mAtext.style('visibility', 'hidden');
+				pAline.style('visibility', 'visible');
+				pAtext.style('visibility', 'visible');
+				mMline.style('visibility', 'hidden');
+				mMtext.style('visibility', 'hidden');
+				pMline.style('visibility', 'visible');
+				pMtext.style('visibility', 'visible');
+			}
+
+		}
 
 	} // end beeswarm
 	// draw everything
@@ -1386,14 +1413,14 @@ d3.csv("data/companies.csv", function(error, data) {
 			bsG.attr("transform", "translate(" + swarmMarginMobile.left + "," + swarmMarginMobile.top + ")");
 
 		// draw labels/ticks
-		bsG.select("#axisLabelStart").attr("x2", bsWMobile - linemargin);
-		bsG.select("#axisLabelEnd").attr("x2", bsWMobile - linemargin);
+		bsG.select("#axisLabelStart").attr("x2", bsWMobile - linemarginMobile);
+		bsG.select("#axisLabelEnd").attr("x2", bsWMobile - linemarginMobile);
 
 		var bsTicks = [4, 8, 16, 32]
 		for (var i = 0; i < bsTicks.length; i++) {
-			bsG.select('#axisLabel' + i).attr("x2", bsWMobile - linemargin);
-			bsG.select('#axisTickM' + i).attr("x2", bsWMobile - linemargin);
-			bsG.select('#axisTickP' + i).attr("x2", bsWMobile - linemargin);
+			bsG.select('#axisLabel' + i).attr("x2", bsWMobile - linemarginMobile);
+			bsG.select('#axisTickM' + i).attr("x2", bsWMobile - linemarginMobile);
+			bsG.select('#axisTickP' + i).attr("x2", bsWMobile - linemarginMobile);
 		}
 		
 		if (gender == 'maternity') {
@@ -1415,14 +1442,15 @@ d3.csv("data/companies.csv", function(error, data) {
 			//   .call(xAxis);
 
 			// draw averages
-			mAline.attr("x2", (bsWMobile) - linemargin)
-
-			pAline.attr("x2", (bsWMobile) - linemargin)
-
-			mMline.attr("x2", (bsWMobile) - linemargin)
-
-			pMline.attr("x2", (bsWMobile) - linemargin)
-
+			mAline.attr("x2", (bsWMobile) - linemarginMobile)
+			mAtext.attr("x", (bsWMobile) - linemarginMobile)
+			pAline.attr("x2", (bsWMobile) - linemarginMobile)
+			pAtext.attr("x", (bsWMobile) - linemarginMobile)
+			mMline.attr("x2", (bsWMobile) - linemarginMobile)
+			mMtext.attr("x", (bsWMobile) - linemarginMobile)
+			pMline.attr("x2", (bsWMobile) - linemarginMobile)
+			pMtext.attr("x", (bsWMobile) - linemarginMobile)
+			
 			// run the force simulation to get new x and y values
 			var simulation = d3.forceSimulation(state.data)
 			.force("y", d3.forceY(function(d) {
@@ -1467,6 +1495,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	function resize() {
 		windowW = window.innerWidth;
 		windowH = window.innerHeight;
+		barControlHeight = $('.bsControl').height();
 		
 		large_screen = false;
 		medium_screen = false;
@@ -1494,14 +1523,13 @@ d3.csv("data/companies.csv", function(error, data) {
 		// mobile setup
 		bsWMobile = windowW; // beeswarm width = full width
 		bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
-		bsHMobile = windowH; // beeswarm height = full height
+		bsHMobile = windowH - barControlHeight; // beeswarm height = full height
 		bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
 
 		y = d3.scaleLinear()
 			.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
 			.domain([0, 6.5, 13, 26, 52]),
 			yAxis = d3.axisLeft(y)
-			.ticks(20, ".0s")
 			.tickSizeOuter(0);
 		
 		if (small_screen && !prev_mobile) {
