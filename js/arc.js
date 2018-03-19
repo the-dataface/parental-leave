@@ -62,7 +62,7 @@ function arcDiagram() {
   var rightmargin = 50;
 	
   var leftmargin = 250;
-  if (small_screen) leftmargin = 175;
+  if (small_screen) leftmargin = 50;
 
   adMargin = {
     top: 0,
@@ -271,12 +271,26 @@ function arcDiagram() {
 	  	  comDy,
 	      locDy,
           empDy;
-		  
+		
+		/*  
 	  if (small_screen) {
 		  allX = -50,
 		  comDy = -30, 
 		  locDy = -12,
 		  empDy = 0;
+	  } else {
+		  allX = -80,
+		  comDy = -40, 
+		  locDy = -18,
+		  empDy = 0;
+	  }
+	  */
+	  
+	  if (small_screen) {
+		  allX = adX(50),
+		  comDy = -60, 
+		  locDy = -42,
+		  empDy = -30;
 	  } else {
 		  allX = -80,
 		  comDy = -40, 
