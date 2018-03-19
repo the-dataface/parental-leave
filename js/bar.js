@@ -88,7 +88,7 @@ function barChart() {
 
   // set defaults
   var order = "matLeave",
-    classification = "developed";
+      classification = "developed";
 	
   $("#barOrderSelectMat").addClass("active")
   $("#barOrderSelectPat").removeClass("active")
@@ -255,7 +255,13 @@ function barChart() {
         })
       barLabels.enter().append("text")
         .attr("class", "barLabels")
-        .attr("x", barX(0) + 10)
+        .attr("x", function(d) {
+		  if ((barX(d[order]) - barX(0)) > 80) {
+			  return barX(0) + 10;
+		  } else {
+			  return barX(d[order]) + 5;
+		  }
+	  	})
         .attr("y", function(d) {
           return barY(d.country);
         })
@@ -266,10 +272,22 @@ function barChart() {
         })
         .style("fill", function(d) {
           if (d.country === "United States") return "#666666"
-          return "#ffffff"
+		  
+		  if ((barX(d[order]) - barX(0)) > 80) {
+			  return "#ffffff";
+		  } else {
+			  return "rgb(254, 103, 56)";
+		  }
+
         })
         .transition().ease(d3.easeExp, 3).duration(750)
-        .attr("x", barX(0) + 10)
+        .attr("x", function(d) {
+		  if ((barX(d[order]) - barX(0)) > 80) {
+			  return barX(0) + 10;
+		  } else {
+			  return barX(d[order]) + 5;
+		  }
+	  	})
         .attr("y", function(d) {
           return barY(d.country);
         });
