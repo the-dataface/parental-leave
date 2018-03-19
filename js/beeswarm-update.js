@@ -85,7 +85,8 @@ d3.csv("data/companies.csv", function(error, data) {
 			c2: patc2
 		};
 
-	var status = 'paid';
+	var status = 'paid',
+		gender = 'maternity';
 
 	var bsSVG,
 		bsG,
@@ -145,6 +146,10 @@ d3.csv("data/companies.csv", function(error, data) {
 	function beeSwarm() {
 		// remove all
 		d3.selectAll(".beeswarm").remove();
+		
+		d3.select('#bsMetricSelectPaid').style('display', 'inline-block');
+		d3.select('#bsMetricSelectUnpaid').style('display', 'inline-block');
+		d3.select('#bsPayGenderSelectContainer').style('display', 'none');
 
 		bsSVG = d3.select("#beeswarm-container").append('svg')
 			.classed('beeswarm', true)
@@ -334,33 +339,35 @@ d3.csv("data/companies.csv", function(error, data) {
 
 		// redraw when paid/unpaid is clicked
 		$(".bsMetricSelect").on("click", function() {
-			$('.bsSearch').val(null).trigger('change');
-			$('.bsIndustrySelect').val(null).trigger('change');
-			d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
+			if (!small_screen) {
+				$('.bsSearch').val(null).trigger('change');
+				$('.bsIndustrySelect').val(null).trigger('change');
+				d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
 
-			status = $(this).val();
-			m.variable = status;
-			p.variable = status;
+				status = $(this).val();
+				m.variable = status;
+				p.variable = status;
 
-			if (status === "paid") {
-				$("#bsMetricSelectPaid").addClass("active")
-				$("#bsMetricSelectUnpaid").removeClass("active")
-				m.data = data_mat_paid;
-				p.data = data_pat_paid;
+				if (status === "paid") {
+					$("#bsMetricSelectPaid").addClass("active")
+					$("#bsMetricSelectUnpaid").removeClass("active")
+					m.data = data_mat_paid;
+					p.data = data_pat_paid;
+				}
+				if (status === "unpaid") {
+					$("#bsMetricSelectPaid").removeClass("active")
+					$("#bsMetricSelectUnpaid").addClass("active")
+					m.data = data_mat_unpaid;
+					p.data = data_pat_unpaid;
+				}
+
+				industry = 'all';
+				resetSearch(industry, status);
+
+				drawAnnotations(status);
+				drawSwarm(m);
+				drawSwarm(p);
 			}
-			if (status === "unpaid") {
-				$("#bsMetricSelectPaid").removeClass("active")
-				$("#bsMetricSelectUnpaid").addClass("active")
-				m.data = data_mat_unpaid;
-				p.data = data_pat_unpaid;
-			}
-
-			industry = 'all';
-			resetSearch(industry, status);
-
-			drawAnnotations(status);
-			drawSwarm(m);
-			drawSwarm(p);
 		});
 
 		// populate the search
@@ -707,11 +714,15 @@ d3.csv("data/companies.csv", function(error, data) {
 	//beeSwarm()
 
 	function redrawBeeSwarm() {
+		
+		d3.select('#bsMetricSelectPaid').style('display', 'inline-block');
+		d3.select('#bsMetricSelectUnpaid').style('display', 'inline-block');
+		d3.select('#bsPayGenderSelectContainer').style('display', 'none');
 
 		bsSVG.attr("width", bsW + swarmMargin.left + swarmMargin.right - 15)
 			.attr("height", bsH + swarmMargin.top + swarmMargin.bottom),
 			bsG.attr("transform", "translate(" + swarmMargin.left + "," + swarmMargin.top + ")");
-
+		
 		// draw labels/ticks
 		bsG.select("#axisLabelStart").attr("x", x(0));
 		bsG.select("#axisLabelEnd").attr("x", x(52));
@@ -1003,6 +1014,10 @@ d3.csv("data/companies.csv", function(error, data) {
 	function beeSwarmMobile() {
 		// remove all
 		d3.selectAll(".beeswarm").remove();
+		
+		d3.select('#bsMetricSelectPaid').style('display', 'none');
+		d3.select('#bsMetricSelectUnpaid').style('display', 'none');
+		d3.select('#bsPayGenderSelectContainer').style('display', 'inline-block');
 
 		bsSVG = d3.select("#beeswarm-container").append('svg')
 			.classed('beeswarm', true)
@@ -1038,25 +1053,6 @@ d3.csv("data/companies.csv", function(error, data) {
 			bsG.append("text").attr("class", "axislabel").attr("id", "axisLabel" + i).attr("x", linemargin).attr("y", y(bsTicks[i])).text(bsTicks[i] + " weeks").style("text-anchor", "start").attr("dy", -3);
 			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickM" + i).attr("x1", linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
 			bsG.append("line").attr("class", "axisTick").attr("id", "axisTickP" + i).attr("x1", linemargin).attr("x2", (bsWMobile) - linemargin).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
-		}
-
-		var xCoord,
-			rectWidth;
-		if (small_screen) {
-			rectWidth = 200;
-			rectHeight = 33;
-		} else if (medium_screen) {
-			rectWidth = 220;
-			rectHeight = 33;
-		} else {
-			rectWidth = 250;
-			rectHeight = 37;
-		}
-
-		if (windowW > 1300) {
-			xCoord = bsW / 2;
-		} else {
-			xCoord = (2 * bsW) / 3;
 		}
 
 		// create tooltip and call using d3tip.js
@@ -1167,36 +1163,57 @@ d3.csv("data/companies.csv", function(error, data) {
 			resetSearch(industry, status);
 
 		}
+		
 		drawSwarm(m);
 
-		// redraw when paid/unpaid is clicked
-		$(".bsMetricSelect").on("click", function() {
-			$('.bsSearch').val(null).trigger('change');
-			$('.bsIndustrySelect').val(null).trigger('change');
+		$("#bsPayGenderSelect").select2({ 
+			allowClear: false,
+			width: "150px"
+		});
+		$('#bsPayGenderSelect').on("select2:select", function() {
+			
 			d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1).style("stroke", "none").attr("r", r)
 
-			status = $(this).val();
+			var value = $(this).val(),
+				pay = value.charAt(0),
+				gen = value.charAt(1);
+			
+			if (pay == 'p') {
+				status = 'paid';
+			} else {
+				status = 'unpaid';
+			}
+			
 			m.variable = status;
 			p.variable = status;
 
 			if (status === "paid") {
-				$("#bsMetricSelectPaid").addClass("active")
-				$("#bsMetricSelectUnpaid").removeClass("active")
 				m.data = data_mat_paid;
 				p.data = data_pat_paid;
 			}
 			if (status === "unpaid") {
-				$("#bsMetricSelectPaid").removeClass("active")
-				$("#bsMetricSelectUnpaid").addClass("active")
 				m.data = data_mat_unpaid;
 				p.data = data_pat_unpaid;
 			}
 
 			industry = 'all';
 			resetSearch(industry, status);
-
-			drawSwarm(m);
+			
+			if (gen == 'm') {
+				if (gender == 'paternity') {
+					d3.selectAll('.companies').remove();
+				}
+				gender = 'maternity';
+				drawSwarm(m);
+			} else {
+				if (gender == 'maternity') {
+					d3.selectAll('.companies').remove();
+				}
+				gender = 'paternity';
+				drawSwarm(p);
+			}
 		});
+		
 
 		// populate the search
 		resetSearch(industry, status);
@@ -1357,9 +1374,12 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	} // end beeswarm
 	// draw everything
-	beeSwarmMobile()
 
 	function redrawBeeSwarmMobile() {
+		
+		d3.select('#bsMetricSelectPaid').style('display', 'none');
+		d3.select('#bsMetricSelectUnpaid').style('display', 'none');
+		d3.select('#bsPayGenderSelectContainer').style('display', 'inline-block');
 
 		bsSVG.attr("width", bsWMobile + swarmMarginMobile.left + swarmMarginMobile.right - 15)
 			.attr("height", bsHMobile + swarmMarginMobile.top + swarmMarginMobile.bottom),
@@ -1375,8 +1395,12 @@ d3.csv("data/companies.csv", function(error, data) {
 			bsG.select('#axisTickM' + i).attr("x2", bsWMobile - linemargin);
 			bsG.select('#axisTickP' + i).attr("x2", bsWMobile - linemargin);
 		}
-
-		drawSwarm(m);
+		
+		if (gender == 'maternity') {
+			drawSwarm(m);
+		} else {
+			drawSwarm(p);
+		}
 
 		function drawSwarm(state) {
 
@@ -1431,6 +1455,13 @@ d3.csv("data/companies.csv", function(error, data) {
 		
 
 	} //end redraw beeswarm
+	
+	if (small_screen) {
+		beeSwarmMobile()
+	} else {
+		beeSwarm()
+	}
+	
 
 	// on resize
 	function resize() {
