@@ -311,71 +311,85 @@ function arcDiagram() {
     } //end drawing stuff
 
     // annotations, thank you Susie Lu
-    const type = d3.annotationLabel
-    const adAnnotations = [{
-        note: {
-          label: "Paid Maternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), -8],
-            [adX(3) - adX(0), -12]
-          ]
-        },
-        x: adX(13),
-        y: cH - adX(14) / 2,
-        dy: -17,
-        dx: adX(5) - adX(0)
-      },
-      {
-        note: {
-          label: "Unpaid Maternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), -8],
-            [adX(3) - adX(0), -12]
-          ]
-        },
-        x: adX(25),
-        y: cH - adX(5.5) / 2,
-        dy: -17,
-        dx: adX(5) - adX(0)
-      },
-      {
-        note: {
-          label: "Paid Paternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), 10],
-            [adX(3) - adX(0), 14]
-          ]
-        },
-        x: adX(5.5),
-        y: cH + adX(5.5) / 2,
-        dy: 17,
-        dx: adX(5) - adX(0)
-      }
-    ]
+	// variables for annotation location so can fit on mobile
+	
+	var multiplier = 1,
+		xMatLocation = 13,
+		yMatLocation = cH - adX(14) / 2,
+		xPatLocation = adX(25),
+		yPatLocation = cH - adX(5.5) / 2
+	
+	if (small_screen) {
+		multiplier = -1,
+		xMatLocation = 8,
+		yMatLocation = adX(9) - 5,
+		xPatLocation = adX(20.5),
+		yPatLocation = adX(14) - 5
+	}
+	
+    const type = d3.annotationLabel;
+	const adAnnotations = [{
+		note: {
+		  label: "Paid Maternal Leave",
+		  lineType: "none",
+		  orientation: "leftRight",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		connector: {
+		  type: "curve",
+		  points: [
+			[(adX(2) - adX(0)) * multiplier, -8],
+			[(adX(3) - adX(0)) * multiplier, -12]
+		  ]
+		},
+		x: adX(xMatLocation),
+		y: yMatLocation,
+		dy: -17,
+		dx: (adX(5) - adX(0)) * multiplier
+	  },
+	  {
+		note: {
+		  label: "Unpaid Maternal Leave",
+		  lineType: "none",
+		  orientation: "leftRight",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		connector: {
+		  type: "curve",
+		  points: [
+			[(adX(2) - adX(0)) * multiplier, -8],
+			[(adX(3) - adX(0)) * multiplier, -12]
+		  ]
+		},
+		x: xPatLocation,
+		y: yPatLocation,
+		dy: -17,
+		dx: (adX(5) - adX(0)) * multiplier
+	  },
+	  {
+		note: {
+		  label: "Paid Paternal Leave",
+		  lineType: "none",
+		  orientation: "leftRight",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		connector: {
+		  type: d3.annotationCalloutElbow
+		},
+		x: adX(5.5),
+		y: cH + adX(5.5) / 2,
+		dy: 17,
+		dx: adX(2) - adX(0)
+	  }
+	];
+	
+	
 
     const sdMakeAnnotations = d3.annotation()
       .type(type)
