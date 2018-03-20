@@ -328,6 +328,7 @@ function arcDiagram() {
 	}
 	
     const type = d3.annotationLabel;
+	/*
 	const adAnnotations = [{
 		note: {
 		  label: "Paid Maternal Leave",
@@ -386,6 +387,51 @@ function arcDiagram() {
 		y: cH + adX(5.5) / 2,
 		dy: 17,
 		dx: adX(2) - adX(0)
+	  }
+	];
+	*/
+	
+	const adAnnotations = [{
+		note: {
+		  label: "Paid Maternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		x: adX(8),
+		y: cH - adX(8),
+		dy: -10,
+		dx: 0
+	  },
+	  {
+		note: {
+		  label: "Unpaid Maternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		x: adX(20.5),
+		y: cH - adX(4.5),
+		dy: -10,
+		dx: 0
+	  },
+	  {
+		note: {
+		  label: "Paid Paternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		connector: {
+		  type: d3.annotationCalloutElbow
+		},
+		x: adX(3),
+		y: cH + adX(3),
+		dy: 10,
+		dx: 0
 	  }
 	];
 	
