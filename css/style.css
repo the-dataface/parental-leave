@@ -29,7 +29,7 @@ p {
 	width:100%;
 	height:100%;
 	position:relative;
-	background-color:rgba(253, 174, 149, 0.6);;
+	background-color:rgba(253, 174, 149, 0.6);
 }
 
 #header-container {
@@ -141,13 +141,25 @@ p {
 .copy-header {
 	font-family:'Mada';
 	font-weight:600;
-	padding-bottom:.3em;
+	padding-bottom:.7em;
 }
 
 .copy-body {
 	font-family:'PT Serif';
 	font-weight:400;
-    padding-bottom:.7em;
+    padding-bottom:2em;
+}
+
+.quote-container {
+	padding-bottom:2em;
+}
+
+.quote {
+	font-family:'PT Serif';
+	padding-bottom:0px!important;
+	border-left:5px solid rgba(253, 174, 149, 0.6);;
+	font-weight:400;
+	font-style:italic;
 }
 
 .chartHeaderContainer {
@@ -180,6 +192,15 @@ p {
 		margin:auto;
 		font-size:20px;
 		line-height:40px;
+	 }
+	 .quote {
+		font-size:20px;
+		line-height:40px;
+		padding-left:30px!important;
+	 }
+	 .quote-container {
+		width:900px;
+		margin:auto;
 	 }
 	.chartHeaderContainer {
 		font-family:'Mada';
@@ -214,6 +235,15 @@ p {
 	    font-size:16px;
 		line-height:30px;
 	 }
+	 .quote {
+		font-size:18px;
+		line-height:35px;
+		padding-left:30px!important;
+	 }
+	 .quote-container {
+		width:700px;
+		margin:auto;
+	 }
 	 .chartHeaderContainer {
 		width:700px;
 		margin:auto;
@@ -246,6 +276,15 @@ p {
 		margin:auto;
 	    font-size:16px;
 		line-height:30px;
+	 }
+	 .quote {
+		font-size:16px;
+		line-height:30px;
+		padding-left:20px!important;
+	 }
+	 .quote-container {
+		width:84%;
+		margin:auto;
 	 }
 	 .chartHeaderContainer {
 		width:84%;
