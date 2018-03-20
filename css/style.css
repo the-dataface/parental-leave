@@ -43,9 +43,12 @@ p {
 #header {
 	font-family: 'Mada';
 	font-weight:400;
-	color:black;
+	color:white;
 	text-decoration:underline;
-	text-decoration-color:white;
+}
+
+.header-span {
+	color:black;
 }
 
 #sub-header {
