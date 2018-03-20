@@ -405,22 +405,14 @@ function barChart() {
       }, {
         note: {
           label: "Sweden tops the list on both sides, mandating up to 68 weeks paid maternal leave and 18 weeks paid paternal leave, funded by social security.",
-          orientation: "leftRight",
           "align": "middle",
           wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
-        connector: {
-          type: "curve",
-          points: [
-            [-2, 20],
-            [-5, 40]
-          ]
-        },
-        x: barX(-5),
+        x: barX(-16),
         y: barY("Sweden") + barY.bandwidth() + 5,
-        dy: 100,
-        dx: -20
+        dy: 20,
+        dx: 0
       }]
 
       const barMakeAnnotations = d3.annotation()

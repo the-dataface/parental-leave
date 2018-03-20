@@ -224,10 +224,10 @@ p {
 
 @media only screen and (max-width: 763px) {
 	.chartTitle {
-	  font-size: 20px;}
+	  font-size: 14px;}
 
 	.chartTitleh2 {
-	  font-size: 13px;}
+	  font-size: 11px;}
 }
 
 .adbaseline {
