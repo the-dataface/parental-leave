@@ -177,7 +177,32 @@ p {
 }
 
 .bsControl {
+	
  }
+
+.download-container {
+	 font-family: "Mada", Arial, sans-serif;
+	margin-top:20px;
+}
+
+.downloadButton {
+  display: inline-block;
+  background-color: #ffffff;
+  color:black!important;
+  font-size: 14px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5b5b5;
+  border-bottom-width: 3px;
+  margin: 10px 0px 10px; }
+}
+
+a.downloadLink {
+  color:black!important;
+}
+
 
 @media only screen and (min-width : 1000px) {
 	 .copy-header {
@@ -202,6 +227,10 @@ p {
 		width:900px;
 		margin:auto;
 	 }
+	.download-container {
+		width:900px;
+		margin:auto;
+	}
 	.chartHeaderContainer {
 		font-family:'Mada';
 		width:900px;
@@ -244,6 +273,10 @@ p {
 		width:700px;
 		margin:auto;
 	 }
+	 .download-container {
+		width:700px;
+		margin:auto;
+	 }
 	 .chartHeaderContainer {
 		width:700px;
 		margin:auto;
@@ -283,6 +316,10 @@ p {
 		padding-left:20px!important;
 	 }
 	 .quote-container {
+		width:84%;
+		margin:auto;
+	 }
+	 .download-container {
 		width:84%;
 		margin:auto;
 	 }
