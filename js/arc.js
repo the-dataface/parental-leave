@@ -322,9 +322,9 @@ function arcDiagram() {
 	if (small_screen) {
 		multiplier = -1,
 		xMatLocation = 8,
-		yMatLocation = adX(9) - 5,
+		yMatLocation = cH - 75,
 		xPatLocation = adX(20.5),
-		yPatLocation = adX(14) - 5
+		yPatLocation = cH - 45
 	}
 	
     const type = d3.annotationLabel;
