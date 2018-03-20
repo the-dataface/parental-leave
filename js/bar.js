@@ -66,7 +66,7 @@ function barChart() {
     barG = barSVG.append("g")
     .attr("transform", "translate(" + barMargin.left + "," + barMargin.top + ")")
   barX = d3.scaleLinear()
-    .range([100, barW]),
+    .range([70, barW]),
     barY = d3.scaleBand()
     .rangeRound([barH, 0])
     .padding(0.2)
@@ -81,7 +81,7 @@ function barChart() {
 	  tickNumber = 10;
   }
   var barXaxis = d3.axisBottom(barX)
-    .ticks(10, ".0s")
+    .ticks(tickNumber, ".0s")
     .tickSizeOuter(0)
     .tickFormat(function(d) {
       return Math.abs(d) + " wks"
@@ -114,7 +114,10 @@ function barChart() {
   barSVG.call(barTT)
 
     drawBars(data, order, classification, true)
-    drawAnnotations(order)
+	if (!small_screen) {
+		drawAnnotations(order)
+	}
+	//d3.select('.d3-tip').style('display', 'none');
 
     $(".barOrderSelect").on("click", function() {
 
@@ -129,7 +132,9 @@ function barChart() {
         $("#barOrderSelectPat").addClass("active")
       }
 
-      drawAnnotations(order)
+      if (!small_screen) {
+	  	drawAnnotations(order)
+	  }
       drawBars(data, order, classification, false)
     });
 
@@ -170,7 +175,7 @@ function barChart() {
       barY.domain(data.map(function(d) {
         return d.country;
       }));
-      barX.domain([-minmaxP[1], minmaxM[1]])
+      barX.domain([-20, minmaxM[1]])
 
       // call X axis if this is the first time
       if (firstTime) {
@@ -179,20 +184,24 @@ function barChart() {
           .attr("transform", "translate(0," + barH + ")")
           .call(barXaxis);
 		  
-		var arrowOffset;
+		var arrowOffset,
+			arrowSize;
 		if (small_screen) {
 		  arrowOffset = 115;
+		  arrowSize = 10;
 		} else if (medium_screen) {
 		  arrowOffset = 135;
+		  arrowSize = 25;
 		} else {
 		  arrowOffset = 155;
+		  arrowSize = 25;
 		}
 
         // draw axis labels
         barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternal Leave").attr("dy", 3)
         barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternal Leave").style("text-anchor", "end").attr("dy", 3)
-        barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + 25).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
-        barG.append("line").attr("x1", barX(0) - arrowOffset).attr("y1", 0).attr("x2", barX(0) - arrowOffset - 25).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+        barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+        barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
       }
 
       // new bars
@@ -281,10 +290,10 @@ function barChart() {
           if (d.country === "United States") {
 			  return "#666666";
 		  } else {
-			 if ((barX(d['matLeave']) - barX(0)) > 80) {
-				  return "#ffffff";
-			  } else {
+			 if ((barX(d['matLeave']) - barX(0)) < 80 && small_screen) {
 				  return "#666666";
+			  } else {
+				  return "#ffffff";
 			  }
 		  }
 
@@ -373,35 +382,45 @@ function barChart() {
 
     var wrap;
 	if (small_screen) {
-	  wrap = 80;
+	  wrap = 100;
     } else if (medium_screen) {
-	  wrap = 160;
+	  wrap = 140;
     } else {
 	  wrap = 200;
     }
 
     // annotations, thank you Susie Lu
+	var xMatLocation = barX(0) + 100,
+	    dyMatLocation = -(barY.bandwidth() * 2),
+	    dxMatLocation = barX(15) - barX(0);
+	
+	if (small_screen) {
+		xMatLocation = barX(0),
+		dyMatLocation = 0,
+	    dxMatLocation = barX(0) - barX(13)
+	}
+	  
     const type = d3.annotationLabel
     if (status === "matLeave") {
       const barAnnotations = [{
         note: {
           label: "The United States is the only developed country with no federal paid parental leave policy, but mandates 12 weeks unpaid leave for each parent.",
-          orientation: "leftRight",
           "align": "middle",
+		  orientation: "leftRight",
           wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-start",
-        connector: {
+		connector: {
           type: "curve",
           points: [
-            [barX(5) - barX(0), -10],
-            [barX(9) - barX(0), -40]
+            [barX(15) - barX(0) - 100, -(barY.bandwidth() * .5)],
+            [barX(20) - barX(0) - 100, -(barY.bandwidth() * 2)]
           ]
         },
         x: barX(0) + 100,
         y: barY("United States") + barY.bandwidth() / 2,
-        dy: -60,
-        dx: barX(10) - barX(0)
+        dy: -(barY.bandwidth() * 4),
+        dx: barX(15) - barX(0)
       }, {
         note: {
           label: "Sweden tops the list on both sides, mandating up to 68 weeks paid maternal leave and 18 weeks paid paternal leave, funded by social security.",
@@ -432,17 +451,10 @@ function barChart() {
           wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
-        connector: {
-          type: "curve",
-          points: [
-            [-8, -6],
-            [-20, -14]
-          ]
-        },
         x: barX(-1) - 4,
         y: barY.bandwidth() * 43 + barMargin.top,
         dy: -20,
-        dx: -30
+        dx: -(barX(8) - barX(0))
       }, {
         note: {
           label: "Some countries, like the United Kingdom, offer split parental leave. The UK requires 2 weeks maternal leave, while the remaining 50 weeks can be split between either parent.",
@@ -451,17 +463,10 @@ function barChart() {
           wrap: wrap
         },
         className: "adAnnotation bsAnnotation1 bsAnnotation-end",
-        connector: {
-          type: "curve",
-          points: [
-            [-12, 10],
-            [-12, 10]
-          ]
-        },
         x: barX(-2) - 4,
         y: barY.bandwidth() * 19.5 + barMargin.top,
         dy: 34,
-        dx: -30
+        dx: -(barX(8) - barX(0))
       }]
 
       const barMakeAnnotations = d3.annotation()

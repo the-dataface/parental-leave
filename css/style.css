@@ -529,7 +529,7 @@ p {
 .aText, .axislabel, .barXaxis text {
   font-family: "Mada", Arial, sans-serif;
   text-transform: uppercase;
-  fill: #b5b5b5; }
+  fill: #666666; }
 
 @media only screen and (min-width : 1000px) {
 	 .aText, .axislabel, .barXaxis text {
@@ -543,7 +543,7 @@ p {
 
 @media only screen and (max-width: 763px) {
 	 .aText, .axislabel, .barXaxis text {
-	  font-size: 10px;}
+	  font-size: 11px;}
 }
 
 .axisTick {
