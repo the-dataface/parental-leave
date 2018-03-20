@@ -2,6 +2,7 @@
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
+var barWindowW = window.innerWidth;
 var windowH = window.innerHeight;
 
 // barMargin setup
@@ -488,20 +489,23 @@ barChart()
 window.addEventListener('resize', resize)
 
 function resize() {
-  windowW = window.innerWidth;
-  windowH = window.innerHeight;
+  if (barWindowW != window.innerWidth) {
+	  windowW = window.innerWidth;
+	  barWindowW = window.innerWidth;
+	  windowH = window.innerHeight;
 
-  if (windowW > 1000) {
-    large_screen = true;
-  } else if (windowW > 763) {
-    medium_screen = true;
-  } else {
-    small_screen = true;
-    barMargin.left = 10;
-    barMargin.right = 10;
+	  if (windowW > 1000) {
+		large_screen = true;
+	  } else if (windowW > 763) {
+		medium_screen = true;
+	  } else {
+		small_screen = true;
+		barMargin.left = 10;
+		barMargin.right = 10;
+	  }
+
+	  barChart()
   }
-	
-  barChart()
 }
 }) // end load data
 	

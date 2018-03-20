@@ -2,6 +2,7 @@
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
+var arcWindowW = window.innerWidth;
 var windowH = window.innerHeight;
 
 // margin setup
@@ -388,24 +389,27 @@ arcDiagram()
 window.addEventListener('resize', resize)
 
 function resize() {
-  windowW = window.innerWidth;
-  windowH = window.innerHeight;
-  
-  large_screen = false;
-  medium_screen = false;
-  small_screen = false;
+  if (arcWindowW != window.innerWidth) {
+	  windowW = window.innerWidth;
+	  arcWindowW = window.innerWidth;
+	  windowH = window.innerHeight;
 
-  if (windowW > 1000) {
-    large_screen = true;
-  } else if (windowW > 763) {
-    medium_screen = true;
-  } else {
-    small_screen = true;
-    arcMargin.left = 10;
-    arcMargin.right = 10;
+	  large_screen = false;
+	  medium_screen = false;
+	  small_screen = false;
+
+	  if (windowW > 1000) {
+		large_screen = true;
+	  } else if (windowW > 763) {
+		medium_screen = true;
+	  } else {
+		small_screen = true;
+		arcMargin.left = 10;
+		arcMargin.right = 10;
+	  }
+
+	  arcDiagram()
   }
-
-  arcDiagram()
 }
 }) // end load data
 

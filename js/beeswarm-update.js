@@ -2,6 +2,7 @@
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
+var bsWindowW = window.innerWidth;
 var windowH = window.innerHeight;
 var barControlHeight = $('.bsControl').height();
 
@@ -1673,57 +1674,60 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	// on resize
 	function resize() {
-		windowW = window.innerWidth;
-		windowH = window.innerHeight;
-		barControlHeight = $('.bsControl').height();
-		
-		large_screen = false;
-		medium_screen = false;
-		small_screen = false;
+		if (bsWindowW != window.innerWidth) {
+			windowW = window.innerWidth;
+			bsWindowW = window.innerWidth;
+			windowH = window.innerHeight;
+			barControlHeight = $('.bsControl').height();
 
-		if (windowW > 1000) {
-			large_screen = true;
-		} else if (windowW > 763) {
-			medium_screen = true;
-		} else {
-			small_screen = true;
-		}
+			large_screen = false;
+			medium_screen = false;
+			small_screen = false;
 
-		// desktop setup
-		bsW = windowW; // beeswarm width = full width
-		bsW = bsW - swarmMargin.left - swarmMargin.right;
+			if (windowW > 1000) {
+				large_screen = true;
+			} else if (windowW > 763) {
+				medium_screen = true;
+			} else {
+				small_screen = true;
+			}
 
-		x = d3.scaleLinear()
-			.rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])
-			.domain([0, 6.5, 13, 26, 52]),
-			xAxis = d3.axisBottom(x)
-			.ticks(20, ".0s")
-			.tickSizeOuter(0);
-		
-		// mobile setup
-		bsWMobile = windowW; // beeswarm width = full width
-		bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
-		bsHMobile = (windowH * 1.3) - barControlHeight; // beeswarm height = full height
-		bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
+			// desktop setup
+			bsW = windowW; // beeswarm width = full width
+			bsW = bsW - swarmMargin.left - swarmMargin.right;
 
-		y = d3.scaleLinear()
-			.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
-			.domain([0, 6.5, 13, 26, 52]),
-			yAxis = d3.axisLeft(y)
-			.tickSizeOuter(0);
-		
-		if (small_screen && !prev_mobile) {
-			beeSwarmMobile();
-			prev_mobile = true;
-		} else if (!small_screen && prev_mobile) {
-			beeSwarm();
-			prev_mobile = false;
-		} else if (small_screen && prev_mobile) {
-			redrawBeeSwarmMobile();
-			prev_mobile = true;
-		} else if (!small_screen && !prev_mobile) {
-			redrawBeeSwarm();
-			prev_mobile = false;
+			x = d3.scaleLinear()
+				.rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])
+				.domain([0, 6.5, 13, 26, 52]),
+				xAxis = d3.axisBottom(x)
+				.ticks(20, ".0s")
+				.tickSizeOuter(0);
+
+			// mobile setup
+			bsWMobile = windowW; // beeswarm width = full width
+			bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
+			bsHMobile = (windowH * 1.3) - barControlHeight; // beeswarm height = full height
+			bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
+
+			y = d3.scaleLinear()
+				.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
+				.domain([0, 6.5, 13, 26, 52]),
+				yAxis = d3.axisLeft(y)
+				.tickSizeOuter(0);
+
+			if (small_screen && !prev_mobile) {
+				beeSwarmMobile();
+				prev_mobile = true;
+			} else if (!small_screen && prev_mobile) {
+				beeSwarm();
+				prev_mobile = false;
+			} else if (small_screen && prev_mobile) {
+				redrawBeeSwarmMobile();
+				prev_mobile = true;
+			} else if (!small_screen && !prev_mobile) {
+				redrawBeeSwarm();
+				prev_mobile = false;
+			}
 		}
 	}
 
