@@ -377,9 +377,6 @@ function arcDiagram() {
     adG.append("g")
       .attr("class", "annotation-group")
       .call(sdMakeAnnotations);
-
-
-
   
 } //end arc diagram
 // draw everything

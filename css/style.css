@@ -502,6 +502,29 @@ p {
   max-width: 200px; 
   border-radius:2px;}
 
+.close-button {
+	margin:0;
+	display:none;
+}
+
+@media only screen and (max-width: 763px) {
+	 .tooltip {
+		background: #666666;
+		padding-top:0px;
+	}
+
+	.close-button {
+		font-family:'Mada';
+		font-weight:600;
+		color:white;
+		margin:0;
+		padding-top:5px;
+		padding-bottom:0px;
+		display:flex;
+		justify-content:flex-end;
+	}
+}
+
 .tooltip h1 {
   font-weight: 700;
   padding-bottom: 2px;
@@ -772,10 +795,10 @@ p {
 }
 
 .adAnnotation .annotation-note-label, .adAnnotation .connector-end {
-  fill: #b5b5b5 !important; }
+  fill: #8c8c8c !important; }
 
 .adAnnotation .connector, .adAnnotation .note-line, .adAnnotation .connector-end {
-  stroke: #b5b5b5 !important; }
+  stroke: #8c8c8c !important; }
 
 .bsAnnotation1 {
 	
