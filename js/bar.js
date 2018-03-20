@@ -113,7 +113,7 @@ function barChart() {
   });
 
   barSVG.call(barTT)
-  $(".close-button").on("click", barTT.hide);
+  d3.selectAll('.close-button').on("click", barTT.hide);
 
     drawBars(data, order, classification, true)
 	if (!small_screen) {

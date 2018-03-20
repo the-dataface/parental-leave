@@ -250,7 +250,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		});
 
 		bsSVG.call(bsTT)
-		$(".close-button").on("click", bsTT.hide);
+		d3.selectAll('.close-button').on("click", bsTT.hide);
 
 		var industry = 'all';
 
@@ -1082,7 +1082,7 @@ d3.csv("data/companies.csv", function(error, data) {
 		});
 
 		bsSVG.call(bsTT)
-		$(".close-button").on("click", bsTT.hide);
+		d3.selectAll('.close-button').on("click", bsTT.hide);
 
 		var industry = 'all';
 
