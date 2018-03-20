@@ -140,12 +140,13 @@ p {
 
 .copy-header {
 	font-family:'Mada';
-	font-weight:700;
+	font-weight:600;
 	padding-bottom:.3em;
 }
 
 .copy-body {
 	font-family:'PT Serif';
+	font-weight:400;
     padding-bottom:.7em;
 }
 
@@ -171,13 +172,14 @@ p {
 		width:900px;
 	    font-size:32px;
 		margin:auto;
+		margin-top:100px;
 	 }
 
 	 .copy-body {
  		width:900px;
 		margin:auto;
-		font-size:18px;
-		line-height:30px;
+		font-size:20px;
+		line-height:40px;
 	 }
 	.chartHeaderContainer {
 		font-family:'Mada';
@@ -201,14 +203,16 @@ p {
 @media only screen and (min-width : 764px) and (max-width: 999px) {
 	 .copy-header {
 		width:700px;
-		font-size:30px;
+		font-size:32px;
 		margin:auto;
+		margin-top:80px;
 	 }
 
 	 .copy-body {
  		width:700px;
 		margin:auto;
 	    font-size:16px;
+		line-height:30px;
 	 }
 	 .chartHeaderContainer {
 		width:700px;
@@ -232,13 +236,16 @@ p {
 	 .copy-header {
 		width:84%;
 		font-size:26px;
+		line-height:28px;
 		margin:auto;
+		margin-top:80px;
 	 }
 
 	 .copy-body {
  		width:84%;
 		margin:auto;
-	    font-size:14px;
+	    font-size:16px;
+		line-height:30px;
 	 }
 	 .chartHeaderContainer {
 		width:84%;
