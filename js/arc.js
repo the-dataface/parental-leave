@@ -7,7 +7,7 @@ var windowH = window.innerHeight;
 
 // margin setup
 var arcMargin = {
-  top: 30,
+  top: 100,
   right: 30,
   bottom: 100,
   left: 30
@@ -82,7 +82,7 @@ function arcDiagram() {
     .attr("width", adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)
     .attr("height", adH + arcMargin.top + arcMargin.bottom),
     adG = adSVG.append("g")
-    .attr("transform", "translate(" + Gtrans + "," + (-50) + ")")
+    .attr("transform", "translate(" + Gtrans + "," + (-20) + ")")
   adX = d3.scaleLinear()
     .range([0, adW])
     .domain([0, 52]);
@@ -116,8 +116,8 @@ function arcDiagram() {
       var arcGen = d3.arc();
       drawMarc(data[i].mat_paid, 0, p, "mat", "p")
       drawMarc(data[i].mat_unpaid, data[i].mat_paid, p, "mat", "up")
-      drawParc(data[i].pat_paid, 0, p, "pat", "p")
-      drawParc(data[i].pat_unpaid, data[i].pat_paid, p, "pat", "up")
+      drawParc(data[i].pat_paid, 0, p, "pat", "p", data[i].company)
+      drawParc(data[i].pat_unpaid, data[i].pat_paid, p, "pat", "up", data[i].company)
 
       function drawMarc(x2, add, y2, gen, kind) {
         var xTrans = adX(x2) / 2
@@ -143,7 +143,7 @@ function arcDiagram() {
           .attr("dy", 8)
           .style("text-anchor", "middle")
           .style("fill", function() {
-            if (adX(x2) < 50) return "#bfbfbf"
+            if (adX(x2) < 50) return "#666666"
             if (adX(x2) >= 50) return "white"
           })
           .text(function(d) {
@@ -176,7 +176,7 @@ function arcDiagram() {
           })
       }
 
-      function drawParc(x2, add, y2, gen, kind) {
+      function drawParc(x2, add, y2, gen, kind, comp) {
         var xTrans = adX(x2) / 2
         if (add > 0) xTrans = adX(x2) / 2 + adX(add)
 
@@ -200,7 +200,7 @@ function arcDiagram() {
           .attr("dy", 2)
           .style("text-anchor", "middle")
           .style("fill", function() {
-            if (adX(x2) < 50) return "#bfbfbf"
+            if (adX(x2) < 50) return "#666666"
             if (adX(x2) >= 50) return "white"
           })
           .text(function(d) {
@@ -218,7 +218,13 @@ function arcDiagram() {
           .text(function() {
             if (x2 > 0) return x2 + " wks"
           })
-          .style("fill", "white")
+          .style("fill", function(d) {
+			if (comp == 'Kroger' || comp == "McDonald's") {
+				return '#666666';
+			} else {
+				return 'white';
+			}
+		  })
           .style("display", "none")
 
         arc.on("mouseover", function(d) {

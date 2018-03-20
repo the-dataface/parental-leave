@@ -491,28 +491,31 @@ p {
 
 .tooltip {
   font-family: "Mada", Arial, sans-serif;
-  padding-top: 8px;
+  padding-top: 10px;
   padding-bottom: 8px;
   padding-left:15px;
   padding-right:15px;
   background: #666666;
   color: black;
-  pointer-events: none;
-  cursor: none;
   max-width: 200px; 
   border-radius:2px;}
 
 .close-button {
 	margin:0;
 	display:none;
-	z-index:2;
+	z-index:100;
 	pointer-events:all;
 }
 
+
+
 @media only screen and (max-width: 763px) {
-	 .tooltip {
-		background: #666666;
+	.bs-tooltip {
 		padding-top:0px;
+	}
+	
+	.bar-tooltip{
+		
 	}
 
 	.close-button {
@@ -522,8 +525,19 @@ p {
 		margin:0;
 		padding-top:5px;
 		padding-bottom:0px;
+		z-index:100;
+	}
+	
+	.bs-close-button {
 		display:flex;
 		justify-content:flex-end;
+	}
+	
+	.bar-close-button {
+		display:block;
+		position:absolute;
+		right:5%;
+		top:0;
 	}
 }
 
@@ -543,7 +557,6 @@ p {
 
 .tooltip-header {
 	margin:0;
-	margin-top:5px;
 	margin-bottom:5px;
 	font-size:20px;
 	line-height:20px;
