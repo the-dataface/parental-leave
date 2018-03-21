@@ -842,6 +842,10 @@ a.downloadLink {
 .barOrderSelect:focus {
   outline: none; }
 
+.label {
+	font-weight: 400;
+}
+
 .annotation-group {
   font-family: "Mada", Arial, sans-serif;
   font-weight: 400; }
