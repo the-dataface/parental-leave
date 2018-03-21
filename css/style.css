@@ -211,6 +211,14 @@ body {
 	margin-top:20px;
 }
 
+.footnote-swarm {
+	font-style:italic;
+}
+
+.download-text {
+	margin:0;
+}
+
 .downloadButton {
   display: inline-block;
   background-color: #ffffff;

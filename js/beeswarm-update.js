@@ -51,6 +51,10 @@ var matc1 = "#fdae95",
 // bring in the data
 d3.csv("https://the-dataface.github.io/parental-leave/data/companies.csv", function(error, data) {
 	if (error) throw error;
+	
+	data = data.filter(function(d) {
+		return d['country'] == 'USA';
+	})
 
 	// filter data depending on what we're looking at
 	var data_mat_paid = data.filter(function(d) {
