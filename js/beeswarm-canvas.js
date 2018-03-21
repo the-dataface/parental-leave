@@ -69,7 +69,7 @@ var customBasePat = document.createElement('custom');
 var customPat = d3.select(customBasePat);
 
 // bring in the data
-d3.csv("data/companies.csv", function(error, data) {
+d3.csv("http://the-dataface.github.io/parental-leave/data/companies.csv", function(error, data) {
 if (error) throw error;
 
 // filter data depending on what we're looking at
