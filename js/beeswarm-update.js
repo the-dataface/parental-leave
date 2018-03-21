@@ -49,7 +49,7 @@ var matc1 = "#fdae95",
 // showing every company's parental leave policies from 0 to 52 weeks, with options for paid vs unpaid, search, and industry filter
 
 // bring in the data
-d3.csv("data/companies.csv", function(error, data) {
+d3.csv("http://the-dataface.github.io/parental-leave/data/companies.csv", function(error, data) {
 	if (error) throw error;
 
 	// filter data depending on what we're looking at
