@@ -359,8 +359,7 @@ a.downloadLink {
 		margin:auto;
 	 }
 	 .download-container {
-		width:84%;
-		margin:auto;
+		display:none;
 	 }
 	 .chartHeaderContainer {
 		width:84%;
