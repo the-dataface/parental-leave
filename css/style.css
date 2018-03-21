@@ -81,7 +81,7 @@ body {
 	.pL-header-margin {
 		padding-left:100px;
 		padding-right:100px;
-		max-width:1200px;
+		max-width:1400px;
 	}
 	#pL-sub-header {
 		margin-top:30px;
@@ -801,6 +801,10 @@ a.downloadLink {
 .barOrderSelect:focus {
   outline: none; }
 
+.label {
+	font-weight: 400;
+}
+
 .annotation-group {
   font-family: "Mada", Arial, sans-serif;
   font-weight: 400; }
@@ -818,9 +822,6 @@ a.downloadLink {
 
 .bsAnnotation-start {
   text-anchor: start; }
-
-.annotation-note-bg {
-  fill: #666666; }
 
 .adAnnotation {
   font-size: 16px; }
