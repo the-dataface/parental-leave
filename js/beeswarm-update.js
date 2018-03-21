@@ -10,7 +10,7 @@ var barControlHeight = $('.bsControl').height();
 var swarmMargin = {
 	top: 30,
 	right: 30,
-	bottom: 100,
+	bottom: 60,
 	left: 30
 };
 

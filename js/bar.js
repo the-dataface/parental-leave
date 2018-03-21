@@ -9,7 +9,7 @@ var windowH = window.innerHeight;
 var barMargin = {
   top: 30,
   right: 30,
-  bottom: 100,
+  bottom: 40,
   left: 30
 };
 

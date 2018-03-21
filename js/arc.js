@@ -58,7 +58,7 @@ function arcDiagram() {
 	  cH = 200;
   }
   
-  var adH = (10 * cH);
+  var adH = (10.2 * cH);
 
   var rightmargin = 50;
 	
