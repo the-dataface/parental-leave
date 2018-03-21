@@ -52,6 +52,8 @@ var matc1 = "#fdae95",
 d3.csv("https://the-dataface.github.io/parental-leave/data/companies.csv", function(error, data) {
 	if (error) throw error;
 	
+	console.log(data);
+	
 	data = data.filter(function(d) {
 		return d['country'] == 'USA';
 	})
