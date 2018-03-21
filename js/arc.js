@@ -40,7 +40,7 @@ var matc1 = "#fdae95",
 // showing top ten largest employers in the United States and their parental leave policies
 
 // load data
-d3.csv("http://the-dataface.github.io/parental-leave/data/companies-top.csv", function(error, data) {
+d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", function(error, data) {
 	if (error) throw error;
 	
 function arcDiagram() {
