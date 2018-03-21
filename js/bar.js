@@ -38,7 +38,7 @@ var matc1 = "#fdae95",
 // showing how the US compares to other countries around the world
 
 // load the data
-d3.csv("http://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
+d3.csv("https://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
 	if (error) throw error;
 
 function barChart() {
