@@ -38,7 +38,7 @@ var matc1 = "#fdae95",
 // showing how the US compares to other countries around the world
 
 // load the data
-d3.csv("http://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
+d3.csv("https://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
 	if (error) throw error;
 
 function barChart() {
@@ -63,7 +63,8 @@ function barChart() {
 	
   var barSVG = d3.select(".barchart")
     .attr("width", barW + barMargin.left + barMargin.right)
-    .attr("height", barH + barMargin.top + barMargin.bottom),
+    .attr("height", barH + barMargin.top + barMargin.bottom)
+    .style("z-index", -1),
     barG = barSVG.append("g")
     .attr("transform", "translate(" + barMargin.left + "," + barMargin.top + ")")
   barX = d3.scaleLinear()
@@ -109,12 +110,19 @@ function barChart() {
     if (d.patLeave < 2 && d.patLeave > 0) pl = "<br> <strong>" + d.patLeave + " week </strong> paternal leave ";
     if (d.parentalLeave < 2 && d.parentalLeave > 0) parl = "<br> <strong>" + d.parentalLeave + " week </strong>parental leave ";
     if (d.note.length > 1) var note = "<br><br><span style='color: #b5b5b5'; font-size: 9px><em>" + d.note + "</em></span>"
-    return "<div class='tooltip bar-tooltip'><div class='close-button bar-close-button'>x</div><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks parText'>of salary</span></div></div></div>"
+    return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span><span class='weekAmountSubText tooltipWeeks parText'>of salary</span></div></div></div>"
   });
 
-  barSVG.call(barTT)
+    barSVG.call(barTT)
+	barSVG.on('click', function() {
+		barTT.hide;
+	})
 
-  d3.select('.bar-close-button').on("mouseover", console.log('hi'));
+	/*
+  d3.select('.d3-tip').on("click", function() {
+		barTT.hide
+	});
+	*/
 
     drawBars(data, order, classification, true)
 	if (!small_screen) {

@@ -562,47 +562,6 @@ a.downloadLink {
   max-width: 200px; 
   border-radius:2px;}
 
-.close-button {
-	margin:0;
-	display:none;
-	z-index:100;
-	pointer-events:all;
-}
-
-
-
-@media only screen and (max-width: 763px) {
-	.bs-tooltip {
-		padding-top:0px;
-	}
-	
-	.bar-tooltip{
-		
-	}
-
-	.close-button {
-		font-family:'Mada';
-		font-weight:600;
-		color:white;
-		margin:0;
-		padding-top:5px;
-		padding-bottom:0px;
-		z-index:100;
-	}
-	
-	.bs-close-button {
-		display:flex;
-		justify-content:flex-end;
-	}
-	
-	.bar-close-button {
-		display:block;
-		position:absolute;
-		right:5%;
-		top:0;
-	}
-}
-
 .tooltip h1 {
   font-weight: 700;
   padding-bottom: 2px;

@@ -246,11 +246,13 @@ d3.csv("http://the-dataface.github.io/parental-leave/data/companies.csv", functi
 			(ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 			(puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-			return "<div class='tooltip bs-tooltip'><p class='close-button bs-close-button'>x</p><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+			return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 		});
 
 		bsSVG.call(bsTT)
-		d3.select('.bs-close-button').on("click", bsTT.hide);
+		bsSVG.on('click', function() {
+			bsTT.hide;
+		})
 
 		var industry = 'all';
 
@@ -1078,11 +1080,13 @@ d3.csv("http://the-dataface.github.io/parental-leave/data/companies.csv", functi
 			(ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 			(puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-			return "<div class='tooltip bs-tooltip'><div class='close-button bs-close-button'>x</div><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+			return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 		});
 
 		bsSVG.call(bsTT)
-		d3.selectAll('.close-button').on("click", bsTT.hide);
+		bsSVG.on('click', function() {
+			bsTT.hide;
+		})
 
 		var industry = 'all';
 
