@@ -52,9 +52,19 @@ p {
 }
 
 #sub-header {
+	color:black;
+}
+
+.top-sub {
 	font-family: 'PT Serif';
 	font-weight:600;
-	color:black;
+	margin:0;
+}
+
+.bottom-sub {
+	font-family: 'PT Serif';
+	font-weight:600;
+	margin:0;
 }
 
 #authors {
@@ -63,6 +73,9 @@ p {
 	color:black;
 }
 
+.icon {
+	
+}
 
 .pLHighlight {
 	font-weight:700;
@@ -71,7 +84,7 @@ p {
 
 @media only screen and (min-width : 1000px) {
 	#header-container {
-	
+		
 	}
 	 #header {
 		font-size:100px;
@@ -80,17 +93,27 @@ p {
 	
 	.header-margin {
 		padding-left:100px;
-		padding-right:25%;
+		padding-right:100px;
+		max-width:1200px;
 	}
 	#sub-header {
 		margin-top:30px;
+	}
+	.top-sub {
 		font-size:40px;
+		line-height:50px
+	}
+	.bottom-sub {
+		font-size:28px;
 		line-height:50px
 	}
 	
 	#authors {
 		margin-top:40px;
 		font-size:28px;
+	}
+	.icon {
+		width:35px;
 	}
 }
 
@@ -99,42 +122,58 @@ p {
 		font-size:70px;
 		line-height:80px;
 	}
-	
 	.header-margin {
-		padding-left:100px;
-		padding-right:100px;
+		padding-left:75px;
+		padding-right:78px;
 	}
 	#sub-header {
 		margin-top:20px;
+	}
+	.top-sub {
 		font-size:30px;
 		line-height:40px
+	}
+	.bottom-sub {
+		font-size:22px;
+		line-height:40px;
 	}
 	
 	#authors {
 		margin-top:30px;
 		font-size:24px;
 	}
+	.icon {
+		width:30px;
+	}
 }
 
 @media only screen and (max-width: 763px) {
 	 #header {
-		font-size:35px;
-		line-height:42px;
+		font-size:40px;
+		line-height:45px;
 	}
-	
 	.header-margin {
 		padding-left:30px;
 		padding-right:30px;
 	}
 	#sub-header {
 		margin-top:15px;
-		font-size:16px;
-		line-height:20px
+	}
+	.top-sub {
+		font-size:18px;
+		line-height:22px
+	}
+	.bottom-sub {
+		font-size:14px;
+		line-height:22px
 	}
 	
 	#authors {
 		margin-top:20px;
-		font-size:14px;
+		font-size:16px;
+	}
+	.icon {
+		width:20px;
 	}
 }
 
@@ -298,8 +337,8 @@ a.downloadLink {
 @media only screen and (max-width: 763px) {
 	 .copy-header {
 		width:84%;
-		font-size:26px;
-		line-height:28px;
+		font-size:30px;
+		line-height:32px;
 		margin:auto;
 		margin-top:80px;
 	 }
