@@ -29,56 +29,176 @@ p {
 	width:100%;
 	height:100%;
 	position:relative;
+	background-color:rgba(253, 174, 149, 0.6);
 }
 
 #header-container {
-	text-align:center;
 	position:absolute;
 	width:100%;
 	left:50%;
 	top:50%;
 	transform:translate(-50%, -50%);
-	
 }
 
 #header {
 	font-family: 'Mada';
-	font-weight:900;
-	color:#fdae95;
-	text-transform:uppercase;
-	margin-top:auto;
+	font-weight:400;
+	color:white;
+	text-decoration:underline;
+}
+
+.header-span {
+	color:black;
+}
+
+#sub-header {
+	color:black;
+}
+
+.top-sub {
+	font-family: 'PT Serif';
+	font-weight:600;
+	margin:0;
+}
+
+.bottom-sub {
+	font-family: 'PT Serif';
+	font-weight:600;
+	margin:0;
+}
+
+#authors {
+	font-family: 'PT Serif';
+	font-weight:400;
+	color:black;
+}
+
+.icon {
+	
+}
+
+.pLHighlight {
+	font-weight:700;
+	
 }
 
 @media only screen and (min-width : 1000px) {
+	#header-container {
+		
+	}
 	 #header {
-		font-size:80px;
-		line-height:85px;
+		font-size:100px;
+		line-height:120px;
+	}
+	
+	.header-margin {
+		padding-left:100px;
+		padding-right:100px;
+		max-width:1200px;
+	}
+	#sub-header {
+		margin-top:30px;
+	}
+	.top-sub {
+		font-size:40px;
+		line-height:50px
+	}
+	.bottom-sub {
+		font-size:28px;
+		line-height:50px
+	}
+	
+	#authors {
+		margin-top:40px;
+		font-size:28px;
+	}
+	.icon {
+		width:35px;
 	}
 }
 
 @media only screen and (min-width : 764px) and (max-width: 999px) {
-	 #header {
-		font-size:80px;
-		line-height:85px;
+	#header {
+		font-size:70px;
+		line-height:80px;
+	}
+	.header-margin {
+		padding-left:75px;
+		padding-right:78px;
+	}
+	#sub-header {
+		margin-top:20px;
+	}
+	.top-sub {
+		font-size:30px;
+		line-height:40px
+	}
+	.bottom-sub {
+		font-size:22px;
+		line-height:40px;
+	}
+	
+	#authors {
+		margin-top:30px;
+		font-size:24px;
+	}
+	.icon {
+		width:30px;
 	}
 }
 
 @media only screen and (max-width: 763px) {
 	 #header {
-		font-size:60px;
-		line-height:70px;
+		font-size:40px;
+		line-height:45px;
+	}
+	.header-margin {
+		padding-left:30px;
+		padding-right:30px;
+	}
+	#sub-header {
+		margin-top:15px;
+	}
+	.top-sub {
+		font-size:18px;
+		line-height:22px
+	}
+	.bottom-sub {
+		font-size:14px;
+		line-height:22px
+	}
+	
+	#authors {
+		margin-top:20px;
+		font-size:16px;
+	}
+	.icon {
+		width:20px;
 	}
 }
 
 .copy-header {
 	font-family:'Mada';
-	font-weight:700;
-	padding-bottom:.3em;
+	font-weight:600;
+	padding-bottom:.7em;
 }
 
 .copy-body {
 	font-family:'PT Serif';
-    padding-bottom:.7em;
+	font-weight:400;
+    padding-bottom:2em;
+}
+
+.quote-container {
+	padding-bottom:2em;
+}
+
+.quote {
+	font-family:'PT Serif';
+	padding-bottom:0px!important;
+	border-left:5px solid rgba(253, 174, 149, 0.6);;
+	font-weight:400;
+	font-style:italic;
 }
 
 .chartHeaderContainer {
@@ -96,21 +216,60 @@ p {
 }
 
 .bsControl {
+	
  }
+
+.download-container {
+	 font-family: "Mada", Arial, sans-serif;
+	margin-top:20px;
+}
+
+.downloadButton {
+  display: inline-block;
+  background-color: #ffffff;
+  color:black!important;
+  font-size: 14px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border: 1px solid #b5b5b5;
+  border-bottom-width: 3px;
+  margin: 10px 0px 10px; }
+}
+
+a.downloadLink {
+  color:black!important;
+}
+
 
 @media only screen and (min-width : 1000px) {
 	 .copy-header {
 		width:900px;
 	    font-size:32px;
 		margin:auto;
+		margin-top:100px;
 	 }
 
 	 .copy-body {
  		width:900px;
 		margin:auto;
-		font-size:18px;
-		line-height:30px;
+		font-size:20px;
+		line-height:40px;
 	 }
+	 .quote {
+		font-size:20px;
+		line-height:40px;
+		padding-left:30px!important;
+	 }
+	 .quote-container {
+		width:900px;
+		margin:auto;
+	 }
+	.download-container {
+		width:900px;
+		margin:auto;
+	}
 	.chartHeaderContainer {
 		font-family:'Mada';
 		width:900px;
@@ -133,14 +292,29 @@ p {
 @media only screen and (min-width : 764px) and (max-width: 999px) {
 	 .copy-header {
 		width:700px;
-		font-size:30px;
+		font-size:32px;
 		margin:auto;
+		margin-top:80px;
 	 }
 
 	 .copy-body {
  		width:700px;
 		margin:auto;
 	    font-size:16px;
+		line-height:30px;
+	 }
+	 .quote {
+		font-size:18px;
+		line-height:35px;
+		padding-left:30px!important;
+	 }
+	 .quote-container {
+		width:700px;
+		margin:auto;
+	 }
+	 .download-container {
+		width:700px;
+		margin:auto;
 	 }
 	 .chartHeaderContainer {
 		width:700px;
@@ -163,14 +337,29 @@ p {
 @media only screen and (max-width: 763px) {
 	 .copy-header {
 		width:84%;
-		font-size:26px;
+		font-size:30px;
+		line-height:32px;
 		margin:auto;
+		margin-top:80px;
 	 }
 
 	 .copy-body {
  		width:84%;
 		margin:auto;
-	    font-size:14px;
+	    font-size:16px;
+		line-height:30px;
+	 }
+	 .quote {
+		font-size:16px;
+		line-height:30px;
+		padding-left:20px!important;
+	 }
+	 .quote-container {
+		width:84%;
+		margin:auto;
+	 }
+	 .download-container {
+		display:none;
 	 }
 	 .chartHeaderContainer {
 		width:84%;
@@ -227,7 +416,7 @@ p {
 	  font-size: 14px;}
 
 	.chartTitleh2 {
-	  font-size: 10px;}
+	  font-size: 11px;}
 }
 
 .adbaseline {
@@ -377,16 +566,55 @@ p {
 
 .tooltip {
   font-family: "Mada", Arial, sans-serif;
-  padding-top: 8px;
+  padding-top: 10px;
   padding-bottom: 8px;
   padding-left:15px;
   padding-right:15px;
   background: #666666;
   color: black;
-  pointer-events: none;
-  cursor: none;
   max-width: 200px; 
   border-radius:2px;}
+
+.close-button {
+	margin:0;
+	display:none;
+	z-index:100;
+	pointer-events:all;
+}
+
+
+
+@media only screen and (max-width: 763px) {
+	.bs-tooltip {
+		padding-top:0px;
+	}
+	
+	.bar-tooltip{
+		
+	}
+
+	.close-button {
+		font-family:'Mada';
+		font-weight:600;
+		color:white;
+		margin:0;
+		padding-top:5px;
+		padding-bottom:0px;
+		z-index:100;
+	}
+	
+	.bs-close-button {
+		display:flex;
+		justify-content:flex-end;
+	}
+	
+	.bar-close-button {
+		display:block;
+		position:absolute;
+		right:5%;
+		top:0;
+	}
+}
 
 .tooltip h1 {
   font-weight: 700;
@@ -404,7 +632,6 @@ p {
 
 .tooltip-header {
 	margin:0;
-	margin-top:5px;
 	margin-bottom:5px;
 	font-size:20px;
 	line-height:20px;
@@ -529,7 +756,7 @@ p {
 .aText, .axislabel, .barXaxis text {
   font-family: "Mada", Arial, sans-serif;
   text-transform: uppercase;
-  fill: #b5b5b5; }
+  fill: #666666; }
 
 @media only screen and (min-width : 1000px) {
 	 .aText, .axislabel, .barXaxis text {
@@ -543,7 +770,7 @@ p {
 
 @media only screen and (max-width: 763px) {
 	 .aText, .axislabel, .barXaxis text {
-	  font-size: 10px;}
+	  font-size: 11px;}
 }
 
 .axisTick {
@@ -658,10 +885,10 @@ p {
 }
 
 .adAnnotation .annotation-note-label, .adAnnotation .connector-end {
-  fill: #b5b5b5 !important; }
+  fill: #8c8c8c !important; }
 
 .adAnnotation .connector, .adAnnotation .note-line, .adAnnotation .connector-end {
-  stroke: #b5b5b5 !important; }
+  stroke: #8c8c8c !important; }
 
 .bsAnnotation1 {
 	

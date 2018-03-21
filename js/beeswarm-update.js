@@ -2,6 +2,7 @@
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
+var bsWindowW = window.innerWidth;
 var windowH = window.innerHeight;
 var barControlHeight = $('.bsControl').height();
 
@@ -120,7 +121,7 @@ d3.csv("data/companies.csv", function(error, data) {
 	
 	// mobile setup
 	var bsWMobile = windowW, // beeswarm width = full width
-		bsHMobile = (windowH * 1.6) - barControlHeight, // beeswarm height = full height
+		bsHMobile = (windowH * 1.3) - barControlHeight, // beeswarm height = full height
 		r = 3, 
 		linemargin = 15;
 	
@@ -245,10 +246,11 @@ d3.csv("data/companies.csv", function(error, data) {
 			(ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 			(puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-			return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+			return "<div class='tooltip bs-tooltip'><p class='close-button bs-close-button'>x</p><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 		});
 
 		bsSVG.call(bsTT)
+		d3.select('.bs-close-button').on("click", bsTT.hide);
 
 		var industry = 'all';
 
@@ -521,67 +523,67 @@ d3.csv("data/companies.csv", function(error, data) {
 					dy: 55,
 					dx: -74
 				},
-									   {
-										   note: {
-											   label: "The Bill and Melinda Gates Foundation also allows for 52 weeks paid parental leave, regardless of gender.",
-											   // lineType: "none",
-											   "align": "middle",
-											   "orientation": "leftRight",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsGatesAnnotation",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [-20, -20],
-												   [-35, -28]
-											   ]
-										   },
-										   x: x(52) - 4,
-										   y: bsH * .75 - 3,
-										   dy: -34,
-										   dx: -74
-									   }, {
-										   note: {
-											   label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
-											   "orientation": "leftRight",
-											   "align": "bottom",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [(x(10) - x(8)) / 2, 15],
-												   [(x(10) - x(8)), 60]
-											   ]
-										   },
-										   x: x(8),
-										   y: bsH * .5 - 50,
-										   dy: 60,
-										   dx: x(10) - x(8)
-									   },
-									   {
-										   note: {
-											   label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
-											   orientation: "leftRight",
-											   "align": "middle",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [20, 20],
-												   [35, 28]
-											   ]
-										   },
-										   x: x(4.5),
-										   y: bsH - 60,
-										   dy: 34,
-										   dx: 74
-									   }
-									  ]
+			   {
+				   note: {
+					   label: "The Bill and Melinda Gates Foundation also allows for 52 weeks paid parental leave, regardless of gender.",
+					   // lineType: "none",
+					   "align": "middle",
+					   "orientation": "leftRight",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsGatesAnnotation",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [-20, -20],
+						   [-35, -28]
+					   ]
+				   },
+				   x: x(52) - 4,
+				   y: bsH * .75 - 3,
+				   dy: -34,
+				   dx: -74
+			   }, {
+				   note: {
+					   label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
+					   "orientation": "leftRight",
+					   "align": "bottom",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [(x(10) - x(8)) / 2, 15],
+						   [(x(10) - x(8)), 60]
+					   ]
+				   },
+				   x: x(8),
+				   y: bsH * .5 - 50,
+				   dy: 60,
+				   dx: x(10) - x(8)
+			   },
+			   {
+				   note: {
+					   label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
+					   orientation: "leftRight",
+					   "align": "middle",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsPaidAnnotation",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [20, 20],
+						   [35, 28]
+					   ]
+				   },
+				   x: x(4.5),
+				   y: bsH - 60,
+				   dy: 34,
+				   dx: 74
+			   }
+			  ]
 
 				const bsMakeAnnotations = d3.annotation()
 				.type(type)
@@ -632,27 +634,27 @@ d3.csv("data/companies.csv", function(error, data) {
 					dy: -15,
 					dx: 80
 				},
-									   {
-										   note: {
-											   label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
-											   orientation: "leftRight",
-											   "align": "middle",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsUnpaidAnnotation",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [-8, -18],
-												   [-17, -28]
-											   ]
-										   },
-										   x: x(12),
-										   y: bsH - 215,
-										   dy: -34,
-										   dx: -50
-									   }
-									  ]
+			   {
+				   note: {
+					   label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
+					   orientation: "leftRight",
+					   "align": "middle",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start bsUnpaidAnnotation",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [-8, -18],
+						   [-17, -28]
+					   ]
+				   },
+				   x: x(12),
+				   y: bsH - 215,
+				   dy: -34,
+				   dx: -50
+			   }
+			  ]
 
 				const bsMakeAnnotations = d3.annotation()
 				.type(type)
@@ -861,67 +863,67 @@ d3.csv("data/companies.csv", function(error, data) {
 					dy: 55,
 					dx: -74
 				},
-									   {
-										   note: {
-											   label: "The Bill and Melinda Gates Foundation also allows for 52 weeks paid parental leave, regardless of gender.",
-											   // lineType: "none",
-											   "align": "middle",
-											   "orientation": "leftRight",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-end",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [-20, -20],
-												   [-35, -28]
-											   ]
-										   },
-										   x: x(52) - 4,
-										   y: bsH * .75 - 3,
-										   dy: -34,
-										   dx: -74
-									   }, {
-										   note: {
-											   label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
-											   "orientation": "leftRight",
-											   "align": "bottom",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [(x(10) - x(8)) / 2, 15],
-												   [(x(10) - x(8)), 60]
-											   ]
-										   },
-										   x: x(8),
-										   y: bsH * .5 - 50,
-										   dy: 60,
-										   dx: x(10) - x(8)
-									   },
-									   {
-										   note: {
-											   label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
-											   orientation: "leftRight",
-											   "align": "middle",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [20, 20],
-												   [35, 28]
-											   ]
-										   },
-										   x: x(4.5),
-										   y: bsH - 60,
-										   dy: 34,
-										   dx: 74
-									   }
-									  ]
+			   {
+				   note: {
+					   label: "The Bill and Melinda Gates Foundation also allows for 52 weeks paid parental leave, regardless of gender.",
+					   // lineType: "none",
+					   "align": "middle",
+					   "orientation": "leftRight",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-end",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [-20, -20],
+						   [-35, -28]
+					   ]
+				   },
+				   x: x(52) - 4,
+				   y: bsH * .75 - 3,
+				   dy: -34,
+				   dx: -74
+			   }, {
+				   note: {
+					   label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
+					   "orientation": "leftRight",
+					   "align": "bottom",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [(x(10) - x(8)) / 2, 15],
+						   [(x(10) - x(8)), 60]
+					   ]
+				   },
+				   x: x(8),
+				   y: bsH * .5 - 50,
+				   dy: 60,
+				   dx: x(10) - x(8)
+			   },
+			   {
+				   note: {
+					   label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
+					   orientation: "leftRight",
+					   "align": "middle",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [20, 20],
+						   [35, 28]
+					   ]
+				   },
+				   x: x(4.5),
+				   y: bsH - 60,
+				   dy: 34,
+				   dx: 74
+			   }
+			  ]
 
 				const bsMakeAnnotations = d3.annotation()
 				.type(type)
@@ -972,27 +974,27 @@ d3.csv("data/companies.csv", function(error, data) {
 					dy: -15,
 					dx: 80
 				},
-									   {
-										   note: {
-											   label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
-											   orientation: "leftRight",
-											   "align": "middle",
-											   wrap: wrap
-										   },
-										   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
-										   connector: {
-											   type: "curve",
-											   points: [
-												   [-8, -18],
-												   [-17, -28]
-											   ]
-										   },
-										   x: x(12),
-										   y: bsH - 215,
-										   dy: -34,
-										   dx: -50
-									   }
-									  ]
+			   {
+				   note: {
+					   label: "Often, American companies will offer 12 weeks unpaid parental leave to either/both parents.",
+					   orientation: "leftRight",
+					   "align": "middle",
+					   wrap: wrap
+				   },
+				   className: "adAnnotation bsAnnotation1 bsAnnotation-start",
+				   connector: {
+					   type: "curve",
+					   points: [
+						   [-8, -18],
+						   [-17, -28]
+					   ]
+				   },
+				   x: x(12),
+				   y: bsH - 215,
+				   dy: -34,
+				   dx: -50
+			   }
+			  ]
 
 				const bsMakeAnnotations = d3.annotation()
 				.type(type)
@@ -1076,10 +1078,11 @@ d3.csv("data/companies.csv", function(error, data) {
 			(ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 			(puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>" : "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-			return "<div class='tooltip'><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><p class='tooltip-sub-header'>" + city + state + country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+			return "<div class='tooltip bs-tooltip'><div class='close-button bs-close-button'>x</div><p class='tooltip-header'>"+ d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
 		});
 
 		bsSVG.call(bsTT)
+		d3.selectAll('.close-button').on("click", bsTT.hide);
 
 		var industry = 'all';
 
@@ -1117,12 +1120,10 @@ d3.csv("data/companies.csv", function(error, data) {
 			d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1)
 
 			d3.selectAll('.adAnnotation').style('visibility', 'hidden');
-
-			if (status == 'paid') {
-				if (industry == 'other') {
-					d3.select('.bsGatesAnnotation').style('visibility', 'visible');
-				} else if (industry == 'technology') {
-					d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
+			
+			if (status == 'paid' && gender == 'maternity') {
+				if (industry == 'other' || industry == 'technology') {
+					d3.select('.bsNetflixBillAnnotation').style('visibility', 'visible');
 				}
 			}
 
@@ -1136,12 +1137,10 @@ d3.csv("data/companies.csv", function(error, data) {
 			d3.selectAll("#" + company).style("opacity", 1).style("stroke", "black").style("stroke-width", "1px").attr("r", 6);
 
 			d3.selectAll('.adAnnotation').style('visibility', 'hidden');
-
-			if (status == 'paid') {
-				if (company == 'billAndMelindaGatesFoundation') {
-					d3.select('.bsGatesAnnotation').style('visibility', 'visible');
-				} else if (company == 'netflix') {
-					d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
+			
+			if (status == 'paid' && gender == 'maternity') {
+				if (company == 'billAndMelindaGatesFoundation' || company == 'netflix') {
+					d3.select('.bsNetflixBillAnnotation').style('visibility', 'visible');
 				}
 			}
 		}
@@ -1152,25 +1151,23 @@ d3.csv("data/companies.csv", function(error, data) {
 				d3.selectAll(".companies").style("visibility", "visible").style("opacity", 1);
 				d3.selectAll('.adAnnotation').style('visibility', 'visible');
 			} else {
-				if (industry == 'other') {
-					d3.select('.bsGatesAnnotation').style('visibility', 'visible');
-				} else if (industry == 'technology') {
-					d3.select('.bsNetflixAnnotation').style('visibility', 'visible');
-				}
+				if (industry == 'other' || industry == 'technology') {
+					d3.select('.bsNetflixBillAnnotation').style('visibility', 'visible');
+				} 
 				d3.selectAll("." + industry).style("visibility", "visible").style("opacity", 1);
 			}
-
-
 			resetSearch(industry, status);
 
 		}
 		
 		hideLines(gender);
 		drawSwarm(m);
+		drawAnnotations(status);
 
 		$("#bsPayGenderSelect").select2({ 
 			allowClear: false,
-			width: "150px"
+			width: "150px",
+			minimumResultsForSearch: 5
 		});
 		$('#bsPayGenderSelect').on("select2:select", function() {
 			
@@ -1216,6 +1213,7 @@ d3.csv("data/companies.csv", function(error, data) {
 				hideLines(gender)
 				drawSwarm(p);
 			}
+			drawAnnotations(status)
 		});
 		
 
@@ -1334,6 +1332,48 @@ d3.csv("data/companies.csv", function(error, data) {
 			d3.selectAll(".companies").on("mouseover", bsTT.show).on("mouseout", bsTT.hide);
 
 		} // end drawSwarm
+		
+		function drawAnnotations(status) {
+			d3.selectAll(".bsAnnotation-group").remove();
+
+			var wrap = 80;
+
+			// annotations, thank you Susie Lu
+			const type = d3.annotationLabel
+			if (status === "paid" && gender === 'maternity') {
+				const bsAnnotations = [{
+					note: {
+						label: "Both Netflix and The Bill and Melinda Gates Foundation allow for 52 weeks of paid leave for both parents, regardless of sex.",
+						orientation: "leftRight",
+						"align": "middle",
+						wrap: wrap
+					},
+					className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsNetflixBillAnnotation",
+					connector: {
+						type: "curve",
+						points: [
+							[20, -15],
+							[35, -30]
+						]
+					},
+					x: bsW / 2,
+					y: y(52) - 5,
+					dy: -50,
+					dx: 50
+				}
+			  ]
+
+				const bsMakeAnnotations = d3.annotation()
+				.type(type)
+				.annotations(bsAnnotations);
+
+				bsG.append("g")
+					.attr("class", "bsAnnotation-group")
+					.call(bsMakeAnnotations);
+
+			} 
+
+		} // end annotations
 
 		function resetSearch(ind, pay) {
 
@@ -1428,6 +1468,8 @@ d3.csv("data/companies.csv", function(error, data) {
 		} else {
 			drawSwarm(p);
 		}
+		
+		drawAnnotations(status);
 
 		function drawSwarm(state) {
 
@@ -1479,6 +1521,48 @@ d3.csv("data/companies.csv", function(error, data) {
 			});
 
 		} // end drawSwarm
+		
+		function drawAnnotations(status) {
+			d3.selectAll(".bsAnnotation-group").remove();
+
+			var wrap = 80;
+
+			// annotations, thank you Susie Lu
+			const type = d3.annotationLabel
+			if (status === "paid" && gender === 'maternity') {
+				const bsAnnotations = [{
+					note: {
+						label: "Both Netflix and The Bill and Melinda Gates Foundation allow for 52 weeks of paid leave for both parents, regardless of sex.",
+						orientation: "leftRight",
+						"align": "middle",
+						wrap: wrap
+					},
+					className: "adAnnotation bsAnnotation1 bsAnnotation-end bsPaidAnnotation bsNetflixBillAnnotation",
+					connector: {
+						type: "curve",
+						points: [
+							[20, -15],
+							[35, -30]
+						]
+					},
+					x: bsW / 2,
+					y: y(52) - 5,
+					dy: -50,
+					dx: 50
+				}
+			  ]
+
+				const bsMakeAnnotations = d3.annotation()
+				.type(type)
+				.annotations(bsAnnotations);
+
+				bsG.append("g")
+					.attr("class", "bsAnnotation-group")
+					.call(bsMakeAnnotations);
+
+			} 
+
+		} // end annotations
 
 		
 
@@ -1493,57 +1577,60 @@ d3.csv("data/companies.csv", function(error, data) {
 
 	// on resize
 	function resize() {
-		windowW = window.innerWidth;
-		windowH = window.innerHeight;
-		barControlHeight = $('.bsControl').height();
-		
-		large_screen = false;
-		medium_screen = false;
-		small_screen = false;
+		if (bsWindowW != window.innerWidth) {
+			windowW = window.innerWidth;
+			bsWindowW = window.innerWidth;
+			windowH = window.innerHeight;
+			barControlHeight = $('.bsControl').height();
 
-		if (windowW > 1000) {
-			large_screen = true;
-		} else if (windowW > 763) {
-			medium_screen = true;
-		} else {
-			small_screen = true;
-		}
+			large_screen = false;
+			medium_screen = false;
+			small_screen = false;
 
-		// desktop setup
-		bsW = windowW; // beeswarm width = full width
-		bsW = bsW - swarmMargin.left - swarmMargin.right;
+			if (windowW > 1000) {
+				large_screen = true;
+			} else if (windowW > 763) {
+				medium_screen = true;
+			} else {
+				small_screen = true;
+			}
 
-		x = d3.scaleLinear()
-			.rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])
-			.domain([0, 6.5, 13, 26, 52]),
-			xAxis = d3.axisBottom(x)
-			.ticks(20, ".0s")
-			.tickSizeOuter(0);
-		
-		// mobile setup
-		bsWMobile = windowW; // beeswarm width = full width
-		bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
-		bsHMobile = (windowH * 1.6) - barControlHeight; // beeswarm height = full height
-		bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
+			// desktop setup
+			bsW = windowW; // beeswarm width = full width
+			bsW = bsW - swarmMargin.left - swarmMargin.right;
 
-		y = d3.scaleLinear()
-			.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
-			.domain([0, 6.5, 13, 26, 52]),
-			yAxis = d3.axisLeft(y)
-			.tickSizeOuter(0);
-		
-		if (small_screen && !prev_mobile) {
-			beeSwarmMobile();
-			prev_mobile = true;
-		} else if (!small_screen && prev_mobile) {
-			beeSwarm();
-			prev_mobile = false;
-		} else if (small_screen && prev_mobile) {
-			redrawBeeSwarmMobile();
-			prev_mobile = true;
-		} else if (!small_screen && !prev_mobile) {
-			redrawBeeSwarm();
-			prev_mobile = false;
+			x = d3.scaleLinear()
+				.rangeRound([0, bsW * .25, bsW * .5, bsW * .75, bsW])
+				.domain([0, 6.5, 13, 26, 52]),
+				xAxis = d3.axisBottom(x)
+				.ticks(20, ".0s")
+				.tickSizeOuter(0);
+
+			// mobile setup
+			bsWMobile = windowW; // beeswarm width = full width
+			bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
+			bsHMobile = (windowH * 1.3) - barControlHeight; // beeswarm height = full height
+			bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
+
+			y = d3.scaleLinear()
+				.rangeRound([0, bsHMobile * .25, bsHMobile * .5, bsHMobile * .75, bsHMobile])
+				.domain([0, 6.5, 13, 26, 52]),
+				yAxis = d3.axisLeft(y)
+				.tickSizeOuter(0);
+
+			if (small_screen && !prev_mobile) {
+				beeSwarmMobile();
+				prev_mobile = true;
+			} else if (!small_screen && prev_mobile) {
+				beeSwarm();
+				prev_mobile = false;
+			} else if (small_screen && prev_mobile) {
+				redrawBeeSwarmMobile();
+				prev_mobile = true;
+			} else if (!small_screen && !prev_mobile) {
+				redrawBeeSwarm();
+				prev_mobile = false;
+			}
 		}
 	}
 

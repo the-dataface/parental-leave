@@ -2,11 +2,12 @@
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
+var arcWindowW = window.innerWidth;
 var windowH = window.innerHeight;
 
 // margin setup
 var arcMargin = {
-  top: 30,
+  top: 100,
   right: 30,
   bottom: 100,
   left: 30
@@ -57,12 +58,12 @@ function arcDiagram() {
 	  cH = 200;
   }
   
-  var adH = (11 * cH);
+  var adH = (10 * cH);
 
   var rightmargin = 50;
 	
   var leftmargin = 250;
-  if (small_screen) leftmargin = 175;
+  if (small_screen) leftmargin = 50;
 
   adMargin = {
     top: 0,
@@ -81,7 +82,7 @@ function arcDiagram() {
     .attr("width", adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)
     .attr("height", adH + arcMargin.top + arcMargin.bottom),
     adG = adSVG.append("g")
-    .attr("transform", "translate(" + Gtrans + "," + (-50) + ")")
+    .attr("transform", "translate(" + Gtrans + "," + (-20) + ")")
   adX = d3.scaleLinear()
     .range([0, adW])
     .domain([0, 52]);
@@ -115,8 +116,8 @@ function arcDiagram() {
       var arcGen = d3.arc();
       drawMarc(data[i].mat_paid, 0, p, "mat", "p")
       drawMarc(data[i].mat_unpaid, data[i].mat_paid, p, "mat", "up")
-      drawParc(data[i].pat_paid, 0, p, "pat", "p")
-      drawParc(data[i].pat_unpaid, data[i].pat_paid, p, "pat", "up")
+      drawParc(data[i].pat_paid, 0, p, "pat", "p", data[i].company)
+      drawParc(data[i].pat_unpaid, data[i].pat_paid, p, "pat", "up", data[i].company)
 
       function drawMarc(x2, add, y2, gen, kind) {
         var xTrans = adX(x2) / 2
@@ -142,7 +143,7 @@ function arcDiagram() {
           .attr("dy", 8)
           .style("text-anchor", "middle")
           .style("fill", function() {
-            if (adX(x2) < 50) return "#bfbfbf"
+            if (adX(x2) < 50) return "#666666"
             if (adX(x2) >= 50) return "white"
           })
           .text(function(d) {
@@ -175,7 +176,7 @@ function arcDiagram() {
           })
       }
 
-      function drawParc(x2, add, y2, gen, kind) {
+      function drawParc(x2, add, y2, gen, kind, comp) {
         var xTrans = adX(x2) / 2
         if (add > 0) xTrans = adX(x2) / 2 + adX(add)
 
@@ -199,7 +200,7 @@ function arcDiagram() {
           .attr("dy", 2)
           .style("text-anchor", "middle")
           .style("fill", function() {
-            if (adX(x2) < 50) return "#bfbfbf"
+            if (adX(x2) < 50) return "#666666"
             if (adX(x2) >= 50) return "white"
           })
           .text(function(d) {
@@ -217,7 +218,13 @@ function arcDiagram() {
           .text(function() {
             if (x2 > 0) return x2 + " wks"
           })
-          .style("fill", "white")
+          .style("fill", function(d) {
+			if (comp == 'Kroger' || comp == "McDonald's") {
+				return '#666666';
+			} else {
+				return 'white';
+			}
+		  })
           .style("display", "none")
 
         arc.on("mouseover", function(d) {
@@ -271,12 +278,26 @@ function arcDiagram() {
 	  	  comDy,
 	      locDy,
           empDy;
-		  
+		
+		/*  
 	  if (small_screen) {
 		  allX = -50,
 		  comDy = -30, 
 		  locDy = -12,
 		  empDy = 0;
+	  } else {
+		  allX = -80,
+		  comDy = -40, 
+		  locDy = -18,
+		  empDy = 0;
+	  }
+	  */
+	  
+	  if (small_screen) {
+		  allX = adX(50),
+		  comDy = -60, 
+		  locDy = -42,
+		  empDy = -30;
 	  } else {
 		  allX = -80,
 		  comDy = -40, 
@@ -297,71 +318,63 @@ function arcDiagram() {
     } //end drawing stuff
 
     // annotations, thank you Susie Lu
-    const type = d3.annotationLabel
-    const adAnnotations = [{
-        note: {
-          label: "Paid Maternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), -8],
-            [adX(3) - adX(0), -12]
-          ]
-        },
-        x: adX(13),
-        y: cH - adX(14) / 2,
-        dy: -17,
-        dx: adX(5) - adX(0)
-      },
-      {
-        note: {
-          label: "Unpaid Maternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), -8],
-            [adX(3) - adX(0), -12]
-          ]
-        },
-        x: adX(25),
-        y: cH - adX(5.5) / 2,
-        dy: -17,
-        dx: adX(5) - adX(0)
-      },
-      {
-        note: {
-          label: "Paid Paternal Leave",
-          lineType: "none",
-          orientation: "leftRight",
-          "align": "middle",
-          wrap: 200
-        },
-        className: "adAnnotation",
-        connector: {
-          type: "curve",
-          points: [
-            [adX(2) - adX(0), 10],
-            [adX(3) - adX(0), 14]
-          ]
-        },
-        x: adX(5.5),
-        y: cH + adX(5.5) / 2,
-        dy: 17,
-        dx: adX(5) - adX(0)
-      }
-    ]
+	// variables for annotation location so can fit on mobile
+	
+	var multiplier = 1,
+		yMatLocation = cH - adX(4.5);
+	
+	if (small_screen) {
+		multiplier = -1,
+		yMatLocation = cH
+	}
+	
+    const type = d3.annotationLabel;
+	
+	const adAnnotations = [{
+		note: {
+		  label: "Paid Maternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		x: adX(8),
+		y: cH - adX(8),
+		dy: -10,
+		dx: 0
+	  },
+	  {
+		note: {
+		  label: "Unpaid Maternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		x: adX(20.5),
+		y: yMatLocation,
+		dy: (-10) * multiplier,
+		dx: 0
+	  },
+	  {
+		note: {
+		  label: "Paid Paternal Leave",
+		  lineType: "none",
+		  "align": "middle",
+		  wrap: 200
+		},
+		className: "adAnnotation",
+		connector: {
+		  type: d3.annotationCalloutElbow
+		},
+		x: adX(3),
+		y: cH + adX(3),
+		dy: 10,
+		dx: 0
+	  }
+	];
+	
+	
 
     const sdMakeAnnotations = d3.annotation()
       .type(type)
@@ -370,9 +383,6 @@ function arcDiagram() {
     adG.append("g")
       .attr("class", "annotation-group")
       .call(sdMakeAnnotations);
-
-
-
   
 } //end arc diagram
 // draw everything
@@ -382,24 +392,27 @@ arcDiagram()
 window.addEventListener('resize', resize)
 
 function resize() {
-  windowW = window.innerWidth;
-  windowH = window.innerHeight;
-  
-  large_screen = false;
-  medium_screen = false;
-  small_screen = false;
+  if (arcWindowW != window.innerWidth) {
+	  windowW = window.innerWidth;
+	  arcWindowW = window.innerWidth;
+	  windowH = window.innerHeight;
 
-  if (windowW > 1000) {
-    large_screen = true;
-  } else if (windowW > 763) {
-    medium_screen = true;
-  } else {
-    small_screen = true;
-    arcMargin.left = 10;
-    arcMargin.right = 10;
+	  large_screen = false;
+	  medium_screen = false;
+	  small_screen = false;
+
+	  if (windowW > 1000) {
+		large_screen = true;
+	  } else if (windowW > 763) {
+		medium_screen = true;
+	  } else {
+		small_screen = true;
+		arcMargin.left = 10;
+		arcMargin.right = 10;
+	  }
+
+	  arcDiagram()
   }
-
-  arcDiagram()
 }
 }) // end load data
 
