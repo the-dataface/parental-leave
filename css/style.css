@@ -1,6 +1,15 @@
 body {
   margin: 0; }
 
+.black-box {
+	position:absolute;
+	height:100px;
+	width:100px;
+	top:5000px;
+	left:400px;
+	background-color:black;
+}
+
 .guide {
   position: fixed;
   width: 50%;
