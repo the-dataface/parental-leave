@@ -75,10 +75,17 @@ d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", f
 
         adW = adW - arcMargin.left - arcMargin.right - adMargin.left - adMargin.right;
         adH = adH - arcMargin.top - arcMargin.bottom;
-        var Gtrans = adMargin.left + arcMargin.left
+		
+		var svgOffset;
+		if (medium_screen || large_screen) {
+            svgOffset = (windowW - (adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)) / 2;
+        } else {
+            svgOffset = 0;
+        }
+        var Gtrans = adMargin.left + arcMargin.left + svgOffset;
 
         var adSVG = d3.select(".arcdiagram")
-            .attr("width", adW + arcMargin.left + arcMargin.right + adMargin.left + adMargin.right)
+            .attr("width", windowW)
             .attr("height", adH + arcMargin.top + arcMargin.bottom),
             adG = adSVG.append("g")
             .attr("transform", "translate(" + Gtrans + "," + (-20) + ")")
@@ -97,12 +104,6 @@ d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", f
             .append("path")
             .attr("d", "M0,-5L10,0L0,5")
             .style("fill", "black");
-
-        if (medium_screen || large_screen) {
-            adSVG.attr("transform", "translate(" + (windowW - adSVG.attr('width')) / 2 + ")");
-        } else {
-            adSVG.attr("transform", "translate(0)");
-        }
 
         // set up some basics
         var adr = 3;

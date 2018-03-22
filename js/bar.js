@@ -66,8 +66,7 @@ $(document).ready(function() {
 
             var barSVG = d3.select(".barchart")
                 .attr("width", barW + barMargin.left + barMargin.right)
-                .attr("height", barH + barMargin.top + barMargin.bottom)
-                .style("z-index", -1),
+                .attr("height", barH + barMargin.top + barMargin.bottom),
                 barG = barSVG.append("g")
                 .attr("transform", "translate(" + barMargin.left + "," + barMargin.top + ")")
             barX = d3.scaleLinear()
