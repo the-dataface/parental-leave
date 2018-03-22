@@ -144,9 +144,9 @@ function barChart() {
 		matNote = "",
 		patNote = "",
 		parNote = "";
-    if (d.matNote.length > 1) matNote = "<br><span style='color: #b5b5b5'><span class='matText'>*</span><em>" + d.matNote + "</em></span><br>"
-	if (d.patNote.length > 1) patNote = "<br><span style='color: #b5b5b5'><span class='patText'>*</span><em>" + d.patNote + "</em></span><br>"
-	if (d.parNote.length > 1) parNote = "<br><span style='color: #b5b5b5'><span class='parText'>*</span><em>" + d.parNote + "</em></span>"
+    if (d.matNote.length > 1) matNote = "<p style='color: #b5b5b5;font-size:13px;margin:0;margin-top:12px'><span class='matText'>*</span><em>" + d.matNote + "</em></p>"
+	if (d.patNote.length > 1) patNote = "<p style='color: #b5b5b5;font-size:13px;margin:0;margin-top:12px'><span class='patText'>*</span><em>" + d.patNote + "</em></p>"
+	if (d.parNote.length > 1) parNote = "<p style='color: #b5b5b5;font-size:13px;margin:0;margin-top:12px'><span class='parText'>*</span><em>" + d.parNote + "</em></p>"
 	
     return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>"+ d.country + "</p><p class='tooltip-sub-header'>Funded by " + d.source + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + matLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + matPayAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + patLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>" + patLeaveMetric + "</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + patPayAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + parLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + parPayAst + "</span>" + pLsub + "</div></div>" + matNote + patNote + parNote + "</div>"
 	
@@ -421,7 +421,8 @@ function barChart() {
           return barY(d.country);
         })
 
-      d3.selectAll(".bar").on("mouseover", barTT.show).on("mouseout", barTT.hide);
+      d3.selectAll(".bar").on("mouseover", barTT.show);
+		//.on("mouseout", barTT.hide);
 
 
 
