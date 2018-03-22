@@ -38,7 +38,7 @@ var matc1 = "#fdae95",
 // showing how the US compares to other countries around the world
 
 // load the data
-d3.csv("https://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
+d3.csv("https://the-dataface.github.io/parental-leave/data/countries-updated.csv", function(error, data) {
 	if (error) throw error;
 
 function barChart() {
@@ -103,22 +103,53 @@ function barChart() {
 
   // create tooltip and call using d3tip.js
   var barTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
-    var ml = d.matLeave + " weeks</strong> maternal leave ",
-      pl = "<br> <strong>" + d.patLeave + " weeks</strong> paternal leave ",
-      parl = "<br> <strong>" + d.parentalLeave + " weeks</strong> parental leave ";
-    if (d.matLeave < 2 && d.matLeave > 0) ml = d.matLeave + " week </strong>maternal leave ";
-    if (d.patLeave < 2 && d.patLeave > 0) pl = "<br> <strong>" + d.patLeave + " week </strong> paternal leave ";
-    if (d.parentalLeave < 2 && d.parentalLeave > 0) parl = "<br> <strong>" + d.parentalLeave + " week </strong>parental leave ";
+	var matPayAst = "",
+		matLeaveAst = "",
+		patPayAst = "",
+		patLeaveAst = "",
+		parPayAst = "",
+		parLeaveAst = "";
+	if (d.country == 'Croatia' || d.country == 'Australia' || d.country == 'Ireland' || d.country == 'Malta' || d.country == 'Belgium') {
+		matPayAst = "*";
+	}
+	if (d.country == 'United Kingdom' || d.country == 'Norway' || d.country == 'Spain' || d.country == 'Spain') {
+		matLeaveAst = "*";	   
+	} 
+	if (d.country == 'Australia') {
+		patPayAst = "*";	
+	}
+	if (d.country == 'Norway') {
+		patLeaveAst = "*";	
+	}
+	if (d.country == 'Austria') {
+		parPayAst = "*";	
+	}
+	if (d.country == 'Portugal') {
+		parLeaveAst = "*";	
+	}
+	var patLeaveMetric = "weeks";
+	if (d.country == 'Romania') {
+		patLeaveMetric = "days";	
+	} 
 	var pLsub;
-	console.log(d.parentalLeave);
 	if (d.parentalLeavePay == 'a flat rate') {
 		pLsub = "<span class='weekAmountSubText tooltipWeeks parText'></span>";
 	} else {
 		pLsub = "<span class='weekAmountSubText tooltipWeeks parText'>of salary</span>";
 	};
-	var note = "";
-    if (d.note.length > 1) note = "<br><span style='color: #b5b5b5'; font-size: 9px><em>" + d.note + "</em></span>"
-    return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>"+ d.country + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + "</span><span class='weekAmountSubText tooltipWeeks patText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + "</span>" + pLsub + "</div></div>" + note + "</div>"
+	
+	var prenote = "<br><span class='matText'>" + matPayAst + matLeaveAst + "</span><span class='patText'>" + patPayAst + patLeaveAst + "</span><span class='parText'>" + parPayAst + parLeaveAst + "</span>";
+	  
+	var 
+		matNote = "",
+		patNote = "",
+		parNote = "";
+    if (d.matNote.length > 1) matNote = "<br><span style='color: #b5b5b5'><span class='matText'>*</span><em>" + d.matNote + "</em></span><br>"
+	if (d.patNote.length > 1) patNote = "<br><span style='color: #b5b5b5'><span class='patText'>*</span><em>" + d.patNote + "</em></span><br>"
+	if (d.parNote.length > 1) parNote = "<br><span style='color: #b5b5b5'><span class='parText'>*</span><em>" + d.parNote + "</em></span>"
+	
+    return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>"+ d.country + "</p><p class='tooltip-sub-header'>Funded by " + d.source + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>"+ d.matLeave + matLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + matPayAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + patLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>" + patLeaveMetric + "</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + patPayAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + parPayAst + "</span>" + pLsub + "</div></div>" + matNote + patNote + parNote + "</div>"
+	
   });
 
     barSVG.call(barTT)
@@ -390,7 +421,7 @@ function barChart() {
           return barY(d.country);
         })
 
-      d3.selectAll(".bar").on("mouseover", barTT.show).on("mouseout", barTT.hide);
+      d3.selectAll(".bar").on("mouseover", barTT.show);
 
 
 
