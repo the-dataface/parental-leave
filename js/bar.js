@@ -546,6 +546,11 @@ $(document).ready(function() {
                 windowW = window.innerWidth;
                 barWindowW = window.innerWidth;
                 windowH = window.innerHeight;
+				
+				// what size screen?
+				var large_screen = false;
+				var medium_screen = false;
+				var small_screen = false;
 
                 if (windowW > 1000) {
                     large_screen = true;
