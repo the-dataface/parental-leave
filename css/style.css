@@ -24,7 +24,9 @@ body {
 	width:100%;
 	left:50%;
 	top:50%;
-	transform:translate(-50%, -50%);
+	-webkit-transform:translate(-50%, -50%);
+	    -ms-transform:translate(-50%, -50%);
+	        transform:translate(-50%, -50%);
 }
 
 #pL-header {
@@ -231,7 +233,6 @@ body {
   border: 1px solid #b5b5b5;
   border-bottom-width: 3px;
   margin: 10px 0px 10px; }
-}
 
 a.downloadLink {
   color:black!important;
@@ -379,7 +380,8 @@ a.downloadLink {
 	font-size:150px;
 	font-weight:900;
 	text-decoration:underline;
-	text-decoration-color:#88cae3;
+	-webkit-text-decoration-color:#88cae3;
+	        text-decoration-color:#88cae3;
 }
 
 .mLetter {
@@ -612,9 +614,16 @@ a.downloadLink {
 }
 
 .table-row {
+	display:-webkit-box;
+	display:-ms-flexbox;
 	display:flex;
-	flex-direction:row;
-	align-items:center;
+	-webkit-box-orient:horizontal;
+	-webkit-box-direction:normal;
+	    -ms-flex-direction:row;
+	        flex-direction:row;
+	-webkit-box-align:center;
+	    -ms-flex-align:center;
+	        align-items:center;
 }
 
 .flex-cell {
@@ -623,7 +632,9 @@ a.downloadLink {
 	font-weight:600;
 	font-size:14px;
 	line-height:14px;
-	align-items:baseline;
+	-webkit-box-align:baseline;
+	    -ms-flex-align:baseline;
+	        align-items:baseline;
 }
 
 .first-cell {

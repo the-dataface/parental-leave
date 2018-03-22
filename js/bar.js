@@ -421,8 +421,7 @@ function barChart() {
           return barY(d.country);
         })
 
-      d3.selectAll(".bar").on("mouseover", barTT.show);
-		//.on("mouseout", barTT.hide);
+      d3.selectAll(".bar").on("mouseover", barTT.show).on("mouseout", barTT.hide);
 
 
 
