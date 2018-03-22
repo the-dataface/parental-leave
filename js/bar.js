@@ -188,12 +188,12 @@ $(document).ready(function() {
                 drawBars(data, order, classification, false)
             });
 			
-			$(function() {
-				$(".barClassificationSelect").select2({
-					// placeholder: "Filter by Industry",
-					allowClear: true,
-					width: "150px"
-				});
+			/*
+			
+			$(".barClassificationSelect").select2({
+				// placeholder: "Filter by Industry",
+				allowClear: true,
+				width: "150px"
 			});
 			
             $('.barClassificationSelect').on("select2:select", classificationSelect);
@@ -202,6 +202,7 @@ $(document).ready(function() {
                 classification = $(this).val()
                 drawBars(data, order, classification, false)
             }
+			*/
 
             // bar hop!
             function drawBars(data, order, classification, firstTime) {

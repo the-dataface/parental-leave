@@ -262,7 +262,7 @@ $(document).ready(function() {
 
             // set up controls using select2.js
             //    industry filter
-            $(".bsIndustrySelect").select2({
+            $("#bsIndustrySelect").select2({
                 placeholder: "Filter by Industry",
                 allowClear: true,
                 width: "150px"
@@ -274,7 +274,7 @@ $(document).ready(function() {
             });
 
             //    company search, will populate later
-            $('.bsSearch').select2({ // company search
+            $('#bsSearch').select2({ // company search
                 placeholder: "Find a Company...",
                 allowClear: true,
                 width: "150px"
