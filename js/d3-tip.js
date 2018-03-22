@@ -34,7 +34,7 @@
     var direction = d3TipDirection,
       offset = d3TipOffset,
       html = d3TipHTML,
-      rootElement = document.getElementsByClassName("post-block")[0],
+      rootElement = document.getElementsByClassName("post-blocks")[0],
       node = initNode(),
       svg = null,
       point = null,
