@@ -34,7 +34,7 @@
     var direction = d3TipDirection,
       offset = d3TipOffset,
       html = d3TipHTML,
-      rootElement = document.getElementsByClassName("main-content"),
+      rootElement = document.getElementsByClassName("main-content")[0],
       node = initNode(),
       svg = null,
       point = null,
