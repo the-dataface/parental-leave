@@ -1,4 +1,5 @@
 // -- SETUP --
+console.log('black-box');
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
 var arcWindowW = window.innerWidth;

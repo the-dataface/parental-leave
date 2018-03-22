@@ -167,7 +167,6 @@ $(document).ready(function() {
 
             drawBars(data, order, classification, true)
             if (!small_screen) {
-				console.log('hi');
                 drawAnnotations(order)
             }
             //d3.select('.d3-tip').style('display', 'none');
