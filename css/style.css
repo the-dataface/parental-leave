@@ -176,11 +176,11 @@ body {
     padding-bottom:2em;
 }
 
-.quote-container {
+.pL-quote-container {
 	padding-bottom:2em;
 }
 
-.quote {
+.pL-quote {
 	font-family:'PT Serif';
 	padding-bottom:0px!important;
 	border-left:5px solid rgba(253, 174, 149, 0.6);;
@@ -252,12 +252,12 @@ a.downloadLink {
 		font-size:20px;
 		line-height:40px;
 	 }
-	 .quote {
+	 .pL-quote {
 		font-size:20px;
 		line-height:40px;
 		padding-left:30px!important;
 	 }
-	 .quote-container {
+	 .pL-quote-container {
 		width:900px;
 		margin:auto;
 	 }
@@ -298,12 +298,12 @@ a.downloadLink {
 	    font-size:16px;
 		line-height:30px;
 	 }
-	 .quote {
+	 .pL-quote {
 		font-size:18px;
 		line-height:35px;
 		padding-left:30px!important;
 	 }
-	 .quote-container {
+	 .pL-quote-container {
 		width:700px;
 		margin:auto;
 	 }
@@ -344,12 +344,12 @@ a.downloadLink {
 	    font-size:16px;
 		line-height:30px;
 	 }
-	 .quote {
+	 .pL-quote {
 		font-size:16px;
 		line-height:30px;
 		padding-left:20px!important;
 	 }
-	 .quote-container {
+	 .pL-quote-container {
 		width:84%;
 		margin:auto;
 	 }
