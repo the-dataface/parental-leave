@@ -187,12 +187,15 @@ $(document).ready(function() {
                 }
                 drawBars(data, order, classification, false)
             });
-
-            $(".barClassificationSelect").select2({
-                // placeholder: "Filter by Industry",
-                allowClear: true,
-                width: "150px"
-            });
+			
+			$(function() {
+				$(".barClassificationSelect").select2({
+					// placeholder: "Filter by Industry",
+					allowClear: true,
+					width: "150px"
+				});
+			});
+			
             $('.barClassificationSelect').on("select2:select", classificationSelect);
 
             function classificationSelect() {
