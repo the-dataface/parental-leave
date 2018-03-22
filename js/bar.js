@@ -40,6 +40,9 @@ $(document).ready(function() {
     // load the data
     d3.csv("https://the-dataface.github.io/parental-leave/data/countries-updated.csv", function(error, data) {
         if (error) throw error;
+		
+		var arrowOffset,
+			arrowSize;
 
         function barChart() {
             // remove
@@ -165,6 +168,7 @@ $(document).ready(function() {
 
             drawBars(data, order, classification, true)
             if (!small_screen) {
+				console.log('hi');
                 drawAnnotations(order)
             }
             //d3.select('.d3-tip').style('display', 'none');
@@ -231,32 +235,29 @@ $(document).ready(function() {
                 }));
                 barX.domain([-20, minmaxM[1]])
 
-                // call X axis if this is the first time
-                if (firstTime) {
-                    barG.append("g")
-                        .attr("class", "barXaxis")
-                        .attr("transform", "translate(0," + barH + ")")
-                        .call(barXaxis);
+				d3.select(".barXaxis").remove();
+				
+				barG.append("g")
+					.attr("class", "barXaxis")
+					.attr("transform", "translate(0," + barH + ")")
+					.call(barXaxis);
+				
+				if (small_screen) {
+					arrowOffset = 115;
+					arrowSize = 10;
+				} else if (medium_screen) {
+					arrowOffset = 135;
+					arrowSize = 25;
+				} else {
+					arrowOffset = 155;
+					arrowSize = 25;
+				}
 
-                    var arrowOffset,
-                        arrowSize;
-                    if (small_screen) {
-                        arrowOffset = 115;
-                        arrowSize = 10;
-                    } else if (medium_screen) {
-                        arrowOffset = 135;
-                        arrowSize = 25;
-                    } else {
-                        arrowOffset = 155;
-                        arrowSize = 25;
-                    }
-
-                    // draw axis labels
-                    barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternal Leave").attr("dy", 3)
-                    barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternal Leave").style("text-anchor", "end").attr("dy", 3)
-                    barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
-                    barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
-                }
+				// draw axis labels
+				barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternal Leave").attr("dy", 3)
+				barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternal Leave").style("text-anchor", "end").attr("dy", 3)
+				barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+				barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
 
                 // new bars
                 var barM = barG.selectAll(".barM")
@@ -548,9 +549,9 @@ $(document).ready(function() {
                 windowH = window.innerHeight;
 				
 				// what size screen?
-				var large_screen = false;
-				var medium_screen = false;
-				var small_screen = false;
+				large_screen = false;
+				medium_screen = false;
+				small_screen = false;
 
                 if (windowW > 1000) {
                     large_screen = true;
