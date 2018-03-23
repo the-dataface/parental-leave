@@ -4,15 +4,6 @@ body {
   width:100%;
 }
 
-.black-box {
-	position:absolute;
-	height:100px;
-	width:100px;
-	top:5000px;
-	left:400px;
-	background-color:black;
-}
-
 .guide {
   position: fixed;
   width: 50%;
@@ -84,6 +75,9 @@ body {
 }
 
 @media only screen and (min-width : 1000px) {
+	#pL-full-header-container {
+		margin-bottom:100px;
+	}
 	#pL-header-container {
 		
 	}
@@ -119,6 +113,9 @@ body {
 }
 
 @media only screen and (min-width : 764px) and (max-width: 999px) {
+	#pL-full-header-container {
+		margin-bottom:70px;
+	}
 	#pL-header {
 		font-size:70px;
 		line-height:80px;
@@ -149,6 +146,9 @@ body {
 }
 
 @media only screen and (max-width: 763px) {
+	#pL-full-header-container {
+		margin-bottom:40px;
+	}
 	 #pL-header {
 		font-size:40px;
 		line-height:45px;
