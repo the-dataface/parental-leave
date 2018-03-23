@@ -1096,17 +1096,18 @@ $(document).ready(function() {
 					swarmH = d3.select('.beeswarm').attr('height')
 				console.log(this.cx.baseVal.value + ',' + swarmW)
 				
-				if (this.cx.baseVal.value < (swarmW / 2) - 20) {
+				if (parseInt(this.cx.baseVal.value) < parseInt((swarmW / 2) - 20)) {
 					left = true;
 				} else {
 					right = true;
 				}
 				
-				if (this.cy.baseVal.value < (swarmH / 2)) {
+				if (parseInt(this.cy.baseVal.value) < parseInt((swarmH / 2))) {
 					top = true;
 				} else {
 					bottom = true;
 				}
+				console.log(top + ',' + bottom + ',' + left + ',' + right);
 				
 				if (top && left) {
 					return 'se';
