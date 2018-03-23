@@ -580,7 +580,9 @@ a.downloadLink {
   background: #666666;
   color: black;
   max-width: 200px; 
-  border-radius:2px;}
+  border-radius:2px;
+  opacity: 1;
+}
 
 .tooltip h1 {
   font-weight: 700;
