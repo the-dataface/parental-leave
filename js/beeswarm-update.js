@@ -1124,15 +1124,16 @@ $(document).ready(function() {
 				var swarmW = d3.select('.beeswarm').attr('width');
 				var midpoint = swarmW / 2;
 				var difference;
-				var differenceScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
+				var differenceLeftScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
+				var differenceRightScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
 				var result;
 				
 				if (cx < midpoint) {
 					difference = midpoint - cx;
-					result = differenceScale(difference);
+					result = differenceLeftScale(difference);
 				} else {
-					difference = cx - midpoint;
-					result = differenceScale(difference);
+					difference = swarmW - cx;
+					result = differenceLeftScale(difference);
 				}
 				console.log(result);
 				return [0,result];
