@@ -1135,6 +1135,7 @@ $(document).ready(function() {
 					difference = cx - midpoint;
 					result = differenceRightScale(difference);
 				}
+				console.log(cx + "," + midpoint + "," + difference + "," + result)
 				return [0,result];
 			
 			}).html(function(d) {
