@@ -175,6 +175,61 @@ body {
 	}
 }
 
+@-webkit-keyframes mover {
+    0% { -webkit-transform: translateY(-10px); }
+    100% { -webkit-transform: translateY(0); }
+}
+@keyframes mover {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+@-moz-keyframes mover {
+    0% { -moz-transform: translateY(-10px); }
+    100% { -moz-transform: translateY(0); }
+}
+@-ms-keyframes mover {
+    0% { -ms-transform: translateY(-10px); }
+    100% { -ms-transform: translateY(0); }
+}
+
+@-o-keyframes mover {
+    0% { -o-transform: translateY(-10px); }
+    100% { -o-transform: translateY(0); }
+}
+
+.animated.mover {
+    -webkit-animation-name: mover;
+    -moz-animation-name: mover;
+    -o-animation-name: mover;
+    animation-name: mover;
+}
+
+.down-arrow-svg {
+	animation: mover 2s infinite;
+	position:absolute;
+	top:90%;
+	left:50%;
+	-moz-transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+.down-arrow {
+	fill:black;
+	stroke:black;
+	stroke-width:4px;
+}
+
+.scroll-button {
+	cursor:pointer;
+}
+
+#scroll-location {
+	position:absolute;
+	top:100%;
+	opacity:0;
+}
+
 .copy-header {
 	font-family:'Mada';
 	font-weight:600;
