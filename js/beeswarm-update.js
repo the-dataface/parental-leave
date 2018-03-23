@@ -1132,10 +1132,7 @@ $(document).ready(function() {
 					difference = midpoint - cx;
 					result = differenceLeftScale(difference);
 				} else {
-					console.log(cx);
-					console.log(swarmW);
-					console.log(swarmW / 2);
-					difference = swarmW - cx;
+					difference = cx - midpoint;
 					result = differenceRightScale(difference);
 				}
 				return [0,result];
