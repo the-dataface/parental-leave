@@ -125,7 +125,7 @@ $(document).ready(function() {
 
         // mobile setup
         var bsWMobile = windowW, // beeswarm width = full width
-            bsHMobile = (windowH * 1.3) - barControlHeight, // beeswarm height = full height
+            bsHMobile = (windowH * 1.6) - barControlHeight, // beeswarm height = full height
             r = 3,
             linemargin = 15;
 
@@ -1673,7 +1673,7 @@ $(document).ready(function() {
                 // mobile setup
                 bsWMobile = windowW; // beeswarm width = full width
                 bsWMobile = bsWMobile - swarmMarginMobile.left - swarmMarginMobile.right;
-                bsHMobile = (windowH * 1.3) - barControlHeight; // beeswarm height = full height
+                bsHMobile = (windowH * 1.6) - barControlHeight; // beeswarm height = full height
                 bsHMobile = bsHMobile - swarmMarginMobile.top - swarmMarginMobile.bottom;
 
                 y = d3.scaleLinear()
