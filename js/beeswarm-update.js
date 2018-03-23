@@ -230,6 +230,8 @@ $(document).ready(function() {
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
 				
+				console.log(this.cx.baseVal.value + ',' + swarmW)
+				
 				if (this.cx.baseVal.value < (swarmW / 2)) {
 					left = true;
 				} else {
@@ -1092,8 +1094,9 @@ $(document).ready(function() {
 					right = false,
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
+				console.log(this.cx.baseVal.value + ',' + swarmW)
 				
-				if (this.cx.baseVal.value < ((swarmW / 2) - 20)) {
+				if (this.cx.baseVal.value < (swarmW / 2) - 20) {
 					left = true;
 				} else {
 					right = true;
