@@ -1133,7 +1133,7 @@ $(document).ready(function() {
 					result = differenceLeftScale(difference);
 				} else {
 					difference = cx - midpoint;
-					result = -(differenceRightScale(difference));
+					result = differenceRightScale(difference) * 2;
 				}
 				console.log(cx + "," + midpoint + "," + difference + "," + result)
 				return [0,result];
