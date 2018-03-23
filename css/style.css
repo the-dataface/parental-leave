@@ -400,7 +400,7 @@ a.downloadLink {
 }
 
 @media only screen and (max-width: 763px) {
-	 .copy-header {
+	.copy-header {
 		width:84%;
 		font-size:30px;
 		line-height:32px;
@@ -426,12 +426,6 @@ a.downloadLink {
 	 .download-container {
 		display:none;
 	 }
-	 .chartHeaderContainer {
-		width:84%;
-		margin:auto;
-	    padding-top:30px;
-		padding-bottom:15px;
-	 }
 	 .chartHeader {
 		font-size:18px;
 	 }
@@ -443,6 +437,25 @@ a.downloadLink {
 		margin-left:8%;
  	 }
 }
+
+@media only screen and (max-width: 763px) and (min-width: 550px) {
+	.chartHeaderContainer {
+		width:500px;
+		margin:auto;
+	    padding-top:30px;
+		padding-bottom:15px;
+	 }	
+}
+
+@media only screen and (max-width: 549px) {
+	.chartHeaderContainer {
+		width:90%;
+		margin:auto;
+	    padding-top:30px;
+		padding-bottom:15px;
+	 }	
+}
+
 
 .largeLetter {
 	font-family: 'Mada';
