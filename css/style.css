@@ -1,5 +1,8 @@
 body {
-  margin: 0; }
+  margin: 0; 
+  overflow-x: hidden;
+  width:100%;
+}
 
 .black-box {
 	position:absolute;
@@ -624,6 +627,7 @@ a.downloadLink {
 
 .d3-tip {
 	z-index: 1;
+	pointer-events:none!important;
 }
 
 .tooltip {
@@ -637,6 +641,7 @@ a.downloadLink {
   max-width: 200px; 
   border-radius:2px;
   opacity: 1;
+  pointer-events:none;
 }
 
 .tooltip h1 {
