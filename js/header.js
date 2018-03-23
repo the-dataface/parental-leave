@@ -54,15 +54,15 @@ function header() {
 		d3.select('#pL-full-header-container')
 		  .append('svg')
 		  .attr('class', 'down-arrow-svg')
-		  .attr('width', 100)
-		  .attr('height', 60)
-		  .style('left', (windowW / 2) - 50)
+		  .attr('width', 90)
+		  .attr('height', 50)
+		  .style('left', (windowW / 2) - 45)
 		  .append('a')
 		  .attr('class', 'scroll-button')
 		  .attr('href', '#scroll-location')
 		  .append('path')
 		  .attr('class', 'down-arrow')
-		  .attr('d', 'M49.292 52c-1.06 0-2.078-.568-2.828-1.318L2.172 6.316c-1.562-1.562-1.562-4.132 0-5.692 1.56-1.562 4.096-1.582 5.656-.018L49.274 42.04 90.152.61c1.552-1.574 4.084-1.592 5.658-.042 1.572 1.552 1.588 4.084.038 5.656L52.14 50.664C51.392 51.422 50.372 52 49.306 52 49.302 52 49.298 52 49.292 52z');
+		  .attr('d', 'M43 46c-1 0-2 0-2-1L2 6c-1-1-1-4 0-5 1-1 4-1 5 0L43 37 79 1c1-1 4-1 5 0 1 1 1 4 0 5L46 44C45 45 44 46 43 46 43 46 43 46 43 46z');
 	}
 
 	$(".scroll-button").click(function() {
