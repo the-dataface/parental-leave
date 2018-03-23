@@ -230,8 +230,6 @@ $(document).ready(function() {
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
 				
-				console.log(this.cx.baseVal.value + ',' + swarmW)
-				
 				if (this.cx.baseVal.value < (swarmW / 2)) {
 					left = true;
 				} else {
@@ -273,7 +271,7 @@ $(document).ready(function() {
                 (ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
                 (puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-                return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>" + d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+                return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>" + d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
             });
 
             bsSVG.call(bsTT)
@@ -573,7 +571,7 @@ $(document).ready(function() {
                             dx: -74
                         }, {
                             note: {
-                                label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
+                                label: "The majority of American companies allow for between 6 and 12 weeks maternity leave.",
                                 "orientation": "leftRight",
                                 "align": "bottom",
                                 wrap: wrap
@@ -593,7 +591,7 @@ $(document).ready(function() {
                         },
                         {
                             note: {
-                                label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
+                                label: "The average length of paid paternity leave offered by American companies is 4.5 weeks.",
                                 orientation: "leftRight",
                                 "align": "middle",
                                 wrap: wrap
@@ -913,7 +911,7 @@ $(document).ready(function() {
                             dx: -74
                         }, {
                             note: {
-                                label: "The majority of American companies allow for between 6 and 12 weeks maternal leave.",
+                                label: "The majority of American companies allow for between 6 and 12 weeks maternity leave.",
                                 "orientation": "leftRight",
                                 "align": "bottom",
                                 wrap: wrap
@@ -933,7 +931,7 @@ $(document).ready(function() {
                         },
                         {
                             note: {
-                                label: "The average length of paid paternal leave offered by American companies is 4.5 weeks.",
+                                label: "The average length of paid paternity leave offered by American companies is 4.5 weeks.",
                                 orientation: "leftRight",
                                 "align": "middle",
                                 wrap: wrap
@@ -1085,16 +1083,15 @@ $(document).ready(function() {
                 bsG.append("line").attr("class", "axisTick").attr("id", "axisTickM" + i).attr("x1", linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
                 bsG.append("line").attr("class", "axisTick").attr("id", "axisTickP" + i).attr("x1", linemarginMobile).attr("x2", (bsWMobile) - linemarginMobile).attr("y1", y(bsTicks[i])).attr("y2", y(bsTicks[i]));
             }
-
-            // create tooltip and call using d3tip.js
-            var bsTT = d3.tip().attr('class', 'd3-tip').direction(function(d) {
+			
+			/*
+			var bsTT = d3.tip().attr('class', 'd3-tip').direction(function(d) {
 				var top = false,
 					bottom = false,
 					left = false,
 					right = false,
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
-				console.log(this.cx.baseVal.value + ',' + swarmW)
 				
 				if (parseInt(this.cx.baseVal.value) < parseInt((swarmW / 2) - 20)) {
 					left = true;
@@ -1107,23 +1104,39 @@ $(document).ready(function() {
 				} else {
 					bottom = true;
 				}
-				console.log(top + ',' + bottom + ',' + left + ',' + right);
 				
 				if (top && left) {
-					console.log('hi')
 					return 'se';
 				} else if (top && right) {
-					console.log('hey')
 					return 'sw';	   
 				} else if (bottom && left) {
-					console.log('uh')
 					return 'ne';
 				} else {
-					console.log('ugh')
 					return 'nw';
 				}
 			
-			}).offset([0, 0]).html(function(d) {
+			})
+			*/
+
+            // create tooltip and call using d3tip.js
+            var bsTT = d3.tip().attr('class', 'd3-tip').direction('s').offset(function(d) {
+				var cx = this.cx.baseVal.value;
+				var swarmW = d3.select('.beeswarm').attr('width');
+				var midpoint = swarmW / 2;
+				var difference;
+				var differenceScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
+				var result;
+				
+				if (cx < midpoint) {
+					difference = midpoint - cx;
+					result = differenceScale(difference);
+				} else {
+					difference = cx - midpoint;
+					result = -(differenceScale(difference));
+				}
+				return [0,result];
+			
+			}).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
                     muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
                     ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
@@ -1142,7 +1155,7 @@ $(document).ready(function() {
                 (ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
                 (puL != '—') ? puT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
 
-                return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>" + d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
+                return "<div class='tooltip bs-tooltip'><p class='tooltip-header'>" + d.company + "</p><p class='tooltip-sub-header'>" + d.industry + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Paid</p><p class='third-cell flex-cell'>Unpaid</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + mpL + "</span>" + mpT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + muL + "</span>" + muT + "</div></div><div class='table-row'><p class='first-cell flex-cell'>Paternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + ppL + "</span>" + ppT + "</div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + puL + "</span>" + puT + "</div></div></div>"
             });
 
             bsSVG.call(bsTT)

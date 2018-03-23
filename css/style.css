@@ -660,6 +660,7 @@ a.downloadLink {
   border-radius:2px;
   opacity: 1;
   pointer-events:none;
+  overflow-x: hidden;
 }
 
 .tooltip h1 {
