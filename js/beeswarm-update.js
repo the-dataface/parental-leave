@@ -1110,12 +1110,16 @@ $(document).ready(function() {
 				console.log(top + ',' + bottom + ',' + left + ',' + right);
 				
 				if (top && left) {
+					console.log('hi')
 					return 'se';
 				} else if (top && right) {
+					console.log('hey')
 					return 'sw';	   
 				} else if (bottom && left) {
+					console.log('uh')
 					return 'ne';
 				} else {
+					console.log('ugh')
 					return 'nw';
 				}
 			
