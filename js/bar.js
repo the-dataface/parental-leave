@@ -152,7 +152,7 @@ $(document).ready(function() {
                 if (d.patNote.length > 1) patNote = "<p style='color: #b5b5b5;font-size:13px;margin:0;margin-top:12px'><span class='patText'>*</span><em>" + d.patNote + "</em></p>"
                 if (d.parNote.length > 1) parNote = "<p style='color: #b5b5b5;font-size:13px;margin:0;margin-top:12px'><span class='parText'>*</span><em>" + d.parNote + "</em></p>"
 
-                return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>" + d.country + "</p><p class='tooltip-sub-header'>Funded by " + d.source + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeave + matLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + matPayAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternal Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + patLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>" + patLeaveMetric + "</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + patPayAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + parLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + parPayAst + "</span>" + pLsub + "</div></div>" + matNote + patNote + parNote + "</div>"
+                return "<div class='tooltip bar-tooltip'><p class='tooltip-header'>" + d.country + "</p><p class='tooltip-sub-header'>Funded by " + d.source + "</p><div class='table-row table-header'><p class='first-cell flex-cell'></p><p class='second-cell flex-cell'>Leave</p><p class='third-cell flex-cell'>Amount</p></div><div class='table-row'><p class='first-cell flex-cell'>Maternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeave + matLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks matText'>" + d.matLeavePay + matPayAst + "</span><span class='weekAmountSubText tooltipWeeks matText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Paternity Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeave + patLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>" + patLeaveMetric + "</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks patText'>" + d.patLeavePay + patPayAst + "</span><span class='weekAmountSubText tooltipWeeks patText'>of salary</span></div></div><div class='table-row'><p class='first-cell flex-cell'>Parental Leave</p><div class='second-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeave + parLeaveAst + "</span><span class='weekAmountSubText tooltipWeeks parText'>weeks</span></div><div class='third-cell flex-cell'><span class='weekAmount tooltipWeeks parText'>" + d.parentalLeavePay + parPayAst + "</span>" + pLsub + "</div></div>" + matNote + patNote + parNote + "</div>"
 
             });
 
@@ -254,8 +254,8 @@ $(document).ready(function() {
 				}
 
 				// draw axis labels
-				barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternal Leave").attr("dy", 3)
-				barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternal Leave").style("text-anchor", "end").attr("dy", 3)
+				barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternity Leave").attr("dy", 3)
+				barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternity Leave").style("text-anchor", "end").attr("dy", 3)
 				barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
 				barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
 
@@ -478,7 +478,7 @@ $(document).ready(function() {
                         dx: barX(15) - barX(0)
                     }, {
                         note: {
-                            label: "Sweden tops the list on both sides, mandating up to 68 weeks paid maternal leave and 18 weeks paid paternal leave, funded by social security.",
+                            label: "Sweden tops the list on both sides, mandating up to 68 weeks paid maternity leave and 18 weeks paid paternity leave, funded by social security.",
                             "align": "middle",
                             wrap: wrap
                         },
@@ -500,7 +500,7 @@ $(document).ready(function() {
                 } else {
                     const barAnnotations = [{
                         note: {
-                            label: "Many developed countries offer no paid paternal leave, leaving it up to private companies to create their own policies.",
+                            label: "Many developed countries offer no paid paternity leave, leaving it up to private companies to create their own policies.",
                             orientation: "leftRight",
                             "align": "middle",
                             wrap: wrap
@@ -512,7 +512,7 @@ $(document).ready(function() {
                         dx: -(barX(8) - barX(0))
                     }, {
                         note: {
-                            label: "Some countries, like the United Kingdom, offer split parental leave. The UK requires 2 weeks maternal leave, while the remaining 50 weeks can be split between either parent.",
+                            label: "Some countries, like the United Kingdom, offer split parental leave. The UK requires 2 weeks maternity leave, while the remaining 50 weeks can be split between either parent.",
                             orientation: "leftRight",
                             "align": "middle",
                             wrap: wrap

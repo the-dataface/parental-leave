@@ -332,7 +332,7 @@ d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", f
 
         const adAnnotations = [{
                 note: {
-                    label: "Paid Maternal Leave",
+                    label: "Paid Maternity Leave",
                     lineType: "none",
                     "align": "middle",
                     wrap: 200
@@ -345,7 +345,7 @@ d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", f
             },
             {
                 note: {
-                    label: "Unpaid Maternal Leave",
+                    label: "Unpaid Maternity Leave",
                     lineType: "none",
                     "align": "middle",
                     wrap: 200
@@ -358,7 +358,7 @@ d3.csv("https://the-dataface.github.io/parental-leave/data/companies-top.csv", f
             },
             {
                 note: {
-                    label: "Paid Paternal Leave",
+                    label: "Paid Paternity Leave",
                     lineType: "none",
                     "align": "middle",
                     wrap: 200
