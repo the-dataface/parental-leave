@@ -230,13 +230,13 @@ $(document).ready(function() {
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
 				
-				if (this.cx.baseVal.value < (swarmH / 2)) {
+				if (this.cx.baseVal.value < (swarmW / 2)) {
 					left = true;
 				} else {
 					right = true;
 				}
 				
-				if (this.cy.baseVal.value < (swarmW / 2)) {
+				if (this.cy.baseVal.value < (swarmH / 2)) {
 					top = true;
 				} else {
 					bottom = true;
@@ -1093,13 +1093,13 @@ $(document).ready(function() {
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
 				
-				if (d.x < (swarmW / 2)) {
+				if (this.cx.baseVal.value < ((swarmW / 2) - 20)) {
 					left = true;
 				} else {
 					right = true;
 				}
 				
-				if (d.side == "top") {
+				if (this.cy.baseVal.value < (swarmH / 2)) {
 					top = true;
 				} else {
 					bottom = true;
@@ -1354,14 +1354,6 @@ $(document).ready(function() {
                     .attr("id", function(d) {
                         return camelize(d.company)
                     })
-				    .each(function(d) {
-						var combo = state.gender + '_' + state.variable;
-					    if (d[combo] < 16) {
-							d.side = 'top';
-						} else {
-							d.side = 'bottom';
-						}
-					})
                     .attr("cx", bsWMobile / 2)
                     .attr("cy", 0)
                     .attr("r", r)

@@ -105,7 +105,6 @@ $(document).ready(function() {
 
             // create tooltip and call using d3tip.js
             var barTT = d3.tip().attr('class', 'd3-tip').direction("s").offset(function() {
-				console.log(this.getBBox().width);
 				return [0, -this.getBBox().width / 2]
 			}).html(function(d) {
                 var matPayAst = "",
