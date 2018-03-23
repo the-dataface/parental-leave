@@ -222,7 +222,7 @@ $(document).ready(function() {
             bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", bsH - 15).style("text-anchor", "middle").text("Length of Paternity Leave")
 
             // create tooltip and call using d3tip.js
-            var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
+            var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([0, 0]).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
                     muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
                     ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
