@@ -1125,17 +1125,19 @@ $(document).ready(function() {
 				var midpoint = swarmW / 2;
 				var difference;
 				var differenceLeftScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
-				var differenceRightScale = d3.scaleLinear().domain([0, midpoint]).range([-80, 80]);
+				var differenceRightScale = d3.scaleLinear().domain([0, midpoint]).range([0, -80]);
 				var result;
 				
 				if (cx < midpoint) {
 					difference = midpoint - cx;
 					result = differenceLeftScale(difference);
 				} else {
+					console.log(cx);
+					console.log(swarmW);
+					console.log(swarmW / 2);
 					difference = swarmW - cx;
-					result = differenceLeftScale(difference);
+					result = differenceRightScale(difference);
 				}
-				console.log(result);
 				return [0,result];
 			
 			}).html(function(d) {
