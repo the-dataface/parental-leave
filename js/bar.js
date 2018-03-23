@@ -104,7 +104,10 @@ $(document).ready(function() {
             $("#barOrderSelectPat").removeClass("active")
 
             // create tooltip and call using d3tip.js
-            var barTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([0, 0]).html(function(d) {
+            var barTT = d3.tip().attr('class', 'd3-tip').direction("s").offset(function() {
+				console.log(this.getBBox().width);
+				return [0, -this.getBBox().width / 2]
+			}).html(function(d) {
                 var matPayAst = "",
                     matLeaveAst = "",
                     patPayAst = "",

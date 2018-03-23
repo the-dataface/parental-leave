@@ -222,7 +222,37 @@ $(document).ready(function() {
             bsG.append("text").attr("class", "chartTitle bsChartTitle").attr("x", xCoord).attr("y", bsH - 15).style("text-anchor", "middle").text("Length of Paternity Leave")
 
             // create tooltip and call using d3tip.js
-            var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([0, 0]).html(function(d) {
+            var bsTT = d3.tip().attr('class', 'd3-tip').direction(function(d) {
+				var top = false,
+					bottom = false,
+					left = false,
+					right = false,
+					swarmW = d3.select('.beeswarm').attr('width'),
+					swarmH = d3.select('.beeswarm').attr('height')
+				
+				if (this.cx.baseVal.value < (swarmH / 2)) {
+					left = true;
+				} else {
+					right = true;
+				}
+				
+				if (this.cy.baseVal.value < (swarmW / 2)) {
+					top = true;
+				} else {
+					bottom = true;
+				}
+				
+				if (top && left) {
+					return 'se';
+				} else if (top && right) {
+					return 'sw';	   
+				} else if (bottom && left) {
+					return 'ne';
+				} else {
+					return 'nw';
+				}
+			
+			}).offset([0, 0]).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
                     muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
                     ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
@@ -235,16 +265,7 @@ $(document).ready(function() {
                     city = d.city + ", ",
                     state = d.state + ", ",
                     country = d.country;
-                /*
-		if (mpL > 1) mpT = "<span style='color: " + matc1 + "'>" + mpL + " weeks <strong>paid</strong> maternal leave</span>";
-		if (mpL === 1) mpT = "<br><span style='color: " + matc1 + "'>" + mpL + " week <strong>paid</strong> maternal leave</span>";
-		if (muL > 1) muT = "<br><span style='color: " + matc1 + "'>" + muL + " weeks <strong>unpaid</strong> maternal leave</span>";
-		if (muL === 1) muT = "<br><span style='color: " + matc1 + "'>" + muL + " week <strong>unpaid</strong> maternal leave</span>";
-		if (ppL > 1) ppT = "<br><span style='color: " + patc1 + "'>" + ppL + " weeks <strong>paid</strong> paternal leave</span>";
-		if (ppL === 1) ppT = "<br><span style='color: " + patc1 + "'>" + ppL + " week <strong>paid</strong> paternal leave</span>";
-		if (puL > 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " weeks <strong>unpaid</strong> paternal leave</span>";
-		if (puL === 1) puT = "<br><span style='color: " + patc1 + "'>" + puL + " week <strong>unpaid</strong> paternal leave</span>";
-		*/
+				
                 (mpL != '—') ? mpT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
                 (muL != '—') ? muT = "<span class='weekAmountSubText tooltipWeeks matText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
                 (ppL != '—') ? ppT = "<span class='weekAmountSubText tooltipWeeks patText'>weeks</span>": "<span class='weekAmountSubText tooltipWeeks tooltipHiddenText'>_</span>";
@@ -439,7 +460,6 @@ $(document).ready(function() {
                     .data(state.data, function(d) {
                         return d.company
                     })
-
                 // remove the ones that aren't in the swarm anymore
                 cc.exit()
                     .transition()
@@ -1065,7 +1085,37 @@ $(document).ready(function() {
             }
 
             // create tooltip and call using d3tip.js
-            var bsTT = d3.tip().attr('class', 'd3-tip').direction("s").offset([10, 0]).html(function(d) {
+            var bsTT = d3.tip().attr('class', 'd3-tip').direction(function(d) {
+				var top = false,
+					bottom = false,
+					left = false,
+					right = false,
+					swarmW = d3.select('.beeswarm').attr('width'),
+					swarmH = d3.select('.beeswarm').attr('height')
+				
+				if (d.x < (swarmW / 2)) {
+					left = true;
+				} else {
+					right = true;
+				}
+				
+				if (d.side == "top") {
+					top = true;
+				} else {
+					bottom = true;
+				}
+				
+				if (top && left) {
+					return 'se';
+				} else if (top && right) {
+					return 'sw';	   
+				} else if (bottom && left) {
+					return 'ne';
+				} else {
+					return 'nw';
+				}
+			
+			}).offset([0, 0]).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
                     muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
                     ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
@@ -1304,6 +1354,14 @@ $(document).ready(function() {
                     .attr("id", function(d) {
                         return camelize(d.company)
                     })
+				    .each(function(d) {
+						var combo = state.gender + '_' + state.variable;
+					    if (d[combo] < 16) {
+							d.side = 'top';
+						} else {
+							d.side = 'bottom';
+						}
+					})
                     .attr("cx", bsWMobile / 2)
                     .attr("cy", 0)
                     .attr("r", r)
