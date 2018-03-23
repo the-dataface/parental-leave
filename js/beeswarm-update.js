@@ -1134,6 +1134,7 @@ $(document).ready(function() {
 					difference = cx - midpoint;
 					result = -(differenceScale(difference));
 				}
+				console.log(result);
 				return [0,result];
 			
 			}).html(function(d) {
