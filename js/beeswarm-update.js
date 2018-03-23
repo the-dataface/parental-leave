@@ -1132,7 +1132,7 @@ $(document).ready(function() {
 					result = differenceScale(difference);
 				} else {
 					difference = cx - midpoint;
-					result = -(differenceScale(difference));
+					result = differenceScale(difference);
 				}
 				console.log(result);
 				return [0,result];
