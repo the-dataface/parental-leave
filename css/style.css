@@ -227,6 +227,7 @@ body {
 #scroll-location {
 	position:absolute;
 	top:100%;
+	opacity:0;
 }
 
 .copy-header {
