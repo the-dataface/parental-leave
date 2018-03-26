@@ -223,6 +223,7 @@ $(document).ready(function() {
 
             // create tooltip and call using d3tip.js
             var bsTT = d3.tip().attr('class', 'd3-tip').direction(function(d) {
+				/*
 				var top = false,
 					bottom = false,
 					left = false,
@@ -253,8 +254,43 @@ $(document).ready(function() {
 				} else {
 					return 'nw';
 				}
+				*/
+				return 's';
 			
-			}).offset([0, 0]).html(function(d) {
+			}).offset(function(d) {
+
+				var top = false,
+					bottom = false,
+					left = false,
+					right = false,
+					swarmW = d3.select('.beeswarm').attr('width'),
+					swarmH = d3.select('.beeswarm').attr('height')
+				
+				console.log(swarmW + ', ' + this.cx.baseVal.value + ', ' + swarmH + ', ' + this.cy.baseVal.value);
+							
+				if (this.cx.baseVal.value < (swarmW / 2)) {
+					left = true;
+				} else {
+					right = true;
+				}
+				
+				if (this.cy.baseVal.value < (swarmH / 2)) {
+					top = true;
+				} else {
+					bottom = true;
+				}
+				
+				if (top && left) {
+					return [0, 100];
+				} else if (top && right) {
+					return [0, -100];	   
+				} else if (bottom && left) {
+					return [0, 100];
+				} else {
+					return [0, -100];
+				}
+			
+			}).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
                     muL = (d.mat_unpaid == -5) ? '—' : d.mat_unpaid,
                     ppL = (d.pat_paid == -5) ? '—' : d.pat_paid,
