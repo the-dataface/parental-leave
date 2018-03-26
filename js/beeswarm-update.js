@@ -281,13 +281,13 @@ $(document).ready(function() {
 				}
 				
 				if (top && left) {
-					return [0, 100];
+					return [0, 0];
 				} else if (top && right) {
-					return [0, -100];	   
+					return [0, -200];	   
 				} else if (bottom && left) {
-					return [0, 100];
+					return [0, 0];
 				} else {
-					return [0, -100];
+					return [0, -200];
 				}
 			
 			}).html(function(d) {
