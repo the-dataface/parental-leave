@@ -265,8 +265,6 @@ $(document).ready(function() {
 					right = false,
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
-				
-				console.log(swarmW + ', ' + this.cx.baseVal.value + ', ' + swarmH + ', ' + this.cy.baseVal.value);
 							
 				if (this.cx.baseVal.value < (swarmW / 2)) {
 					left = true;
@@ -1166,6 +1164,7 @@ $(document).ready(function() {
 				var differenceRightScale = d3.scaleLinear().domain([0, midpoint]).range([0, -80]);
 				var result;
 				
+				/*
 				if (cx < midpoint) {
 					difference = midpoint - cx;
 					result = differenceLeftScale(difference);
@@ -1173,8 +1172,13 @@ $(document).ready(function() {
 					difference = cx - midpoint;
 					result = differenceRightScale(difference) * 2;
 				}
-				console.log(cx + "," + midpoint + "," + difference + "," + result)
-				return [0,result];
+				*/
+				
+				if (cx < midpoint) {
+					return [0, 0];
+				} else {
+					return [0, -200];	   
+				} 
 			
 			}).html(function(d) {
                 var mpL = (d.mat_paid == -5) ? '—' : d.mat_paid,
