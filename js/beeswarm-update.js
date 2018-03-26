@@ -230,6 +230,8 @@ $(document).ready(function() {
 					swarmW = d3.select('.beeswarm').attr('width'),
 					swarmH = d3.select('.beeswarm').attr('height')
 				
+				console.log(swarmW + ', ' + this.cx.baseVal.value + ', ' + swarmH + ', ' + this.cy.baseVal.value);
+							
 				if (this.cx.baseVal.value < (swarmW / 2)) {
 					left = true;
 				} else {
