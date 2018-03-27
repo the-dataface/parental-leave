@@ -252,12 +252,14 @@ $(document).ready(function() {
 					arrowOffset = 155;
 					arrowSize = 25;
 				}
-
-				// draw axis labels
-				barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternity Leave").attr("dy", 3)
-				barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternity Leave").style("text-anchor", "end").attr("dy", 3)
-				barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
-				barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+				
+				if (firstTime) {
+					// draw axis labels
+					barG.append("text").attr("x", barX(0) + 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Maternity Leave").attr("dy", 3)
+					barG.append("text").attr("x", barX(0) - 5).attr("y", 0).attr("class", "bar-axis-label").text("Length of Paternity Leave").style("text-anchor", "end").attr("dy", 3)
+					barG.append("line").attr("x1", barX(0) + arrowOffset).attr("y1", 0).attr("x2", barX(0) + arrowOffset + arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+					barG.append("line").attr("x1", barX(0) - arrowOffset + 2).attr("y1", 0).attr("x2", barX(0) - arrowOffset - arrowSize).attr("y2", 0).style("fill", "none").style("stroke", "#666666").style("stroke-width", "2px").attr("marker-end", "url(#triangle)");
+				}
 
                 // new bars
                 var barM = barG.selectAll(".barM")
@@ -473,7 +475,7 @@ $(document).ready(function() {
                             ]
                         },
                         x: barX(0) + 100,
-                        y: barY("United States") + barY.bandwidth() / 2,
+                        y: barY.bandwidth() * 46 + barMargin.top,
                         dy: -(barY.bandwidth() * 4),
                         dx: barX(15) - barX(0)
                     }, {
