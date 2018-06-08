@@ -1,3 +1,5 @@
+//define asset paths
+var asset_path = setAssetPaths();
 
 // window width and height (from previous DataFace projects)
 var windowW = window.innerWidth;
@@ -98,4 +100,12 @@ function resize() {
 
 		header()
 	}
+}
+
+function setAssetPaths() {
+	var asset_path = '/data/';
+	if (window.location.hostname == 'the-dataface.github.io') {
+		asset_path = asset_path.substring(1);
+	}
+	return asset_path
 }

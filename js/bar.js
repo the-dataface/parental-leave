@@ -38,7 +38,7 @@ $(document).ready(function() {
     // showing how the US compares to other countries around the world
 
     // load the data
-    d3.csv("https://the-dataface.github.io/parental-leave/data/countries-updated.csv", function(error, data) {
+    d3.csv(asset_path + "countries-updated.csv", function(error, data) {
         if (error) throw error;
 		
 		var arrowOffset,
