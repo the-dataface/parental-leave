@@ -195,7 +195,7 @@ function beeSwarm() {
   }
 
   // bring in the data
-  d3.csv("https://the-dataface.github.io/parental-leave/data/companies.csv", function(error, data) {
+  d3.csv(asset_path + "companies.csv", function(error, data) {
     if (error) throw error;
 
     // filter data depending on what we're looking at

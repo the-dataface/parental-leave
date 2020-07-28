@@ -116,7 +116,7 @@ function arcDiagram() {
   if (large_screen) adSVG.attr("transform", "translate(" + windowW / 4 + ")")
 
   // load data
-  d3.csv("data/companies-top.csv", function(error, data) {
+  d3.csv(asset_path + "companies-top.csv", function(error, data) {
     if (error) throw error;
 
     // set up some basics
@@ -366,7 +366,7 @@ var customPat = d3.select(customBasePat);
 function beeSwarm() {
   // remove all
   d3.selectAll(".beeswarm").remove();
-	
+
   // setup
   var bsW = windowW, // beeswarm width = full width
     bsH = 800,
@@ -500,7 +500,7 @@ function beeSwarm() {
   }
 
   // bring in the data
-  d3.csv("data/companies.csv", function(error, data) {
+  d3.csv(asset_path + "companies.csv", function(error, data) {
     if (error) throw error;
 
     // filter data depending on what we're looking at
@@ -586,7 +586,7 @@ function beeSwarm() {
       })
 
     function drawSwarm(state) {
-		
+
       // define metric arnd colour scale
       var metric = state.gender + "_" + state.variable,
         c = d3.scaleLinear().domain([1, 52]).interpolate(d3.interpolateHcl).range([d3.rgb(state.c1), d3.rgb(state.c2)])
@@ -625,7 +625,7 @@ function beeSwarm() {
 
       pMtext.transition().duration(1000).ease(d3.easeExp)
         .attr("x", x(suppData["pat_" + state.variable + "med"])).text("MEDIAN " + suppData["pat_" + state.variable + "med"].toFixed(1));
-	  
+
       // run the force simulation to get new x and y values
       var simulation = d3.forceSimulation(state.data)
         .force("x", d3.forceX(function(d) {
@@ -636,11 +636,11 @@ function beeSwarm() {
         .stop();
 
       for (var i = 0; i < 200; ++i) simulation.tick(); // increase this number to make it look better
-	
+
 	  //remove gender-specific canvas
 	  var thisGender = state.gender;
 	  d3.select('#canvas-container' + thisGender).remove();
-		
+
 	  //create visible and hidden canvas
 	  var canvasWidth = bsW + margin.left + margin.right - 15,
 		canvasHeight = (bsH + margin.top + margin.bottom) / 2;
@@ -675,14 +675,14 @@ function beeSwarm() {
 				return 'translate(' + margin.left + 'px,-' + (canvasHeight - margin.top - (canvasHeight / 2)) + 'px)';
 			}
 		})
-		.style("display","none");	
+		.style("display","none");
 
 	  var hiddenContext = hiddenCanvas.node().getContext("2d");
 	  hiddenContext.clearRect(0, 0, canvasWidth, canvasHeight);
 
 	  // create an in memory only element of type 'custom'
 	  var dataContainer;
-		
+
 	  if (thisGender == 'mat') {
 		  dataContainer = customMat;
 		  console.log('mat');
@@ -690,12 +690,12 @@ function beeSwarm() {
 		  dataContainer = customPat;
 		  console.log('pat');
 	  }
-		  
+
 	  var dataBinding = dataContainer.selectAll("custom.rect")
-    	.data(state.data, function(d) { 
-			return d.company; 
+    	.data(state.data, function(d) {
+			return d.company;
 		});
-	  
+
 	  enterSel = dataBinding.enter()
         .append("custom")
        	.classed("dot", true)
@@ -707,7 +707,7 @@ function beeSwarm() {
 	  	})
       	.attr("size", r)
       	.attr("fillStyle", "red")
-	
+
 	  dataBinding.merge(enterSel)
 		.transition()
         .duration(2500)
@@ -729,7 +729,7 @@ function beeSwarm() {
             return c(d[metric])
           }
 	  	});
-		
+
 	  var exitSel = dataBinding.exit()
 		.transition()
         .duration(0)
@@ -738,7 +738,7 @@ function beeSwarm() {
         .attr("cy", bsH * state.placement)
         .style("opacity", 0)
         .remove();
-	  
+
 	  var elements = dataContainer.selectAll("custom.dot");
   		elements.each(function(d) {
     		var node = d3.select(this);
@@ -1054,7 +1054,7 @@ function barChart() {
 
 
   // load the data
-  d3.csv("data/countries.csv", function(error, data) {
+  d3.csv(asset_path + "countries.csv", function(error, data) {
     if (error) throw error;
 
     drawBars(data, order, classification, true)

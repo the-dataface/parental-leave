@@ -22,7 +22,7 @@ if (windowW > 1000) {
 function header() {
 	d3.select('#pL-full-header-container')
 	  .style('height', windowH + 'px');
-	
+
 	d3.select('.down-arrow-svg').remove();
 
 	if (small_screen) {
@@ -102,10 +102,13 @@ function resize() {
 	}
 }
 
+//Setting asset paths to be dynamic based on where we're loading up the site
 function setAssetPaths() {
-	var asset_path = '/data/';
-	if (window.location.hostname == 'the-dataface.github.io') {
-		asset_path = asset_path.substring(1);
-	}
-	return asset_path
+  if (window.location.hostname == 'thedataface.com') {
+    return 'https://thedataface.com/data/parental_leave/'
+  } else if (window.location.hostname == 'the-dataface.github.io') {
+    return 'https://the-dataface.github.io/parental-leave/data/'
+  } else {
+    return '/data/'
+  }
 }

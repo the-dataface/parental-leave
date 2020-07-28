@@ -37,14 +37,14 @@ var matc1 = "#fdae95",
 // showing how the US compares to other countries around the world
 
 // load the data
-d3.csv("https://the-dataface.github.io/parental-leave/data/countries-abbrev.csv", function(error, data) {
+d3.csv(asset_path + "countries-abbrev.csv", function(error, data) {
 	if (error) throw error;
 
 function barChart() {
   // remove
   d3.selectAll(".barchart > *").remove();
 
-  var barW, 
+  var barW,
   	  barH = 1000;
   // setup
   if (windowW > 1500) {
@@ -59,7 +59,7 @@ function barChart() {
 
   barW = barW - barMargin.left - barMargin.right;
   barH = barH - barMargin.top - barMargin.bottom;
-	
+
   var barSVG = d3.select(".barchart")
     .attr("width", barW + barMargin.left + barMargin.right)
     .attr("height", barH + barMargin.top + barMargin.bottom),
@@ -89,7 +89,7 @@ function barChart() {
   // set defaults
   var order = "matLeave",
       classification = "developed";
-	
+
   $("#barOrderSelectMat").addClass("active")
   $("#barOrderSelectPat").removeClass("active")
 
@@ -172,7 +172,7 @@ function barChart() {
           .attr("class", "barXaxis")
           .attr("transform", "translate(0," + barH + ")")
           .call(barXaxis);
-		  
+
 		var arrowOffset;
 		if (small_screen) {
 		  arrowOffset = 115;
@@ -501,11 +501,11 @@ function resize() {
     barMargin.left = 10;
     barMargin.right = 10;
   }
-	
+
   barChart()
 }
 }) // end load data
-	
+
 // to clean up company names for id tags
 function camelize(str) {
   return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter, index) {
